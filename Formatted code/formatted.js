@@ -163,30 +163,6 @@ const windowResize = (event) => {
 
 
 
-document.querySelectorAll('.carousel').forEach((carousel) => {
-  const images = carousel.querySelector('.carousel-images');
-  const dots = carousel.querySelectorAll('.nav-dot');
-  let index = 0;
-
-  function updateCarousel() {
-    images.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === index);
-    });
-  }
-
-  dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-      index = idx;
-      updateCarousel();
-    });
-  });
-
-  setInterval(() => {
-    index = (index + 1) % dots.length;
-    updateCarousel();
-  }, 3000); // Change image every 3 seconds
-});
 
 
 window.addEventListener('mousemove', mouseMove);
