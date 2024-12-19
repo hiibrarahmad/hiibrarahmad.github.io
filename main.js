@@ -2,26 +2,26 @@ var audio=document.getElementById("audioPlayer"),loader=document.getElementById(
 
 document.querySelectorAll('.carousel').forEach((carousel) => {
     const images = carousel.querySelector('.carousel-images');
-    const dots = carousel.querySelectorAll('.nav-dot');
+    const buttons = carousel.querySelectorAll('.nav-btn');
     let index = 0;
   
     function updateCarousel() {
       images.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === index);
+      buttons.forEach((button, idx) => {
+        button.classList.toggle('active', idx === index);
       });
     }
   
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
+    buttons.forEach((button, idx) => {
+      button.addEventListener('click', () => {
         index = idx;
         updateCarousel();
       });
     });
   
     setInterval(() => {
-      index = (index + 1) % dots.length;
+      index = (index + 1) % buttons.length;
       updateCarousel();
-    }, 3000); // Change image every 3 seconds
+    }, 5000); // Change image every 5 seconds
   });
   
