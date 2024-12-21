@@ -2029,39 +2029,44 @@ footer {
 
 
 
-
-
-/* Fix image aspect ratio */
+/* Container for the image carousel */
 .image-div {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    height: 250px; /* Adjust height as needed */
+    width: 550px; /* Set the width of the carousel */
+    height: 350px; /* Set the height of the carousel */
+    margin: 0 auto;
     background: #000;
+  }
+  
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
   
   .carousel-images {
     display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 300%; /* Three images */
-    height: 100%;
+    transition: transform 0.5s ease-in-out; /* Smooth sliding effect */
+    width: calc(100% * 3); /* Adjust for number of images */
   }
   
   .carousel-images img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures the entire image fits without cropping */
-    background: #000; /* Optional background for non-rectangular images */
+    object-fit: contain; /* Ensure image fits within container */
+    flex-shrink: 0; /* Prevent images from shrinking */
   }
   
-  /* Navigation Buttons (1, 2, 3) */
+  /* Navigation Buttons */
   .carousel-nav {
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
+    z-index: 10;
   }
   
   .nav-btn {
@@ -2082,4 +2087,3 @@ footer {
     color: #fff;
   }
   
-

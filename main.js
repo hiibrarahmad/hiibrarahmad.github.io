@@ -3,24 +3,27 @@ var audio=document.getElementById("audioPlayer"),loader=document.getElementById(
 document.querySelectorAll('.carousel').forEach((carousel) => {
     const images = carousel.querySelector('.carousel-images');
     const buttons = carousel.querySelectorAll('.nav-btn');
-    let index = 0;
+    let index = 0; // Start with the first image
   
+    // Function to update the carousel
     function updateCarousel() {
-      images.style.transform = `translateX(-${index * 100}%)`;
+      images.style.transform = `translateX(-${index * 100}%)`; // Slide images
       buttons.forEach((button, idx) => {
-        button.classList.toggle('active', idx === index);
+        button.classList.toggle('active', idx === index); // Highlight the active button
       });
     }
   
+    // Add click event listeners to navigation buttons
     buttons.forEach((button, idx) => {
       button.addEventListener('click', () => {
-        index = idx;
+        index = idx; // Set the current index to the button's index
         updateCarousel();
       });
     });
   
+    // Auto-slide every 5 seconds
     setInterval(() => {
-      index = (index + 1) % buttons.length;
+      index = (index + 1) % buttons.length; // Loop back to the first image after the last
       updateCarousel();
     }, 5000); // Change image every 5 seconds
   });
