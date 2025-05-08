@@ -159,6 +159,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 }
 
 // Get the button
+// Get the button
 let scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
 // Show/hide the button on scroll

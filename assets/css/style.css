@@ -1881,7 +1881,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 }
 
-
 #scrollToTopBtn {
   position: fixed;
   bottom: 30px;
@@ -1896,7 +1895,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   padding: 12px;
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  display: none; /* Hidden by default */
+  display: none; /* Start hidden */
   transition: opacity 0.3s ease;
 }
 
