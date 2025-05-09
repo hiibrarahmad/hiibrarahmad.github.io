@@ -455,7 +455,7 @@ main {
 \*-----------------------------------*/
 
 .navbar {
-  position: fixed;
+  position: fixed;  
   bottom: 0;
   left: 0;
   width: 100%;
@@ -1291,7 +1291,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .sidebar, article {
     width: 520px;
     margin-inline: auto;
-    padding: 30px;
+    padding: 20px;
   }
 
   .article-title {
