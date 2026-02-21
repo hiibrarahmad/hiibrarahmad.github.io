@@ -1,5 +1,5 @@
 window.PORTFOLIO_DATA = {
-  "updatedAt": "2026-02-20T19:19:18.482Z",
+  "updatedAt": "2026-02-21T20:37:40.753Z",
   "hero": {
     "firstName": "IBRAR",
     "lastName": "AHMAD",
@@ -168,6 +168,30 @@ window.PORTFOLIO_DATA = {
       "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
       "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",
       "liveBtnLabel": "VIEW CV ONLINE",
+      "featured": false
+    },
+    {
+      "id": "PRJ-2026-PCB-0001",
+      "year": "2026",
+      "client": "",
+      "badge": "pcb",
+      "badgeLabel": "PCB DESIGN",
+      "status": "live",
+      "title": "UNO V1 — Custom Arduino UNO Compatible Board",
+      "desc": "Custom Arduino UNO compatible development board built around the ATmega328P with modern USB Type-C via CH340G, onboard 3.3V & 5V regulation, SMD components, and full Arduino UNO shield connector compatibility.",
+      "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1.jpg",
+      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1bot.jpg",
+      "tags": [
+        "ATmega328P",
+        "CH340G",
+        "USB Type-C",
+        "16 MHz",
+        "AVR",
+        "Arduino UNO"
+      ],
+      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-PCB-0001-UNO-V1.github.io/",
+      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io",
+      "liveBtnLabel": "View PCB",
       "featured": false
     },
     {
