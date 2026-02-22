@@ -3076,7 +3076,8 @@
     const liveLabelDefault = liveUrl ? 'VIEW PROJECT' : 'VIEW REPO';
     const liveLabel = escapeHtml(p.liveBtnLabel || liveLabelDefault);
     const imgUrl = p.imgUrl || '';
-    const ghostOrder = escapeHtml(p.id || `PRJ-${String(index + 1).padStart(4, '0')}`);
+    const idDigits = String(p.id || '').match(/(\d{4})(?!.*\d)/);
+    const ghostOrder = escapeHtml(`PRJ-${idDigits ? idDigits[1] : String(index + 1).padStart(4, '0')}`);
     const bottomFallbacks = {
       'PRJ-2026-PCB-0005': 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png'
     };
