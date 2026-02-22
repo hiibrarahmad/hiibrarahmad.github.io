@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio Dashboard — Ibrar Ahmad</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Portfolio Dashboard - Ibrar Ahmad</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#081118;--surface:#0d1a22;--surface2:#12222b;--surface3:#162a35;
@@ -15,25 +15,28 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;display:flex;flex-direction:column}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;display:flex;flex-direction:column}
 
 /* TOPBAR */
 .topbar{height:56px;background:var(--surface);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;z-index:10}
 .tb-brand{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;color:var(--accent);letter-spacing:1.6px}
 .tb-brand em{color:var(--accent2);font-style:normal}
-.tb-center{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1.2px}
+.tb-center{display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1.2px}
 .tb-right{display:flex;gap:8px}
+.save-indicator{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:.8px;padding:0 8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* LAYOUT */
 .app{display:flex;flex:1;overflow:hidden}
 
 /* SIDEBAR */
 .sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
-.sidebar-logo{padding:20px 16px 12px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--border)}
-.nav-item{display:flex;align-items:center;gap:10px;padding:12px 16px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.8px;color:var(--text-dim);cursor:pointer;border-left:2px solid transparent;transition:all .15s;text-transform:uppercase}
+.sidebar-logo{padding:20px 16px 12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.nav-item{display:flex;align-items:center;gap:10px;padding:12px 16px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.8px;color:var(--text-dim);cursor:pointer;border-left:2px solid transparent;transition:all .15s;text-transform:uppercase}
 .nav-item:hover{color:var(--text);background:rgba(84,191,216,.05)}
 .nav-item.active{color:var(--accent);border-left-color:var(--accent);background:rgba(84,191,216,.08)}
 .nav-item svg{width:14px;height:14px;flex-shrink:0}
+.nav-item:focus-visible{outline:2px solid var(--accent2);outline-offset:-2px}
 
 .sidebar-footer{margin-top:auto;padding:12px 16px;border-top:1px solid var(--border)}
 
@@ -45,7 +48,7 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;fo
 .panel.active{display:flex}
 .panel-header{padding:24px 32px 0;border-bottom:1px solid var(--border);flex-shrink:0}
 .panel-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:#fff;letter-spacing:1.4px;margin-bottom:4px}
-.panel-sub{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1.2px;margin-bottom:20px}
+.panel-sub{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1.2px;margin-bottom:20px}
 .panel-body{flex:1;padding:28px 32px;overflow-y:auto}
 
 /* FORM ELEMENTS */
@@ -53,8 +56,8 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;fo
 .form-row.full{grid-template-columns:1fr}
 .form-row.three{grid-template-columns:1fr 1fr 1fr}
 .fgroup{display:flex;flex-direction:column;gap:6px}
-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase}
-input,textarea,select{background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;padding:10px 12px;transition:border-color .2s;outline:none;width:100%;resize:vertical}
+label{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase}
+input,textarea,select{background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:10px 12px;transition:border-color .2s;outline:none;width:100%;resize:vertical}
 input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 1px rgba(0,212,255,.1)}
 textarea{min-height:80px;line-height:1.6}
 select option{background:var(--surface2)}
@@ -70,11 +73,11 @@ select option{background:var(--surface2)}
 .proj-thumb{width:48px;height:36px;object-fit:cover;border:1px solid var(--border2);flex-shrink:0;background:var(--surface3);display:flex;align-items:center;justify-content:center}
 .proj-thumb img{width:100%;height:100%;object-fit:cover}
 .proj-info{flex:1;min-width:0}
-.proj-id{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.8px;margin-bottom:2px}
+.proj-id{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.8px;margin-bottom:2px}
 .proj-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.proj-meta2{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.8px;margin-top:2px}
+.proj-meta2{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.8px;margin-top:2px}
 .proj-actions{display:flex;gap:6px;flex-shrink:0}
-.badge-tiny{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.8px;padding:2px 7px;border:1px solid}
+.badge-tiny{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.8px;padding:2px 7px;border:1px solid}
 .badge-tiny.live{color:var(--accent2);border-color:rgba(0,255,136,.3)}
 .badge-tiny.wip{color:var(--accent3);border-color:rgba(255,107,53,.3)}
 .badge-tiny.featured{color:var(--accent4);border-color:rgba(168,85,247,.3)}
@@ -92,6 +95,7 @@ select option{background:var(--surface2)}
 .btn-g:hover{box-shadow:0 0 12px rgba(87,215,164,.22)}
 .btn-icon{background:transparent;color:var(--text-dim);border:1px solid var(--border2);padding:6px 8px;clip-path:none;transition:all .15s}
 .btn-icon:hover{color:var(--accent);border-color:var(--accent)}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent2);outline-offset:1px}
 
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
@@ -106,21 +110,21 @@ select option{background:var(--surface2)}
 
 /* TAGS EDITOR */
 .tags-editor{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border2);min-height:44px;align-items:flex-start}
-.tag-chip{display:flex;align-items:center;gap:4px;padding:3px 8px;border:1px solid rgba(84,191,216,.3);background:rgba(84,191,216,.07);font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.8px}
+.tag-chip{display:flex;align-items:center;gap:4px;padding:3px 8px;border:1px solid rgba(84,191,216,.3);background:rgba(84,191,216,.07);font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.8px}
 .tag-chip button{background:none;border:none;color:var(--text-dim);cursor:pointer;padding:0;font-size:11px;line-height:1;transition:color .15s}
 .tag-chip button:hover{color:var(--danger)}
 .tag-input-wrap{display:flex;gap:6px;margin-top:6px}
 .tag-input-wrap input{flex:1;min-width:120px;padding:6px 10px;font-size:12px}
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;z-index:999;padding:12px 20px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:1.2px;border:1px solid;transform:translateX(120%);transition:transform .3s ease;display:flex;align-items:center;gap:10px}
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;padding:12px 20px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.2px;border:1px solid;transform:translateX(120%);transition:transform .3s ease;display:flex;align-items:center;gap:10px}
 .toast.success{background:rgba(0,255,136,.1);border-color:var(--accent2);color:var(--accent2)}
 .toast.error{background:rgba(255,68,68,.1);border-color:var(--danger);color:var(--danger)}
 .toast.show{transform:translateX(0)}
 
 /* PREVIEW iframe */
 .preview-bar{padding:16px 32px 0;display:flex;align-items:center;gap:12px;flex-shrink:0}
-.preview-url{flex:1;background:var(--surface2);border:1px solid var(--border2);padding:7px 12px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:.8px}
+.preview-url{flex:1;background:var(--surface2);border:1px solid var(--border2);padding:7px 12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:.8px}
 .iframe-wrap{flex:1;margin:16px 32px;border:1px solid var(--border2);overflow:hidden;position:relative}
 .iframe-wrap iframe{width:100%;height:100%;border:none;transform-origin:top left}
 
@@ -128,10 +132,10 @@ select option{background:var(--surface2)}
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:28px}
 .stat-box{background:var(--surface);padding:16px 20px}
 .stat-box-n{font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--accent);margin-bottom:4px}
-.stat-box-l{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1.2px;text-transform:uppercase}
+.stat-box-l{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1.2px;text-transform:uppercase}
 
 /* JSON editor */
-.json-area{font-family:'Share Tech Mono',monospace;font-size:12px;min-height:300px;line-height:1.7;color:#c8e6ff}
+.json-area{font-family:'Space Mono',monospace;font-size:12px;min-height:300px;line-height:1.7;color:#c8e6ff}
 
 /* Toggle */
 .toggle{display:flex;align-items:center;gap:10px;cursor:pointer}
@@ -140,7 +144,7 @@ select option{background:var(--surface2)}
 .toggle input:checked + .toggle-track{background:var(--accent)}
 .toggle-track::after{content:'';width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:left .2s}
 .toggle input:checked + .toggle-track::after{left:19px}
-.toggle-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:.8px}
+.toggle-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:.8px}
 
 /* Drag handle */
 .drag-handle{color:var(--text-muted);cursor:grab;padding:4px;margin-right:4px;user-select:none}
@@ -184,6 +188,15 @@ select option{background:var(--surface2)}
     PORTFOLIO EDITOR · LOCAL STORAGE
   </div>
   <div class="tb-right">
+    <span class="save-indicator" id="save-indicator">Last saved: --</span>
+    <button class="btn btn-o btn-sm" onclick="copyDataJS()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy Data JS
+    </button>
+    <button class="btn btn-o btn-sm" onclick="document.getElementById('import-json-file').click()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Import JSON
+    </button>
     <button class="btn btn-o btn-sm" onclick="exportJSON()">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Export JSON
@@ -196,12 +209,13 @@ select option{background:var(--surface2)}
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
       Save All
     </button>
-    <a href="index.html" target="_blank" class="btn btn-sm" style="background:transparent;color:var(--text-dim);border:1px solid var(--border2);clip-path:none">
+    <a href="../index.html" target="_blank" class="btn btn-sm" style="background:transparent;color:var(--text-dim);border:1px solid var(--border2);clip-path:none">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       View Portfolio
     </a>
   </div>
 </div>
+<input id="import-json-file" class="sr-only" type="file" accept="application/json,.json" onchange="importJSONFile(event)">
 
 <!-- APP -->
 <div class="app">
@@ -258,7 +272,7 @@ select option{background:var(--surface2)}
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn btn-p btn-sm" onclick="switchPanel(document.querySelector('[data-panel=projects]'))">+ Add Project</button>
           <button class="btn btn-o btn-sm" onclick="switchPanel(document.querySelector('[data-panel=hero]'))">Edit Hero</button>
-          <a href="index.html" target="_blank" class="btn btn-sm" style="background:transparent;border:1px solid var(--border2);color:var(--text-dim);clip-path:none">Open Portfolio</a>
+          <a href="../index.html" target="_blank" class="btn btn-sm" style="background:transparent;border:1px solid var(--border2);color:var(--text-dim);clip-path:none">Open Portfolio</a>
         </div>
         <div class="sdiv" style="margin-top:32px">RECENT PROJECTS</div>
         <div class="proj-list" id="overview-projects"></div>
@@ -318,7 +332,7 @@ select option{background:var(--surface2)}
       </div>
       <div class="panel-body">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">DRAG TO REORDER · CLICK EDIT TO MODIFY</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">DRAG TO REORDER · CLICK EDIT TO MODIFY</span>
           <button class="btn btn-p btn-sm" onclick="openProjectModal()">+ ADD PROJECT</button>
         </div>
         <div class="proj-list" id="proj-list-editor"></div>
@@ -333,7 +347,7 @@ select option{background:var(--surface2)}
       </div>
       <div class="panel-body">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">SKILL CARDS APPEAR IN TECH STACK SECTION</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">SKILL CARDS APPEAR IN TECH STACK SECTION</span>
           <button class="btn btn-p btn-sm" onclick="openSkillModal()">+ ADD SKILL</button>
         </div>
         <div class="proj-list" id="skill-list-editor"></div>
@@ -362,7 +376,7 @@ select option{background:var(--surface2)}
       </div>
       <div class="panel-body">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-          <span style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">THESE APPEAR AS CLICKABLE CARDS IN CONTACT SECTION</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">THESE APPEAR AS CLICKABLE CARDS IN CONTACT SECTION</span>
           <button class="btn btn-p btn-sm" onclick="openContactModal()">+ ADD CONTACT</button>
         </div>
         <div class="proj-list" id="contact-list-editor"></div>
@@ -393,7 +407,7 @@ select option{background:var(--surface2)}
   <div class="modal">
     <div class="modal-header">
       <div class="modal-title" id="proj-modal-title">ADD PROJECT</div>
-      <button class="modal-close" onclick="closeModal('proj-modal')">×</button>
+      <button class="modal-close" onclick="closeModal('proj-modal')">&times;</button>
     </div>
     <div class="modal-body">
       <div class="form-row">
@@ -423,7 +437,7 @@ select option{background:var(--surface2)}
         </div>
       </div>
       <div class="form-row full">
-        <div class="fgroup"><label>Project Title</label><input id="pm-title" placeholder="PROJECT NAME — Subtitle"></div>
+        <div class="fgroup"><label>Project Title</label><input id="pm-title" placeholder="PROJECT NAME - Subtitle"></div>
       </div>
       <div class="form-row full">
         <div class="fgroup"><label>Description</label><textarea id="pm-desc" rows="3"></textarea></div>
@@ -469,7 +483,7 @@ select option{background:var(--surface2)}
   <div class="modal" style="max-width:520px">
     <div class="modal-header">
       <div class="modal-title" id="skill-modal-title">ADD SKILL CARD</div>
-      <button class="modal-close" onclick="closeModal('skill-modal')">×</button>
+      <button class="modal-close" onclick="closeModal('skill-modal')">&times;</button>
     </div>
     <div class="modal-body">
       <div class="form-row full"><div class="fgroup"><label>Category (small text)</label><input id="sm-cat" placeholder="Hardware Design"></div></div>
@@ -506,7 +520,7 @@ select option{background:var(--surface2)}
   <div class="modal" style="max-width:480px">
     <div class="modal-header">
       <div class="modal-title" id="contact-modal-title">ADD CONTACT</div>
-      <button class="modal-close" onclick="closeModal('contact-modal')">×</button>
+      <button class="modal-close" onclick="closeModal('contact-modal')">&times;</button>
     </div>
     <div class="modal-body">
       <div class="form-row">
@@ -541,25 +555,56 @@ select option{background:var(--surface2)}
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="portfolio-data.js"></script>
 <script>
-// ─── DATA HELPERS ───────────────────────────────────────────────────────
+// â”€â”€â”€ DATA HELPERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DEFAULT = window.PORTFOLIO_DATA || {
   updatedAt: "2026-02-20T00:00:00Z",
-  hero:{firstName:"IBRAR",lastName:"AHMAD",role:"PCB Designer · Firmware Dev · Embedded Linux",bio:"Designing hardware that ships — from schematic to silicon to software. Specializing in high-speed PCB design, NXP/STM32 embedded systems, medical & industrial IoT, and full-stack firmware development.",stat1:"10+",stat1l:"PCB Projects",stat2:"4L",stat2l:"Max Stack",stat3:"2026",stat3l:"Active",cvUrl:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/"},
-  about:{p1:"I'm Ibrar Ahmad — a hardware and embedded systems engineer with a passion for building purpose-driven electronics. From schematic capture to PCB layout, firmware development to Linux BSP, I work across the full hardware-software stack.",p2:"My current focus is medical-grade embedded systems, high-speed PCB design with controlled impedance, and deploying secure Linux platforms on NXP SoMs.",p3:"Based in Hazro, Punjab — available for freelance PCB design, firmware consulting, and embedded systems development globally."},
-  contacts:[{icon:"github",label:"GitHub",value:"github.com/hiibrarahmad",url:"https://github.com/hiibrarahmad",color:"c"},{icon:"cv",label:"Curriculum Vitae",value:"View / Download PDF Resume",url:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",color:"p"},{icon:"pcb",label:"Interactive PCB Demo",value:"DermScope REVIVE — Live Viewer",url:"https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",color:"g"}],
-  skills:[{cat:"Hardware Design",name:"PCB LAYOUT & DESIGN",color:"c",tags:["Altium Designer","KiCad","4-Layer","MIPI CSI/DSI","USB 2.0 HS","Impedance Control","ENIG","DDR3"]},{cat:"Embedded Systems",name:"FIRMWARE & BSP",color:"g",tags:["NXP i.MX6UL","STM32","ARM Cortex-A7","U-Boot","Yocto Linux","FreeRTOS","Device Tree"]},{cat:"Software & Tools",name:"DEVELOPMENT",color:"o",tags:["Python","C / C++","Shell Script","Git","VS Code","LaTeX","GitHub Actions"]},{cat:"Connectivity",name:"INTERFACES & COMMS",color:"p",tags:["SPI · I2C · UART","USB OTG","4G LTE / NB-IoT","Wi-Fi · BT 4.2","MQTT · AMQP","GNSS / GPS","Ethernet"]},{cat:"Documentation",name:"TECHNICAL WRITING",color:"c",tags:["LaTeX / XeLaTeX","Markdown","GitHub Pages","Bilingual EN/ID","BOM / Gerber"]},{cat:"Cloud & Security",name:"PLATFORM & OTA",color:"g",tags:["AWS · Azure · GCP","ARM TrustZone","Secure Boot","AES-256","OTA Updates","TLS / DTLS"]}],
-  projects:[{id:"PRJ-2026-PCB-0005",featured:true,status:"live",badge:"pcb",badgeLabel:"PCB DESIGN",year:"2026",client:"Revive Medical Technology",title:"DERMSCOPE REVIVE — Carrier PCB",desc:"Advanced high-speed carrier PCB for handheld dermatology imaging. 4-layer ENIG board hosting INVENSOM-6UL SOM.",imgUrl:"https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png",imgUrlBottom:"https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png",tags:["4 LAYERS","90×62mm","NXP iMX6UL","MIPI CSI/DSI","ENIG","100Ω DIFF","4G LTE","Wi-Fi+BT","GPS/GNSS","TP4056"],liveUrl:"https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",repoUrl:"https://github.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io",liveBtnLabel:"VIEW INTERACTIVE PCB"},{id:"PRJ-2026-DOC-0003",featured:false,status:"live",badge:"doc",badgeLabel:"DOCUMENTATION",year:"2026",client:"Personal · Dual Language",title:"PROFESSIONAL CV — LaTeX",desc:"Dual-language curriculum vitae (English & Indonesian) built with Awesome-CV LaTeX template.",imgUrl:"",imgUrlBottom:"",tags:["LaTeX / XeLaTeX","Awesome-CV","English + Indonesian","GitHub Pages","PDF Output"],liveUrl:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",repoUrl:"https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",liveBtnLabel:"VIEW CV ONLINE"},{id:"PRJ-2026-FW-0001",featured:false,status:"wip",badge:"fw",badgeLabel:"FIRMWARE",year:"2026",client:"NXP i.MX6UL Platform",title:"YOCTO LINUX BSP — iMX6UL",desc:"Custom Board Support Package for NXP i.MX6UL including U-Boot, Linux kernel, and device tree customization.",imgUrl:"",imgUrlBottom:"",tags:["Yocto Project","U-Boot 2017.03","Linux 4.9.11","Device Tree","Qt5 / Wayland"],liveUrl:"",repoUrl:"",liveBtnLabel:"VIEW PROJECT"},{id:"PRJ-2026-HW-0002",featured:false,status:"wip",badge:"pcb",badgeLabel:"IOT GATEWAY",year:"2026",client:"Industrial IoT",title:"INDUSTRIAL IoT GATEWAY PCB",desc:"Multi-protocol industrial gateway supporting MQTT, AMQP, OPC-UA, 4G LTE and Ethernet.",imgUrl:"",imgUrlBottom:"",tags:["4G LTE","Ethernet","MQTT / OPC-UA","Modbus RTU","DIN Rail"],liveUrl:"",repoUrl:"",liveBtnLabel:"VIEW PROJECT"}]
+  hero:{firstName:"IBRAR",lastName:"AHMAD",role:"PCB Designer Â· Firmware Dev Â· Embedded Linux",bio:"Designing hardware that ships â€” from schematic to silicon to software. Specializing in high-speed PCB design, NXP/STM32 embedded systems, medical & industrial IoT, and full-stack firmware development.",stat1:"10+",stat1l:"PCB Projects",stat2:"4L",stat2l:"Max Stack",stat3:"2026",stat3l:"Active",cvUrl:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/"},
+  about:{p1:"I'm Ibrar Ahmad â€” a hardware and embedded systems engineer with a passion for building purpose-driven electronics. From schematic capture to PCB layout, firmware development to Linux BSP, I work across the full hardware-software stack.",p2:"My current focus is medical-grade embedded systems, high-speed PCB design with controlled impedance, and deploying secure Linux platforms on NXP SoMs.",p3:"Based in Hazro, Punjab â€” available for freelance PCB design, firmware consulting, and embedded systems development globally."},
+  contacts:[{icon:"github",label:"GitHub",value:"github.com/hiibrarahmad",url:"https://github.com/hiibrarahmad",color:"c"},{icon:"cv",label:"Curriculum Vitae",value:"View / Download PDF Resume",url:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",color:"p"},{icon:"pcb",label:"Interactive PCB Demo",value:"DermScope REVIVE â€” Live Viewer",url:"https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",color:"g"}],
+  skills:[{cat:"Hardware Design",name:"PCB LAYOUT & DESIGN",color:"c",tags:["Altium Designer","KiCad","4-Layer","MIPI CSI/DSI","USB 2.0 HS","Impedance Control","ENIG","DDR3"]},{cat:"Embedded Systems",name:"FIRMWARE & BSP",color:"g",tags:["NXP i.MX6UL","STM32","ARM Cortex-A7","U-Boot","Yocto Linux","FreeRTOS","Device Tree"]},{cat:"Software & Tools",name:"DEVELOPMENT",color:"o",tags:["Python","C / C++","Shell Script","Git","VS Code","LaTeX","GitHub Actions"]},{cat:"Connectivity",name:"INTERFACES & COMMS",color:"p",tags:["SPI Â· I2C Â· UART","USB OTG","4G LTE / NB-IoT","Wi-Fi Â· BT 4.2","MQTT Â· AMQP","GNSS / GPS","Ethernet"]},{cat:"Documentation",name:"TECHNICAL WRITING",color:"c",tags:["LaTeX / XeLaTeX","Markdown","GitHub Pages","Bilingual EN/ID","BOM / Gerber"]},{cat:"Cloud & Security",name:"PLATFORM & OTA",color:"g",tags:["AWS Â· Azure Â· GCP","ARM TrustZone","Secure Boot","AES-256","OTA Updates","TLS / DTLS"]}],
+  projects:[{id:"PRJ-2026-PCB-0005",featured:true,status:"live",badge:"pcb",badgeLabel:"PCB DESIGN",year:"2026",client:"Revive Medical Technology",title:"DERMSCOPE REVIVE â€” Carrier PCB",desc:"Advanced high-speed carrier PCB for handheld dermatology imaging. 4-layer ENIG board hosting INVENSOM-6UL SOM.",imgUrl:"https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png",imgUrlBottom:"https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png",tags:["4 LAYERS","90Ã—62mm","NXP iMX6UL","MIPI CSI/DSI","ENIG","100Î© DIFF","4G LTE","Wi-Fi+BT","GPS/GNSS","TP4056"],liveUrl:"https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",repoUrl:"https://github.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io",liveBtnLabel:"VIEW INTERACTIVE PCB"},{id:"PRJ-2026-DOC-0003",featured:false,status:"live",badge:"doc",badgeLabel:"DOCUMENTATION",year:"2026",client:"Personal Â· Dual Language",title:"PROFESSIONAL CV â€” LaTeX",desc:"Dual-language curriculum vitae (English & Indonesian) built with Awesome-CV LaTeX template.",imgUrl:"",imgUrlBottom:"",tags:["LaTeX / XeLaTeX","Awesome-CV","English + Indonesian","GitHub Pages","PDF Output"],liveUrl:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",repoUrl:"https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",liveBtnLabel:"VIEW CV ONLINE"},{id:"PRJ-2026-FW-0001",featured:false,status:"wip",badge:"fw",badgeLabel:"FIRMWARE",year:"2026",client:"NXP i.MX6UL Platform",title:"YOCTO LINUX BSP â€” iMX6UL",desc:"Custom Board Support Package for NXP i.MX6UL including U-Boot, Linux kernel, and device tree customization.",imgUrl:"",imgUrlBottom:"",tags:["Yocto Project","U-Boot 2017.03","Linux 4.9.11","Device Tree","Qt5 / Wayland"],liveUrl:"",repoUrl:"",liveBtnLabel:"VIEW PROJECT"},{id:"PRJ-2026-HW-0002",featured:false,status:"wip",badge:"pcb",badgeLabel:"IOT GATEWAY",year:"2026",client:"Industrial IoT",title:"INDUSTRIAL IoT GATEWAY PCB",desc:"Multi-protocol industrial gateway supporting MQTT, AMQP, OPC-UA, 4G LTE and Ethernet.",imgUrl:"",imgUrlBottom:"",tags:["4G LTE","Ethernet","MQTT / OPC-UA","Modbus RTU","DIN Rail"],liveUrl:"",repoUrl:"",liveBtnLabel:"VIEW PROJECT"}]
 };
 
-function load(){try{return JSON.parse(localStorage.getItem('portfolio_data'))||DEFAULT}catch{return DEFAULT}}
-function save(d){
+const TEXT_FIXUPS = [
+  ['Â·', '·'],
+  ['â€”', '—'],
+  ['Ã—', '×'],
+  ['Î©', 'Ω'],
+  ['90Ã—62mm', '90×62mm'],
+  ['100Î©', '100Ω']
+];
+function cleanText(value){
+  let out=String(value ?? '');
+  TEXT_FIXUPS.forEach(([bad,good])=>{ out=out.split(bad).join(good); });
+  return out;
+}
+function cleanData(value){
+  if(typeof value==='string') return cleanText(value);
+  if(Array.isArray(value)) return value.map(cleanData);
+  if(value && typeof value==='object'){
+    const out={};
+    Object.keys(value).forEach(k=>{ out[k]=cleanData(value[k]); });
+    return out;
+  }
+  return value;
+}
+function load(){try{return cleanData(JSON.parse(localStorage.getItem('portfolio_data'))||DEFAULT)}catch{return cleanData(DEFAULT)}}
+function updateSaveIndicator(iso){
+  const el=document.getElementById('save-indicator');
+  if(!el)return;
+  const dt=iso?new Date(iso):new Date();
+  el.textContent='Last saved: '+dt.toLocaleString();
+}
+function save(d,opts={}){
+  d = cleanData(d);
   d.updatedAt = new Date().toISOString();
   localStorage.setItem('portfolio_data',JSON.stringify(d));
-  toast('Saved!','success');
+  updateSaveIndicator(d.updatedAt);
+  if(!opts.silent)toast('Saved!','success');
 }
 
 function toast(msg,type='success'){
@@ -568,11 +613,45 @@ function toast(msg,type='success'){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-// ─── PANEL SWITCHING ─────────────────────────────────────────────────────
+async function copyDataJS(){
+  const data = load();
+  data.updatedAt = new Date().toISOString();
+  const content='window.PORTFOLIO_DATA = '+JSON.stringify(data,null,2)+';';
+  try{
+    await navigator.clipboard.writeText(content);
+    toast('Copied portfolio-data.js to clipboard','success');
+  }catch(err){
+    toast('Clipboard blocked, exporting file instead','error');
+    exportDataJS();
+  }
+}
+
+function importJSONFile(event){
+  const file=event?.target?.files?.[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const parsed=JSON.parse(String(reader.result||'{}'));
+      save(parsed,{silent:true});
+      toast('JSON imported','success');
+      renderPanel(document.querySelector('.nav-item.active').dataset.panel);
+      refreshJson();
+    }catch(err){
+      toast('Import failed: '+err.message,'error');
+    }finally{
+      event.target.value='';
+    }
+  };
+  reader.readAsText(file);
+}
+
+// â”€â”€â”€ PANEL SWITCHING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function switchPanel(el){
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>{n.classList.remove('active');n.setAttribute('aria-pressed','false');});
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
+  el.setAttribute('aria-pressed','true');
   const panelId='panel-'+el.dataset.panel;
   document.getElementById(panelId).classList.add('active');
   renderPanel(el.dataset.panel);
@@ -588,7 +667,47 @@ function renderPanel(name){
   else if(name==='json')refreshJson();
 }
 
-// ─── OVERVIEW ────────────────────────────────────────────────────────────
+function initAccessibility(){
+  document.querySelectorAll('.nav-item').forEach(item=>{
+    item.setAttribute('role','button');
+    item.setAttribute('tabindex','0');
+    item.setAttribute('aria-pressed',item.classList.contains('active')?'true':'false');
+    item.setAttribute('aria-label','Open '+(item.dataset.panel||'panel'));
+    item.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        switchPanel(item);
+      }
+    });
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    document.querySelectorAll('.modal-bg.open').forEach(m=>m.classList.remove('open'));
+  });
+}
+
+let autosaveTimer;
+function queueAutosave(section){
+  clearTimeout(autosaveTimer);
+  autosaveTimer=setTimeout(()=>{
+    if(section==='hero')saveHero(true);
+    if(section==='about')saveAbout(true);
+  },500);
+}
+function initAutosave(){
+  document.querySelectorAll('#panel-hero input,#panel-hero textarea').forEach(el=>{
+    if(el.dataset.autosaveBound)return;
+    el.dataset.autosaveBound='1';
+    el.addEventListener('input',()=>queueAutosave('hero'));
+  });
+  document.querySelectorAll('#panel-about textarea').forEach(el=>{
+    if(el.dataset.autosaveBound)return;
+    el.dataset.autosaveBound='1';
+    el.addEventListener('input',()=>queueAutosave('about'));
+  });
+}
+
+// â”€â”€â”€ OVERVIEW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderOverview(){
   const d=load();
   const stats=document.getElementById('overview-stats');
@@ -599,7 +718,7 @@ function renderOverview(){
     <div class="stat-box"><div class="stat-box-n">${d.contacts.length}</div><div class="stat-box-l">Contacts</div></div>`;
   document.getElementById('overview-projects').innerHTML=d.projects.map(p=>`
     <div class="proj-row">
-      <div class="proj-thumb">${p.imgUrl?`<img src="${p.imgUrl}" onerror="this.style.display='none'">`:'<span style="font-size:18px">🔲</span>'}</div>
+      <div class="proj-thumb">${p.imgUrl?`<img src="${p.imgUrl}" onerror="this.style.display='none'">`:'<span style="font-size:18px">ðŸ”²</span>'}</div>
       <div class="proj-info">
         <div class="proj-id">${p.id}</div>
         <div class="proj-name">${p.title}</div>
@@ -610,7 +729,7 @@ function renderOverview(){
     </div>`).join('');
 }
 
-// ─── HERO FORM ────────────────────────────────────────────────────────────
+// â”€â”€â”€ HERO FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderHeroForm(){
   const h=load().hero;
   ['firstName','lastName','role','bio','cvUrl','s1','sl1','s2','sl2','s3','sl3'].forEach(k=>{
@@ -630,7 +749,7 @@ function renderHeroForm(){
   document.getElementById('h-s3').value=h.stat3||'';
   document.getElementById('h-sl3').value=h.stat3l||'';
 }
-function saveHero(){
+function saveHero(silent=false){
   const d=load();
   d.hero={
     firstName:document.getElementById('h-firstName').value,
@@ -645,23 +764,23 @@ function saveHero(){
     stat3:document.getElementById('h-s3').value,
     stat3l:document.getElementById('h-sl3').value
   };
-  save(d);
+  save(d,{silent});
 }
 
-// ─── ABOUT FORM ───────────────────────────────────────────────────────────
+// â”€â”€â”€ ABOUT FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderAboutForm(){
   const a=load().about;
   document.getElementById('ab-p1').value=a.p1||'';
   document.getElementById('ab-p2').value=a.p2||'';
   document.getElementById('ab-p3').value=a.p3||'';
 }
-function saveAbout(){
+function saveAbout(silent=false){
   const d=load();
   d.about={p1:document.getElementById('ab-p1').value,p2:document.getElementById('ab-p2').value,p3:document.getElementById('ab-p3').value};
-  save(d);
+  save(d,{silent});
 }
 
-// ─── PROJECTS ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ PROJECTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let editingProjectIdx = -1;
 let currentTags = {pm:[], sm:[]};
 
@@ -669,7 +788,7 @@ function renderProjectList(){
   const d=load();
   document.getElementById('proj-list-editor').innerHTML=d.projects.map((p,i)=>`
     <div class="proj-row" draggable="true" data-idx="${i}" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event,'projects')">
-      <span class="drag-handle" title="Drag to reorder">⠿</span>
+      <span class="drag-handle" title="Drag to reorder">â ¿</span>
       <div class="proj-thumb">${p.imgUrl?`<img src="${p.imgUrl}" onerror="this.style.display='none'">`:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a3548" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="12" cy="12" r="5"/></svg>'}</div>
       <div class="proj-info">
         <div class="proj-id">${p.id}</div>
@@ -679,8 +798,8 @@ function renderProjectList(){
       <span class="badge-tiny ${p.status}">${p.status}</span>
       ${p.featured?'<span class="badge-tiny featured">FEATURED</span>':''}
       <div class="proj-actions">
-        <button class="btn btn-icon btn-sm" onclick="editProject(${i})" title="Edit">✎</button>
-        <button class="btn btn-d btn-sm" onclick="deleteProject(${i})" title="Delete" style="clip-path:none">✕</button>
+        <button class="btn btn-icon btn-sm" onclick="editProject(${i})" title="Edit">âœŽ</button>
+        <button class="btn btn-d btn-sm" onclick="deleteProject(${i})" title="Delete" style="clip-path:none">âœ•</button>
       </div>
     </div>`).join('');
 }
@@ -728,21 +847,21 @@ function saveProject(){
   save(d);closeModal('proj-modal');renderProjectList();
 }
 
-// ─── SKILLS ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ SKILLS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let editingSkillIdx=-1;
 function renderSkillList(){
   const d=load();
   document.getElementById('skill-list-editor').innerHTML=d.skills.map((s,i)=>`
     <div class="proj-row" draggable="true" data-idx="${i}" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event,'skills')">
-      <span class="drag-handle">⠿</span>
+      <span class="drag-handle">â ¿</span>
       <div class="proj-info">
         <div class="proj-id">${s.cat}</div>
         <div class="proj-name">${s.name}</div>
-        <div class="proj-meta2" style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px">${s.tags.slice(0,5).map(t=>`<span style="font-family:'Share Tech Mono',monospace;font-size:9px;padding:1px 6px;border:1px solid var(--border2);color:var(--text-dim)">${t}</span>`).join('')}${s.tags.length>5?`<span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text-muted)">+${s.tags.length-5} more</span>`:''}</div>
+        <div class="proj-meta2" style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px">${s.tags.slice(0,5).map(t=>`<span style="font-family:'Space Mono',monospace;font-size:9px;padding:1px 6px;border:1px solid var(--border2);color:var(--text-dim)">${t}</span>`).join('')}${s.tags.length>5?`<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted)">+${s.tags.length-5} more</span>`:''}</div>
       </div>
       <div class="proj-actions">
-        <button class="btn btn-icon btn-sm" onclick="editSkill(${i})">✎</button>
-        <button class="btn btn-d btn-sm" onclick="deleteSkill(${i})" style="clip-path:none">✕</button>
+        <button class="btn btn-icon btn-sm" onclick="editSkill(${i})">âœŽ</button>
+        <button class="btn btn-d btn-sm" onclick="deleteSkill(${i})" style="clip-path:none">âœ•</button>
       </div>
     </div>`).join('');
 }
@@ -767,7 +886,7 @@ function saveSkill(){
   save(d);closeModal('skill-modal');renderSkillList();
 }
 
-// ─── CONTACTS ────────────────────────────────────────────────────────────
+// â”€â”€â”€ CONTACTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let editingContactIdx=-1;
 function renderContactList(){
   const d=load();
@@ -779,8 +898,8 @@ function renderContactList(){
         <div class="proj-meta2" style="color:var(--accent)">${c.url}</div>
       </div>
       <div class="proj-actions">
-        <button class="btn btn-icon btn-sm" onclick="editContact(${i})">✎</button>
-        <button class="btn btn-d btn-sm" onclick="deleteContact(${i})" style="clip-path:none">✕</button>
+        <button class="btn btn-icon btn-sm" onclick="editContact(${i})">âœŽ</button>
+        <button class="btn btn-d btn-sm" onclick="deleteContact(${i})" style="clip-path:none">âœ•</button>
       </div>
     </div>`).join('');
 }
@@ -805,10 +924,10 @@ function saveContact(){
   save(d);closeModal('contact-modal');renderContactList();
 }
 
-// ─── TAGS EDITOR ─────────────────────────────────────────────────────────
+// â”€â”€â”€ TAGS EDITOR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderTagsDisplay(prefix){
   document.getElementById(prefix+'-tags-display').innerHTML=currentTags[prefix].map((t,i)=>`
-    <span class="tag-chip">${t}<button onclick="removeTag('${prefix}',${i})">×</button></span>`).join('');
+    <span class="tag-chip">${t}<button onclick="removeTag('${prefix}',${i})">&times;</button></span>`).join('');
 }
 function addTag(prefix){
   const inp=document.getElementById(prefix+'-tag-input');
@@ -819,7 +938,7 @@ function addTag(prefix){
 function removeTag(prefix,idx){currentTags[prefix].splice(idx,1);renderTagsDisplay(prefix)}
 function handleTagKey(e,prefix){if(e.key==='Enter'||e.key===','){e.preventDefault();addTag(prefix)}}
 
-// ─── DRAG & DROP REORDER ──────────────────────────────────────────────────
+// â”€â”€â”€ DRAG & DROP REORDER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let dragSrcIdx=-1;
 function dragStart(e){dragSrcIdx=+e.currentTarget.dataset.idx;e.currentTarget.classList.add('dragging')}
 function dragOver(e){e.preventDefault()}
@@ -836,21 +955,21 @@ function dropItem(e,list){
   else if(list==='skills')renderSkillList();
 }
 
-// ─── MODAL ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function closeModal(id){document.getElementById(id).classList.remove('open')}
 document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')}));
 
-// ─── JSON EDITOR ──────────────────────────────────────────────────────────
+// â”€â”€â”€ JSON EDITOR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function refreshJson(){document.getElementById('json-editor').value=JSON.stringify(load(),null,2)}
 function saveJson(){
   try{
     const d=JSON.parse(document.getElementById('json-editor').value);
-    localStorage.setItem('portfolio_data',JSON.stringify(d));
+    save(d,{silent:true});
     toast('JSON applied!','success');
   }catch(err){toast('Invalid JSON: '+err.message,'error')}
 }
 
-// ─── EXPORT ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ EXPORT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function exportJSON(){
   const blob=new Blob([JSON.stringify(load(),null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio_data.json';a.click();
@@ -864,7 +983,7 @@ function exportDataJS(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio-data.js';a.click();
 }
 
-// ─── SAVE ALL ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ SAVE ALL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function saveAll(){
   const panel=document.querySelector('.panel.active').id.replace('panel-','');
   if(panel==='hero')saveHero();
@@ -872,15 +991,18 @@ function saveAll(){
   else toast('All changes already auto-saved!','success');
 }
 
-// ─── RESET ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ RESET â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function resetToDefault(){
   if(!confirm('Reset ALL portfolio data to defaults? This cannot be undone.'))return;
-  localStorage.setItem('portfolio_data',JSON.stringify(DEFAULT));
+  save(JSON.parse(JSON.stringify(DEFAULT)),{silent:true});
   toast('Reset to defaults','success');
   renderPanel(document.querySelector('.nav-item.active').dataset.panel);
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ INIT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+updateSaveIndicator(load().updatedAt);
+initAccessibility();
+initAutosave();
 renderOverview();
 </script>
 </body>
