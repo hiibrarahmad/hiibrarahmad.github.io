@@ -3,9 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ibrar Ahmad — Hardware & Embedded Systems Engineer specializing in PCB design, NXP i.MX6UL platforms, firmware, and embedded Linux.">
+<meta name="theme-color" content="#081118">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ibrar Ahmad — Hardware & Embedded Systems Engineer">
+<meta property="og:description" content="PCB Design, Embedded Linux BSP, firmware, and product-grade electronics portfolio.">
+<meta property="og:image" content="https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png">
+<meta property="og:url" content="https://hiibrarahmad.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23040a10'/%3E%3Cpath d='M14 50V14h7v36zm15 0V14h7v36zM18 21h28v6H18zm0 16h28v6H18z' fill='%23d4821a'/%3E%3C/svg%3E">
 <title>Ibrar Ahmad - Hardware & Embedded Systems Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ibrar Ahmad",
+  "jobTitle": "Hardware and Embedded Systems Engineer",
+  "url": "https://hiibrarahmad.github.io/",
+  "sameAs": ["https://github.com/hiibrarahmad"],
+  "knowsAbout": ["PCB Design", "Embedded Linux", "Firmware Development", "NXP i.MX6UL", "Yocto BSP"]
+}
+</script>
 <style>
   :root {
     --bg: #081118;
@@ -287,13 +307,75 @@
     position: absolute; bottom: -4px; left: 0; right: 0;
     height: 1px;
     background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.2s;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.26s ease;
   }
   .nav-links a:hover { color: var(--accent); }
-  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a:hover::after { clip-path: inset(0 0 0 0); }
   .nav-links a.active { color: var(--accent); }
-  .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a.active::after { clip-path: inset(0 0 0 0); }
+  .nav-toggle {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(84,191,216,0.34);
+    background: rgba(8,17,24,0.78);
+    color: var(--accent);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+  .nav-toggle:hover {
+    border-color: rgba(212,130,26,0.55);
+    color: var(--accent3);
+    background: rgba(212,130,26,0.08);
+  }
+  .nav-toggle svg { width: 16px; height: 16px; }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgba(4,10,16,0.96);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.24s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-overlay-menu {
+    list-style: none;
+    display: grid;
+    gap: 22px;
+    text-align: center;
+  }
+  .nav-overlay-menu a {
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: clamp(24px, 9vw, 42px);
+    color: #dbeaf2;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .nav-overlay-menu a:hover { color: var(--accent3); }
+  .nav-overlay-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(84,191,216,0.34);
+    color: var(--accent);
+    background: rgba(8,17,24,0.78);
+    cursor: pointer;
+  }
   .nav-status {
     display: flex; align-items: center; gap: 8px;
     font-family: 'Space Mono', monospace;
@@ -331,6 +413,33 @@
   /* MAIN LAYOUT */
   main { position: relative; z-index: 5; padding-top: 92px; }
 
+  .marquee-strip {
+    margin: 0 24px 16px;
+    border-top: 1px solid rgba(212,130,26,0.45);
+    border-bottom: 1px solid rgba(212,130,26,0.45);
+    background: rgba(5,10,14,0.78);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 6;
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 20px;
+    padding: 9px 0;
+    min-width: max-content;
+    animation: marqueeRun 26s linear infinite;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #f3d7ab;
+  }
+  @keyframes marqueeRun {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   /* HERO */
   .hero {
     --hero-glow-x: 72%;
@@ -364,6 +473,31 @@
     background: linear-gradient(90deg, transparent, rgba(84,191,216,0.42), transparent);
     pointer-events: none;
     z-index: 2;
+  }
+  .hero-meta {
+    position: absolute;
+    top: 84px;
+    right: 60px;
+    z-index: 3;
+    display: grid;
+    justify-items: end;
+    gap: 6px;
+  }
+  .hero-clock {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    color: #f0d5ad;
+    border: 1px solid rgba(212,130,26,0.44);
+    background: rgba(10,18,24,0.78);
+    padding: 4px 8px;
+  }
+  .hero-coords {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    color: #bdced8;
+    text-transform: uppercase;
   }
   .hero-traces {
     position: absolute;
@@ -492,7 +626,8 @@
     height: 100%;
     object-fit: cover;
     transform: translateZ(24px) scale(1.02);
-    filter: saturate(1) contrast(1) brightness(0.96);
+    filter: grayscale(1) sepia(0.66) hue-rotate(-18deg) saturate(1.2) contrast(1.08) brightness(0.86);
+    mix-blend-mode: luminosity;
   }
 
   .hero-portrait.active {
@@ -539,6 +674,13 @@
     -webkit-text-stroke: 1px rgba(84,191,216,0.72);
     text-shadow: 0 0 22px rgba(84,191,216,0.18);
     display: block;
+  }
+  .hero-name.glitching .line1,
+  .hero-name.glitching .line2 {
+    text-shadow:
+      1px 0 rgba(255,59,59,0.38),
+      -1px 0 rgba(0,255,213,0.38),
+      0 0 14px rgba(212,130,26,0.32);
   }
   @keyframes heroShimmer {
     0% { background-position: 0% 50%; }
@@ -624,6 +766,10 @@
     isolation: isolate;
     transform: translateY(0);
   }
+  .magnetic {
+    will-change: transform;
+    transition: transform 0.16s ease;
+  }
   .btn-primary::before, .btn-outline::before {
     content: '';
     position: absolute;
@@ -698,6 +844,25 @@
     font-size: 13px; color: var(--text-muted);
     letter-spacing: 1.8px;
     animation: fadeUp 1s ease 1s both;
+  }
+
+  .sticky-section-label {
+    position: fixed;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(212,130,26,0.72);
+    border: 1px solid rgba(212,130,26,0.34);
+    background: rgba(6,12,17,0.74);
+    padding: 10px 6px;
+    pointer-events: none;
   }
   .scroll-line {
     width: 30px; height: 1px; background: var(--text-muted);
@@ -843,10 +1008,99 @@
     background: rgba(212,130,26,0.1);
     padding: 3px 8px;
   }
+  .skills-visuals {
+    display: grid;
+    grid-template-columns: minmax(260px, 420px) 1fr;
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+  .skills-radar,
+  .skills-bars {
+    border: 1px solid rgba(84,191,216,0.2);
+    background: rgba(8,18,25,0.72);
+    padding: 16px;
+  }
+  .skills-radar-title,
+  .skills-bars-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #d9e8f1;
+    margin-bottom: 12px;
+  }
+  .radar-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .skill-bars-list {
+    display: grid;
+    gap: 10px;
+  }
+  .skill-bar-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 44px;
+    gap: 10px;
+    align-items: center;
+  }
+  .skill-bar-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    color: #c4d8e4;
+  }
+  .skill-bar-track {
+    height: 8px;
+    background: rgba(84,191,216,0.13);
+    border: 1px solid rgba(84,191,216,0.22);
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #d4821a, #54bfd8 66%, #00ffd5);
+    transition: width 1s cubic-bezier(.25,.9,.2,1);
+  }
+  .skill-bar-row.visible .skill-bar-fill { width: var(--value); }
+  .skill-bar-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #f2d8ae;
+    text-align: right;
+  }
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 14px;
+  }
+  .tool-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .tool-logo {
+    border: 1px solid rgba(84,191,216,0.22);
+    background: rgba(8,18,25,0.72);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+  }
+  .tool-logo img {
+    width: 16px;
+    height: 16px;
+    filter: drop-shadow(0 0 6px rgba(84,191,216,0.4));
+  }
+  .tool-logo span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #d8eaf4;
   }
   .skill-card {
     --tilt-x: 0deg;
@@ -1049,7 +1303,6 @@
       0 0 72px rgba(84,191,216,0.16);
   }
   .project-card:hover .pcb-switch .pcb-view {
-    transform: scale(1.24);
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.35)) brightness(0.98) saturate(1.04);
   }
 
@@ -1119,21 +1372,28 @@
     pointer-events: none;
     z-index: 0;
   }
+  .pcb-stage {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(.25,.7,.15,1);
+    z-index: 1;
+  }
   .pcb-switch .pcb-view {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: contain;
     padding: 0;
-    opacity: 0;
-    transform: scale(1.06);
-    transition: opacity 0.35s ease, transform 0.6s ease;
-    z-index: 1;
+    backface-visibility: hidden;
+    transform: rotateY(0deg) scale(1.14);
+    transition: transform 0.55s ease;
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.35));
   }
-  .pcb-switch[data-view="top"] .pcb-top,
-  .pcb-switch[data-view="bottom"] .pcb-bottom {
-    opacity: 1;
-    transform: scale(1.18);
+  .pcb-switch .pcb-bottom {
+    transform: rotateY(180deg) scale(1.14);
+  }
+  .pcb-switch[data-view="bottom"] .pcb-stage {
+    transform: rotateY(180deg);
   }
   .pcb-toggle {
     position: absolute; bottom: 12px; left: 12px;
@@ -1377,6 +1637,26 @@
     0%, 100% { transform: scaleX(0.35); opacity: 0.35; }
     50% { transform: scaleX(1); opacity: 1; }
   }
+  .wip-countdown {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #f0d4d4;
+  }
+  .wip-request {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    color: #1a0909;
+    border: 1px solid rgba(255,59,59,0.75);
+    background: rgba(255,59,59,0.86);
+    padding: 6px 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .wip-request:hover {
+    background: rgba(255,59,59,1);
+  }
 
   /* Featured card spans full width */
   .project-card.featured {
@@ -1604,6 +1884,28 @@
     background: #040a10;
     transition: opacity 0.6s ease, visibility 0.6s ease;
   }
+
+  .site-toast {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    z-index: 170;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: #0b1319;
+    background: rgba(212,130,26,0.96);
+    border: 1px solid rgba(212,130,26,1);
+    padding: 10px 12px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+  }
+  .site-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .intro-loader.done {
     opacity: 0;
     visibility: hidden;
@@ -1619,6 +1921,18 @@
     transform: scale(0.88);
     opacity: 0;
     animation: introPulse 1.3s ease forwards;
+  }
+  .intro-mark.boot {
+    font-family: var(--font-mono);
+    font-size: clamp(13px, 2vw, 16px);
+    letter-spacing: 0.8px;
+    white-space: pre;
+    color: #d2e8f2;
+    -webkit-text-stroke: 0;
+    text-shadow: 0 0 10px rgba(84,191,216,0.2);
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
   @keyframes introPulse {
     0% { opacity: 0; transform: scale(0.8); filter: blur(8px); }
@@ -1668,6 +1982,7 @@
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     line-height: 2;
+    overflow-x: auto;
   }
   .terminal-bar {
     background: linear-gradient(135deg, rgba(28,49,62,0.9), rgba(19,35,45,0.92));
@@ -1689,6 +2004,33 @@
   .t-out { color: var(--accent2); }
   .t-comment { color: var(--text-muted); }
   .t-path { color: var(--accent3); }
+  .terminal-ascii {
+    color: rgba(212,130,26,0.72);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .terminal-live {
+    min-height: 170px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .terminal-input-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .terminal-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #d9edf7;
+    font: inherit;
+    outline: none;
+    min-width: 80px;
+    padding: 0;
+  }
   #terminal-dynamic .term-cursor {
     display: inline-block;
     animation: blink 0.85s step-end infinite;
@@ -1715,12 +2057,20 @@
     }
   }
 
+  @media (hover: none) {
+    .project-overlay { opacity: 1; }
+    .project-card { --lift: -3px; }
+    .project-link::before { transform: translateX(0); opacity: 0.35; }
+    .nav-links a::after { clip-path: inset(0 0 0 0); opacity: 0.4; }
+  }
+
   @media (max-width: 768px) {
     nav { top: 10px; left: 12px; right: 12px; height: 58px; padding: 0 14px; }
     main { padding-top: 82px; }
     .nav-counter { display: none; }
     .nav-status { display: none; }
     .nav-links { display: none; }
+    .nav-toggle { display: inline-flex; }
     .hero { min-height: auto; padding: 50px 24px 60px; flex-direction: column; align-items: flex-start; gap: 28px; }
     .hero-content { padding: 24px 20px; width: 100%; }
     .hero-visual { width: 100%; justify-content: center; }
@@ -1730,9 +2080,16 @@
     .hero-pill { font-size: 11px; padding: 6px 10px; }
     section { padding: 80px 24px; }
     section:not(.hero) { margin: 0 12px 18px; padding: 72px 22px; }
+    .marquee-strip { margin: 0 12px 14px; }
+    .skills-visuals { grid-template-columns: 1fr; }
+    .skill-bar-row { grid-template-columns: 1fr; gap: 6px; }
     .hero-stats { gap: 24px; }
     .stat-item { min-width: calc(50% - 12px); }
+    .hero-meta { position: static; justify-items: start; margin-bottom: 16px; }
     .terminal-wrap { margin: 0 12px 18px; padding: 0 18px 24px; }
+    .terminal { font-size: 12px; line-height: 1.75; }
+    .terminal-live { min-height: 140px; }
+    .sticky-section-label { display: none; }
     .projects-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
     footer { margin: 0 12px 18px; padding: 24px; grid-template-columns: 1fr; text-align: left; }
@@ -1747,7 +2104,7 @@
 <body>
 
 <div class="intro-loader" id="intro-loader" aria-hidden="true">
-  <div class="intro-mark">IA</div>
+  <div class="intro-mark boot" id="intro-mark">[ 0.000 ] Booting Ibrar Ahmad v2.0 ...</div>
 </div>
 <div class="scroll-progress-top" aria-hidden="true"></div>
 <div class="cursor" id="cursor"></div>
@@ -1755,6 +2112,8 @@
 <div class="circuit-bg"></div>
 <div class="scanline"></div>
 <div class="noise-overlay"></div>
+<div class="sticky-section-label" id="sticky-section-label">01 // TECH STACK</div>
+<div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
 <div class="corner-deco tl"></div>
 <div class="corner-deco tr"></div>
 <div class="corner-deco bl"></div>
@@ -1776,11 +2135,33 @@
     <span class="status-dot"></span>
     AVAILABLE FOR WORK
   </div>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+  </button>
 </nav>
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+  <button class="nav-overlay-close" id="nav-overlay-close" type="button" aria-label="Close menu">X</button>
+  <ul class="nav-overlay-menu">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <main>
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>PCB DESIGN</span><span>·</span><span>EMBEDDED LINUX</span><span>·</span><span>YOCTO BSP</span><span>·</span><span>NXP iMX6UL</span><span>·</span><span>FIRMWARE DEV</span><span>·</span><span>MEDICAL GRADE</span><span>·</span><span>ROHS COMPLIANT</span><span>·</span>
+    <span>PCB DESIGN</span><span>·</span><span>EMBEDDED LINUX</span><span>·</span><span>YOCTO BSP</span><span>·</span><span>NXP iMX6UL</span><span>·</span><span>FIRMWARE DEV</span><span>·</span><span>MEDICAL GRADE</span><span>·</span><span>ROHS COMPLIANT</span><span>·</span>
+  </div>
+</div>
 <section class="hero" id="home">
+  <div class="hero-meta">
+    <div class="hero-clock" id="hero-clock">PKT 00:00:00</div>
+    <div class="hero-coords" id="hero-coords">33.9098° N · 72.4918° E — Hazro, Pakistan</div>
+  </div>
   <div class="hero-traces" aria-hidden="true">
     <svg viewBox="0 0 1600 900" preserveAspectRatio="none">
       <path class="trace-base" d="M-80,180 C240,110 360,260 560,210 C730,168 820,72 1040,120 C1260,170 1420,270 1700,210"/>
@@ -1797,7 +2178,7 @@
 
   <div class="hero-content">
     <div class="hero-eyebrow" id="hero-eyebrow">Hardware & Embedded Systems Engineer</div>
-    <div class="hero-name">
+    <div class="hero-name" id="hero-name">
       <span class="line1" id="hero-first">IBRAR</span>
       <span class="line2" id="hero-last">AHMAD</span>
     </div>
@@ -1830,6 +2211,24 @@
     <span class="section-line"></span>
   </div>
 
+  <div class="skills-visuals fade-in">
+    <div class="skills-radar">
+      <div class="skills-radar-title">Skill Radar</div>
+      <svg class="radar-svg" id="skills-radar" viewBox="0 0 320 320" aria-label="Radar chart"></svg>
+    </div>
+    <div class="skills-bars">
+      <div class="skills-bars-title">Tool Strength</div>
+      <div class="skill-bars-list" id="skills-bars"></div>
+    </div>
+  </div>
+  <div class="tool-logo-grid fade-in">
+    <div class="tool-logo"><img src="https://cdn.simpleicons.org/kicad/54bfd8" alt="KiCad logo" loading="lazy"><span>KiCad</span></div>
+    <div class="tool-logo"><img src="https://cdn.simpleicons.org/altiumdesigner/54bfd8" alt="Altium logo" loading="lazy"><span>Altium</span></div>
+    <div class="tool-logo"><img src="https://cdn.simpleicons.org/nxp/54bfd8" alt="NXP logo" loading="lazy"><span>NXP</span></div>
+    <div class="tool-logo"><img src="https://cdn.simpleicons.org/visualstudiocode/54bfd8" alt="VS Code logo" loading="lazy"><span>VS Code</span></div>
+    <div class="tool-logo"><img src="https://cdn.simpleicons.org/git/54bfd8" alt="Git logo" loading="lazy"><span>Git</span></div>
+    <div class="tool-logo"><img src="https://cdn.simpleicons.org/stmicroelectronics/54bfd8" alt="STM logo" loading="lazy"><span>STM32</span></div>
+  </div>
   <div class="skills-domains fade-in" id="skills-domains"></div>
   <div class="skills-grid fade-in" id="skills-grid"></div>
 </section>
@@ -1843,13 +2242,16 @@
     <span class="t-title">ibrar@dev:~/portfolio</span>
   </div>
   <div class="terminal">
-    <div><span class="t-path">ibrar@dev</span>:<span class="t-cmd">~/portfolio</span>$ ls -la projects/</div>
-    <div class="t-out">total 8 projects found</div>
-    <div class="t-line">drwxr-xr-x  <span class="t-cmd">PRJ-2026-PCB-0005-DERMSCOPE-REVIVE</span>     <span class="t-comment"># Medical-grade 4-layer carrier PCB</span></div>
-    <div class="t-line">drwxr-xr-x  <span class="t-cmd">PRJ-2026-DOC-0003-Personal-CV</span>          <span class="t-comment"># Dual-language LaTeX CV</span></div>
-    <div class="t-line">drwxr-xr-x  <span class="t-out">PRJ-2026-FW-0001-BSP-iMX6UL</span>            <span class="t-comment"># Yocto Linux BSP</span></div>
-    <div class="t-line">drwxr-xr-x  <span class="t-out">PRJ-2026-HW-0002-IOT-GATEWAY</span>           <span class="t-comment"># Industrial IoT Gateway PCB</span></div>
-    <div id="terminal-dynamic"></div>
+    <pre class="terminal-ascii" aria-hidden="true">  ___    _ 
+ |_ _|  /_\
+  | |  / _ \
+ |___|/_/ \_\</pre>
+    <div class="terminal-live" id="terminal-dynamic" aria-live="polite"></div>
+    <div class="terminal-input-line">
+      <span><span class="t-path">ibrar@dev</span>:<span class="t-cmd">~/portfolio</span>$</span>
+      <input class="terminal-input" id="terminal-input" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command input">
+      <span class="term-cursor">_</span>
+    </div>
   </div>
 </div>
 
@@ -2217,6 +2619,9 @@
       lastName: 'AHMAD',
       role: 'PCB Designer · Firmware Dev · Embedded Linux',
       bio: 'Designing hardware that ships from schematic to production.',
+      timezone: 'Asia/Karachi',
+      tzLabel: 'PKT',
+      coordinates: '33.9098° N · 72.4918° E — Hazro, Pakistan',
       stat1: '8+',
       stat1l: 'Projects',
       stat2: '4L',
@@ -2356,11 +2761,14 @@
     const hasBottom = !!imgUrlBottom;
     const isWip = String(p.status || '').toLowerCase() === 'wip' || !clickUrl;
     const wipClass = isWip ? ' is-wip' : '';
+    const releaseDate = p.releaseDate || '2026-12-31T00:00:00Z';
     const wipOverlay = isWip ? `
       <div class="wip-overlay">
         <div class="wip-classified">██████ CLASSIFIED ██████</div>
         <span class="wip-label">CLEARANCE REQUIRED</span>
         <div class="wip-bars"><span></span><span></span><span></span></div>
+        <div class="wip-countdown" data-release="${escapeHtml(releaseDate)}">ETA: --</div>
+        <button class="wip-request" type="button" data-copy-email="true">Request Access</button>
       </div>` : '';
 
     const metaParts = [];
@@ -2393,8 +2801,10 @@
       if (hasBottom) {
         imageInner = `
           <div class="project-img pcb-switch" data-view="top">
-            <img class="pcb-view pcb-top" src="${escapeHtml(imgUrl)}" alt="${title} Top" loading="lazy">
-            <img class="pcb-view pcb-bottom" src="${escapeHtml(imgUrlBottom)}" alt="${title} Bottom" loading="lazy">
+            <div class="pcb-stage">
+              <img class="pcb-view pcb-top" src="${escapeHtml(imgUrl)}" alt="${title} Top" loading="lazy">
+              <img class="pcb-view pcb-bottom" src="${escapeHtml(imgUrlBottom)}" alt="${title} Bottom" loading="lazy">
+            </div>
             <div class="pcb-toggle">
               <button class="pcb-tab active" type="button" data-view="top">Top</button>
               <button class="pcb-tab" type="button" data-view="bottom">Bottom</button>
@@ -2472,6 +2882,7 @@
     const stats = document.getElementById('hero-stats');
     const ctas = document.getElementById('hero-ctas');
     const ghost = document.getElementById('hero-ghost');
+    const coords = document.getElementById('hero-coords');
 
     if (eyebrow) eyebrow.textContent = h.eyebrow || 'Hardware & Embedded Systems Engineer';
     if (first) first.textContent = h.firstName || '';
@@ -2482,6 +2893,7 @@
       role.dataset.typing = 'off';
     }
     if (bio) bio.textContent = h.bio || '';
+    if (coords) coords.textContent = h.coordinates || '33.9098° N · 72.4918° E — Hazro, Pakistan';
 
     if (stats) {
       const projects = Array.isArray(data.projects) ? data.projects : [];
@@ -2525,6 +2937,7 @@
   function renderSkills() {
     const data = getPortfolioData();
     renderSkillDomains(data);
+    renderSkillVisuals(data);
     const grid = document.getElementById('skills-grid');
     if (!grid || !data || !Array.isArray(data.skills)) return;
     grid.innerHTML = data.skills.map(s => {
@@ -2562,6 +2975,107 @@
         ${r.tags.map(t => `<span class="domain-chip">${escapeHtml(t)}</span>`).join('')}
       </div>
     `).join('');
+  }
+
+  function getSkillScore(skills, tokens) {
+    const text = (Array.isArray(skills) ? skills : []).map(s => {
+      const parts = [s.cat || '', s.name || '', ...(Array.isArray(s.tags) ? s.tags : [])];
+      return parts.join(' ').toLowerCase();
+    }).join(' ');
+    const hits = tokens.reduce((sum, token) => sum + (text.includes(token) ? 1 : 0), 0);
+    return Math.max(40, Math.min(95, 35 + (hits * 15)));
+  }
+
+  function renderSkillVisuals(data) {
+    const skills = Array.isArray(data?.skills) ? data.skills : [];
+    const radarEl = document.getElementById('skills-radar');
+    const barsEl = document.getElementById('skills-bars');
+    if (!radarEl || !barsEl) return;
+
+    const domains = [
+      { label: 'PCB Design', value: getSkillScore(skills, ['pcb', 'kicad', 'altium', 'layout']) },
+      { label: 'Firmware', value: getSkillScore(skills, ['firmware', 'stm32', 'freertos', 'uart']) },
+      { label: 'Linux BSP', value: getSkillScore(skills, ['yocto', 'linux', 'u-boot', 'device tree']) },
+      { label: 'Schematics', value: getSkillScore(skills, ['schematic', 'design', 'hardware']) },
+      { label: 'Signal Integrity', value: getSkillScore(skills, ['mipi', 'impedance', 'ddr', 'usb']) }
+    ];
+
+    const tools = [
+      { label: 'KiCad', value: getSkillScore(skills, ['kicad']) },
+      { label: 'Altium', value: getSkillScore(skills, ['altium']) },
+      { label: 'Yocto', value: getSkillScore(skills, ['yocto']) },
+      { label: 'NXP i.MX6UL', value: getSkillScore(skills, ['imx6ul', 'nxp']) },
+      { label: 'STM32', value: getSkillScore(skills, ['stm32']) },
+      { label: 'FreeRTOS', value: getSkillScore(skills, ['freertos']) }
+    ];
+
+    const cx = 160;
+    const cy = 160;
+    const maxR = 112;
+    const levels = [0.2, 0.4, 0.6, 0.8, 1];
+    const angleStep = (Math.PI * 2) / domains.length;
+    const toPoint = (value, idx) => {
+      const angle = -Math.PI / 2 + (idx * angleStep);
+      const r = maxR * value;
+      const x = cx + Math.cos(angle) * r;
+      const y = cy + Math.sin(angle) * r;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    };
+
+    const ringPolys = levels.map(level => {
+      const points = domains.map((_, idx) => toPoint(level, idx)).join(' ');
+      return `<polygon points="${points}" fill="none" stroke="rgba(84,191,216,0.16)" stroke-width="1"/>`;
+    }).join('');
+
+    const axes = domains.map((d, idx) => {
+      const end = toPoint(1, idx).split(',');
+      const lx = Number(end[0]);
+      const ly = Number(end[1]);
+      const labelX = cx + (lx - cx) * 1.14;
+      const labelY = cy + (ly - cy) * 1.14;
+      return `
+        <line x1="${cx}" y1="${cy}" x2="${lx}" y2="${ly}" stroke="rgba(84,191,216,0.22)" stroke-width="1"/>
+        <text x="${labelX.toFixed(1)}" y="${labelY.toFixed(1)}" fill="#c6d9e3" font-size="10" text-anchor="middle">${escapeHtml(d.label)}</text>
+      `;
+    }).join('');
+
+    const dataPoints = domains.map((d, idx) => toPoint(d.value / 100, idx)).join(' ');
+    radarEl.innerHTML = `
+      <defs>
+        <linearGradient id="radar-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgba(212,130,26,0.55)"/>
+          <stop offset="100%" stop-color="rgba(0,255,213,0.28)"/>
+        </linearGradient>
+      </defs>
+      ${ringPolys}
+      ${axes}
+      <polygon points="${dataPoints}" fill="url(#radar-fill)" stroke="rgba(212,130,26,0.88)" stroke-width="2"/>
+    `;
+
+    barsEl.innerHTML = tools.map(t => `
+      <div class="skill-bar-row" style="--value:${Math.round(t.value)}%">
+        <div class="skill-bar-label">${escapeHtml(t.label)}</div>
+        <div class="skill-bar-track"><span class="skill-bar-fill"></span></div>
+        <div class="skill-bar-value">${Math.round(t.value)}%</div>
+      </div>
+    `).join('');
+    initSkillBarsObserver();
+  }
+
+  let barsObserver;
+  function initSkillBarsObserver() {
+    const rows = Array.from(document.querySelectorAll('.skill-bar-row'));
+    if (!rows.length) return;
+    if (barsObserver) barsObserver.disconnect();
+    barsObserver = new IntersectionObserver(entries => {
+      entries.forEach((entry, idx) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), idx * 90);
+          barsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    rows.forEach(row => barsObserver.observe(row));
   }
 
   function renderAbout() {
@@ -2673,61 +3187,342 @@
     }
   }
 
-  function renderTerminalLoop() {
-    const wrap = document.getElementById('terminal-dynamic');
-    if (!wrap || wrap.dataset.bound) return;
-    wrap.dataset.bound = '1';
-    const commands = [
-      { cmd: 'git log --oneline -5', out: '5 commits: pcb tuning, mipi timing, yocto fixes' },
-      { cmd: 'ls skills/', out: 'pcb-design  firmware  yocto-linux  prototyping' },
-      { cmd: 'cat metrics.txt', out: '4 shipped PCB builds · 3 live demos · 0 field failures' },
-      { cmd: 'echo "available for work"', out: 'status: accepting embedded contracts' }
-    ];
+  function showSiteToast(message) {
+    const toast = document.getElementById('site-toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(showSiteToast._timer);
+    showSiteToast._timer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
 
-    let cmdIdx = 0;
-    let charIdx = 0;
-    let deleting = false;
-
-    function step() {
-      const current = commands[cmdIdx];
-      const full = current.cmd;
-      if (!deleting) {
-        charIdx = Math.min(charIdx + 1, full.length);
-      } else {
-        charIdx = Math.max(charIdx - 1, 0);
+  function initCopyEmail() {
+    const emailEl = document.getElementById('footer-email');
+    if (!emailEl || emailEl.dataset.bound) return;
+    emailEl.dataset.bound = '1';
+    emailEl.addEventListener('click', async e => {
+      e.preventDefault();
+      const value = String(emailEl.textContent || '').trim();
+      if (!value) return;
+      try {
+        await navigator.clipboard.writeText(value);
+        showSiteToast('✓ Copied to clipboard');
+      } catch {
+        showSiteToast('Clipboard permission blocked');
       }
+    });
+  }
 
-      const typed = full.slice(0, charIdx);
-      const showOut = !deleting && charIdx === full.length;
-      wrap.innerHTML = `
-        <div><span class="t-path">ibrar@dev</span>:<span class="t-cmd">~/portfolio</span>$ <span class="term-typed">${escapeHtml(typed)}</span><span class="term-cursor">_</span></div>
-        ${showOut ? `<div class="t-out">${escapeHtml(current.out)}</div>` : ''}
-      `;
+  function getPrimaryEmail() {
+    const data = getPortfolioData();
+    const contacts = Array.isArray(data.contacts) ? data.contacts : [];
+    const emailItem = contacts.find(c => String(c.value || '').includes('@'));
+    if (!emailItem) return '';
+    return String(emailItem.value || '').replace(/^mailto:/i, '').trim();
+  }
 
-      if (!deleting && charIdx === full.length) {
-        deleting = true;
-        setTimeout(step, 1500);
-        return;
+  function initWipActions() {
+    const email = getPrimaryEmail();
+    document.querySelectorAll('.wip-request[data-copy-email="true"]').forEach(btn => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', async e => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!email) {
+          showSiteToast('Email not configured');
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(email);
+          showSiteToast('Access email copied');
+        } catch {
+          showSiteToast('Clipboard permission blocked');
+        }
+      });
+    });
+
+    const updateCountdowns = () => {
+      const now = Date.now();
+      document.querySelectorAll('.wip-countdown').forEach(el => {
+        const release = Date.parse(el.dataset.release || '');
+        if (!release || Number.isNaN(release)) {
+          el.textContent = 'ETA: TBD';
+          return;
+        }
+        const diff = Math.max(release - now, 0);
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        el.textContent = `ETA: ${days}d ${hours}h`;
+      });
+    };
+    updateCountdowns();
+    if (!initWipActions._timer) initWipActions._timer = setInterval(updateCountdowns, 60000);
+  }
+
+  function initNavOverlay() {
+    const openBtn = document.getElementById('nav-toggle');
+    const closeBtn = document.getElementById('nav-overlay-close');
+    const overlay = document.getElementById('nav-overlay');
+    if (!openBtn || !closeBtn || !overlay || openBtn.dataset.bound) return;
+    openBtn.dataset.bound = '1';
+
+    const open = () => {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    };
+    const close = () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    };
+
+    openBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) close();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') close();
+    });
+    overlay.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', () => close());
+    });
+  }
+
+  function initHeroClock() {
+    const clock = document.getElementById('hero-clock');
+    if (!clock || clock.dataset.bound) return;
+    clock.dataset.bound = '1';
+    const tick = () => {
+      const data = getPortfolioData();
+      const tz = String(data?.hero?.timezone || 'Asia/Karachi');
+      const tzLabel = String(data?.hero?.tzLabel || 'PKT');
+      try {
+        const value = new Intl.DateTimeFormat('en-GB', {
+          timeZone: tz,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        }).format(new Date());
+        clock.textContent = `${tzLabel} ${value}`;
+      } catch {
+        const local = new Date().toLocaleTimeString('en-GB', { hour12: false });
+        clock.textContent = `${tzLabel} ${local}`;
       }
-      if (deleting && charIdx === 0) {
-        deleting = false;
-        cmdIdx = (cmdIdx + 1) % commands.length;
-      }
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
 
-      setTimeout(step, deleting ? 38 : 65);
+  function initHeroNameGlitch() {
+    const nameEl = document.getElementById('hero-name');
+    if (!nameEl || nameEl.dataset.bound) return;
+    nameEl.dataset.bound = '1';
+    const charset = '@#$%&*';
+
+    const scramble = node => {
+      const finalText = node.textContent || '';
+      const steps = 8;
+      let frame = 0;
+      const timer = setInterval(() => {
+        const progress = frame / steps;
+        node.textContent = finalText.split('').map((ch, idx) => {
+          if (ch === ' ') return ' ';
+          return idx / finalText.length < progress
+            ? finalText[idx]
+            : charset[Math.floor(Math.random() * charset.length)];
+        }).join('');
+        frame += 1;
+        if (frame > steps) {
+          clearInterval(timer);
+          node.textContent = finalText;
+          nameEl.classList.remove('glitching');
+        }
+      }, 38);
+    };
+
+    nameEl.addEventListener('mouseenter', () => {
+      if (nameEl.classList.contains('glitching')) return;
+      nameEl.classList.add('glitching');
+      const lines = nameEl.querySelectorAll('.line1, .line2');
+      lines.forEach(line => scramble(line));
+    });
+  }
+
+  function initMagneticButtons() {
+    if (reducedMotion || coarsePointer) return;
+    initMagneticButtons._targets = Array.from(document.querySelectorAll('.btn-primary, .btn-outline, .project-link, .footer-email')).filter(Boolean);
+    initMagneticButtons._targets.forEach(t => t.classList.add('magnetic'));
+    if (initMagneticButtons._bound) return;
+    initMagneticButtons._bound = true;
+    const radius = 60;
+    const strength = 10;
+
+    document.addEventListener('mousemove', e => {
+      const targets = initMagneticButtons._targets || [];
+      targets.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const dist = Math.hypot(dx, dy);
+        if (dist < radius + Math.max(rect.width, rect.height) * 0.4) {
+          const factor = (1 - Math.min(dist / radius, 1)) * strength;
+          el.style.transform = `translate(${(dx / radius * factor).toFixed(1)}px, ${(dy / radius * factor).toFixed(1)}px)`;
+        } else {
+          el.style.transform = '';
+        }
+      });
+    }, { passive: true });
+  }
+
+  let terminalBooted = false;
+  let terminalBound = false;
+  const terminalHistory = [];
+  let historyIndex = -1;
+
+  function terminalPrint(target, text, cls = 't-line') {
+    const line = document.createElement('div');
+    line.className = cls;
+    line.textContent = text;
+    line.style.opacity = '0';
+    line.style.transform = 'translateY(8px)';
+    target.appendChild(line);
+    requestAnimationFrame(() => {
+      line.style.opacity = '1';
+      line.style.transform = 'translateY(0)';
+      line.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    });
+    target.scrollTop = target.scrollHeight;
+  }
+
+  function runTerminalCommand(rawInput, out) {
+    const cmd = String(rawInput || '').trim();
+    if (!cmd) return;
+    terminalPrint(out, `ibrar@dev:~/portfolio$ ${cmd}`, 't-path');
+
+    const data = getPortfolioData();
+    const projects = Array.isArray(data.projects) ? data.projects : [];
+    const skills = Array.isArray(data.skills) ? data.skills : [];
+    const lower = cmd.toLowerCase();
+
+    if (lower === 'help') {
+      [
+        'Available commands:',
+        'help',
+        'whoami',
+        'ls projects/',
+        'cat skills.txt',
+        'contact',
+        'clear'
+      ].forEach(line => terminalPrint(out, line, 't-comment'));
+      return;
     }
 
+    if (lower === 'whoami') {
+      terminalPrint(out, `${data.hero?.firstName || 'Ibrar'} ${data.hero?.lastName || 'Ahmad'} — Hardware & Embedded Systems Engineer`, 't-out');
+      return;
+    }
+
+    if (lower === 'ls projects/' || lower === 'ls projects') {
+      terminalPrint(out, `total ${projects.length} projects`, 't-comment');
+      projects.forEach(p => terminalPrint(out, `${p.id || 'PRJ'}  ${p.title || 'Untitled'}`, 't-out'));
+      return;
+    }
+
+    if (lower === 'cat skills.txt') {
+      const flattened = skills.flatMap(s => Array.isArray(s.tags) ? s.tags : []).slice(0, 18);
+      terminalPrint(out, flattened.join('  |  ') || 'No skills configured', 't-out');
+      return;
+    }
+
+    if (lower === 'contact') {
+      const email = (Array.isArray(data.contacts) ? data.contacts : []).find(c => String(c.value || '').includes('@'));
+      terminalPrint(out, email ? `Email: ${email.value}` : 'Contact: github.com/hiibrarahmad', 't-out');
+      return;
+    }
+
+    if (lower === 'clear') {
+      out.innerHTML = '';
+      return;
+    }
+
+    terminalPrint(out, `Command not found: ${cmd}. Type "help"`, 't-comment');
+  }
+
+  function renderTerminalLoop() {
+    const out = document.getElementById('terminal-dynamic');
+    const input = document.getElementById('terminal-input');
+    const terminalRoot = document.querySelector('.terminal');
+    if (!out || !input) return;
+
+    if (!terminalBound) {
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          const value = input.value;
+          if (value.trim()) {
+            terminalHistory.unshift(value.trim());
+            historyIndex = -1;
+          }
+          runTerminalCommand(value, out);
+          input.value = '';
+        } else if (e.key === 'ArrowUp') {
+          if (!terminalHistory.length) return;
+          e.preventDefault();
+          historyIndex = Math.min(historyIndex + 1, terminalHistory.length - 1);
+          input.value = terminalHistory[historyIndex] || '';
+        } else if (e.key === 'ArrowDown') {
+          if (!terminalHistory.length) return;
+          e.preventDefault();
+          historyIndex = Math.max(historyIndex - 1, -1);
+          input.value = historyIndex < 0 ? '' : (terminalHistory[historyIndex] || '');
+        }
+      });
+      if (terminalRoot) {
+        terminalRoot.addEventListener('click', () => input.focus());
+      }
+      terminalBound = true;
+    }
+
+    if (terminalBooted) return;
+    terminalBooted = true;
+    out.innerHTML = '';
+    input.disabled = true;
+
+    const bootLines = [
+      '[  0.000] Booting Ibrar Ahmad v2.0 ...',
+      '[  0.312] Loading hardware stack...',
+      '[  0.884] Mounting project registry...',
+      '[  1.204] All systems nominal.'
+    ];
+
+    let idx = 0;
+    const step = () => {
+      if (idx < bootLines.length) {
+        terminalPrint(out, bootLines[idx], idx === bootLines.length - 1 ? 't-out' : 't-comment');
+        idx += 1;
+        setTimeout(step, 320);
+      } else {
+        terminalPrint(out, 'Type "help" to explore this portfolio terminal.', 't-comment');
+        input.disabled = false;
+        input.focus();
+      }
+    };
     step();
   }
 
   function animateTerminalLines() {
-    document.querySelectorAll('.terminal .t-line').forEach((line, idx) => {
+    const out = document.getElementById('terminal-dynamic');
+    if (!out) return;
+    out.querySelectorAll('div').forEach((line, idx) => {
       if (line.dataset.staggerBound) return;
       line.dataset.staggerBound = '1';
       line.style.opacity = '0';
       line.style.transform = 'translateY(8px)';
-      line.style.animation = 'terminalLineIn 0.52s ease forwards';
-      line.style.animationDelay = `${idx * 0.18}s`;
+      line.style.animation = 'terminalLineIn 0.48s ease forwards';
+      line.style.animationDelay = `${Math.min(idx * 0.08, 0.4)}s`;
     });
   }
 
@@ -2752,6 +3547,7 @@
 
   function initIntroLoader() {
     const loader = document.getElementById('intro-loader');
+    const mark = document.getElementById('intro-mark');
     if (!loader) return;
     if (reducedMotion) {
       loader.classList.add('done');
@@ -2762,10 +3558,26 @@
       loader.classList.add('done');
       return;
     }
-    setTimeout(() => {
-      loader.classList.add('done');
-      sessionStorage.setItem(key, '1');
-    }, 1450);
+    const bootLines = [
+      '[ 0.000 ] Booting Ibrar Ahmad v2.0 ...',
+      '[ 0.246 ] Loading PCB toolchain...',
+      '[ 0.691 ] Syncing embedded modules...',
+      '[ 1.213 ] Interface online.'
+    ];
+    let idx = 0;
+    const step = () => {
+      if (mark) mark.textContent = bootLines.slice(0, idx + 1).join('\n');
+      idx += 1;
+      if (idx < bootLines.length) {
+        setTimeout(step, 280);
+      } else {
+        setTimeout(() => {
+          loader.classList.add('done');
+          sessionStorage.setItem(key, '1');
+        }, 420);
+      }
+    };
+    step();
   }
 
   function bindHoverTargets() {
@@ -2904,9 +3716,14 @@
   initIntroLoader();
   renderHero();
   renderProjects();
+  initWipActions();
   renderSkills();
   renderAbout();
   renderContacts();
+  initHeroClock();
+  initHeroNameGlitch();
+  initNavOverlay();
+  initCopyEmail();
   renderTerminalLoop();
   animateTerminalLines();
   renderFooterProof();
@@ -2914,6 +3731,7 @@
   initHeroPortrait();
   initHeroAmbient();
   initCardTilt();
+  initMagneticButtons();
   bindHoverTargets();
   bindProjectCardClicks();
 
@@ -2941,9 +3759,12 @@
     if (e.key !== 'portfolio_data') return;
     renderHero();
     renderProjects();
+    initWipActions();
     renderSkills();
     renderAbout();
     renderContacts();
+    initHeroNameGlitch();
+    initCopyEmail();
     renderTerminalLoop();
     animateTerminalLines();
     renderFooterProof();
@@ -2951,6 +3772,7 @@
     initHeroPortrait();
     initHeroAmbient();
     initCardTilt();
+    initMagneticButtons();
     bindHoverTargets();
     bindProjectCardClicks();
     observeFades();
@@ -2969,16 +3791,26 @@
 
   // Nav active state and scroll-driven UI
   const sections = Array.from(document.querySelectorAll('section[id]'));
+  const contactAnchor = document.getElementById('contact');
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+  const stickySectionLabel = document.getElementById('sticky-section-label');
   const heroTraces = document.querySelector('.hero-traces');
   const heroGhost = document.getElementById('hero-ghost');
+  const sectionLabelMap = {
+    home: '00 // HERO',
+    skills: '01 // TECH STACK',
+    projects: '02 // PROJECT SHOWCASE',
+    about: '03 // ABOUT & CONTACT',
+    contact: '03 // CONTACT'
+  };
 
   function setActiveNav(sectionId) {
-    const normalized = sectionId === 'home' ? 'skills' : sectionId;
+    const normalized = sectionId;
     navLinks.forEach(link => {
       const active = link.getAttribute('href') === `#${normalized}`;
       link.classList.toggle('active', active);
     });
+    if (stickySectionLabel) stickySectionLabel.textContent = sectionLabelMap[sectionId] || sectionLabelMap[normalized] || '01 // TECH STACK';
   }
 
   if ('IntersectionObserver' in window) {
@@ -2999,6 +3831,7 @@
     sections.forEach(section => {
       if (window.scrollY >= section.offsetTop - 120) current = section.id;
     });
+    if (contactAnchor && window.scrollY >= contactAnchor.offsetTop - 140) current = 'contact';
     if (current) setActiveNav(current);
 
     const traceShift = Math.min(window.scrollY * 0.3, 220);
