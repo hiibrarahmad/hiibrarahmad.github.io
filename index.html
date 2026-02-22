@@ -28,12 +28,22 @@
 </script>
 <script>
   (function () {
+    const forceTop = () => {
+      try {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      } catch (_) {}
+    };
     try {
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       if (location.hash) {
         history.replaceState(null, '', location.pathname + location.search);
       }
-      window.scrollTo(0, 0);
+      forceTop();
+      requestAnimationFrame(() => requestAnimationFrame(forceTop));
+      setTimeout(forceTop, 80);
+      setTimeout(forceTop, 420);
     } catch (_) {}
   })();
 </script>
@@ -2811,16 +2821,26 @@
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
+  const forceTopPosition = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
   window.addEventListener('load', () => {
     if (window.location.hash) {
       history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    forceTopPosition();
+    setTimeout(forceTopPosition, 60);
+    setTimeout(forceTopPosition, 360);
   });
   window.addEventListener('pageshow', evt => {
     if (evt.persisted) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      forceTopPosition();
     }
+  });
+  window.addEventListener('beforeunload', () => {
+    forceTopPosition();
   });
 
   if (customCursorEnabled) {
@@ -3800,7 +3820,6 @@
       } else {
         terminalPrint(out, 'Type "help" to explore this portfolio terminal.', 't-comment');
         input.disabled = false;
-        input.focus();
       }
     };
     step();
@@ -3846,7 +3865,7 @@
     const finish = (fast = false) => {
       const delay = fast ? 500 : 1400;
       loader.classList.add('done');
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      forceTopPosition();
       setTimeout(() => document.body.classList.remove('loading-page'), delay);
     };
     if (!loader) {
