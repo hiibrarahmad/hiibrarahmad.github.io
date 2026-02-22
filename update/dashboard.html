@@ -573,6 +573,7 @@ select option{background:var(--surface2)}
 <script>
 // â”€â”€â”€ DATA HELPERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DEFAULT = window.PORTFOLIO_DATA || {
+  schemaVersion: 3,
   updatedAt: new Date().toISOString(),
   email: "hiibrarahmad@gmail.com",
   linkedin: "https://www.linkedin.com/in/hiibrarahmad/",
@@ -662,7 +663,21 @@ function normalizeData(data){
 }
 function load(){
   try{
-    return normalizeData(JSON.parse(localStorage.getItem('portfolio_data')) || DEFAULT);
+    const localRaw = localStorage.getItem('portfolio_data');
+    const localData = localRaw ? normalizeData(JSON.parse(localRaw)) : null;
+    const fileData = normalizeData(DEFAULT);
+    const fileVersion = Number(fileData?.schemaVersion || 1);
+    const localVersion = Number(localData?.schemaVersion || 0);
+    const fileTime = Date.parse(fileData?.updatedAt || 0) || 0;
+    const localTime = Date.parse(localData?.updatedAt || 0) || 0;
+    const localCompatible = !!localData && localVersion >= fileVersion;
+    const useLocal = localCompatible && localTime >= fileTime;
+    const chosen = useLocal ? localData : fileData;
+    chosen.schemaVersion = fileVersion;
+    if (!useLocal) {
+      localStorage.setItem('portfolio_data', JSON.stringify(chosen));
+    }
+    return normalizeData(chosen);
   }catch{
     return normalizeData(DEFAULT);
   }
@@ -675,6 +690,7 @@ function updateSaveIndicator(iso){
 }
 function save(d,opts={}){
   d = normalizeData(d);
+  d.schemaVersion = Number(DEFAULT?.schemaVersion || 1);
   d.updatedAt = new Date().toISOString();
   localStorage.setItem('portfolio_data',JSON.stringify(d));
   updateSaveIndicator(d.updatedAt);

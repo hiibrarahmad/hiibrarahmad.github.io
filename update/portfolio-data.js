@@ -1,4 +1,5 @@
 ﻿window.PORTFOLIO_DATA = {
+  schemaVersion: 3,
   updatedAt: "2026-02-23T02:15:00.000Z",
   email: "hiibrarahmad@gmail.com",
   linkedin: "https://www.linkedin.com/in/hiibrarahmad/",
