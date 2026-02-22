@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ibrar Ahmad — Hardware & Embedded Systems Engineer specializing in PCB design, NXP i.MX6UL platforms, firmware, and embedded Linux.">
+<meta name="description" content="Ibrar Ahmad — Hardware and Embedded Systems Engineer in Islamabad, Pakistan specializing in PCB design, EEG hardware, NXP i.MX6UL platforms, and firmware.">
 <meta name="theme-color" content="#081118">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ibrar Ahmad — Hardware & Embedded Systems Engineer">
-<meta property="og:description" content="PCB Design, Embedded Linux BSP, firmware, and product-grade electronics portfolio.">
+<meta property="og:description" content="PCB design, EEG hardware, firmware, and product-grade embedded electronics portfolio.">
 <meta property="og:image" content="https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png">
 <meta property="og:url" content="https://hiibrarahmad.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23040a10'/%3E%3Cpath d='M14 50V14h7v36zm15 0V14h7v36zM18 21h28v6H18zm0 16h28v6H18z' fill='%23d4821a'/%3E%3C/svg%3E">
-<title>Ibrar Ahmad | PCB Designer & Embedded Systems Engineer - Hazro, Pakistan</title>
+<title>Ibrar Ahmad | PCB Designer & Embedded Systems Engineer - Islamabad, Pakistan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
@@ -22,8 +22,8 @@
   "name": "Ibrar Ahmad",
   "jobTitle": "Hardware and Embedded Systems Engineer",
   "url": "https://hiibrarahmad.github.io/",
-  "sameAs": ["https://github.com/hiibrarahmad"],
-  "knowsAbout": ["PCB Design", "Embedded Linux", "Firmware Development", "NXP i.MX6UL", "Yocto BSP"]
+  "sameAs": ["https://github.com/hiibrarahmad", "https://www.linkedin.com/in/hiibrarahmad/"],
+  "knowsAbout": ["PCB Design", "EEG Hardware", "Firmware Development", "NXP i.MX6UL", "TWS Audio"]
 }
 </script>
 <style>
@@ -291,7 +291,7 @@
     padding: 4px 10px;
   }
   .nav-logo span { color: var(--accent2); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a {
     font-family: 'Space Mono', monospace;
     font-size: 15px;
@@ -1031,119 +1031,74 @@
   }
 
   /* SKILLS */
-  .skills-domains {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 22px;
-  }
-  .domain-row {
-    border: 1px solid rgba(84,191,216,0.22);
-    background: rgba(8,18,25,0.66);
-    padding: 8px 10px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease;
-  }
-  .domain-row.active {
-    border-color: rgba(212,130,26,0.6);
-    background: rgba(212,130,26,0.14);
-  }
-  .domain-row:hover {
-    border-color: rgba(84,191,216,0.45);
-  }
-  .domain-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1.2px;
-    color: #d6e7f1;
-    text-transform: uppercase;
-  }
   .skills-visuals {
     display: grid;
-    grid-template-columns: minmax(260px, 420px) 1fr;
-    gap: 18px;
-    margin-bottom: 16px;
+    grid-template-columns: minmax(220px, 480px);
+    gap: 12px;
+    margin: 0 auto 14px;
+    justify-content: center;
   }
-  .skills-radar,
-  .skills-bars {
+  .skills-radar {
     border: 1px solid rgba(84,191,216,0.2);
     background: rgba(8,18,25,0.72);
-    padding: 16px;
+    padding: 12px 14px;
+    margin: 0 auto;
   }
-  .skills-radar-title,
-  .skills-bars-title {
+  .skills-radar-title {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 1.4px;
     text-transform: uppercase;
     color: #d9e8f1;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .radar-svg {
     width: 100%;
+    max-width: 420px;
     height: auto;
     display: block;
-  }
-  .skill-bars-list {
-    display: grid;
-    gap: 10px;
-  }
-  .skill-bar-row {
-    display: grid;
-    grid-template-columns: 160px 1fr 44px;
-    gap: 10px;
-    align-items: center;
-  }
-  .skill-bar-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    color: #c4d8e4;
-  }
-  .skill-bar-track {
-    height: 8px;
-    background: rgba(84,191,216,0.13);
-    border: 1px solid rgba(84,191,216,0.22);
-    overflow: hidden;
-  }
-  .skill-bar-fill {
-    height: 100%;
-    width: 0;
-    background: linear-gradient(90deg, #d4821a, #54bfd8 66%, #00ffd5);
-    transition: width 1s cubic-bezier(.25,.9,.2,1);
-  }
-  .skill-bar-row.visible .skill-bar-fill { width: var(--value); }
-  .skill-bar-value {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: #f2d8ae;
-    text-align: right;
+    margin: 0 auto;
   }
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0 auto;
+    max-width: 1480px;
+    align-items: stretch;
+  }
+  @media (max-width: 1200px) {
+    .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .skills-grid { grid-template-columns: 1fr; }
   }
   .tool-logo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
     gap: 10px;
-    margin-bottom: 16px;
+    margin: 0 auto 14px;
+    max-width: 1480px;
   }
   .tool-logo {
     border: 1px solid rgba(84,191,216,0.22);
     background: rgba(8,18,25,0.72);
-    padding: 10px;
+    padding: 10px 11px;
     display: flex;
     align-items: center;
     gap: 8px;
-    min-height: 44px;
+    min-height: 42px;
   }
-  .tool-logo img {
+  .tool-logo img,
+  .tool-logo svg {
     width: 16px;
     height: 16px;
     filter: drop-shadow(0 0 6px rgba(84,191,216,0.4));
+    color: #54bfd8;
+    flex-shrink: 0;
   }
   .tool-logo span {
     font-family: var(--font-mono);
@@ -1151,6 +1106,7 @@
     letter-spacing: 0.8px;
     text-transform: uppercase;
     color: #d8eaf4;
+    white-space: nowrap;
   }
   .skill-card {
     --tilt-x: 0deg;
@@ -1159,14 +1115,14 @@
     background: linear-gradient(150deg, rgba(20,38,48,0.86), rgba(11,22,30,0.88));
     border: 1px solid rgba(84,191,216,0.15);
     border-radius: 12px;
-    padding: 28px;
+    padding: 22px;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     position: relative;
     overflow: hidden;
     transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(var(--lift));
     transform-style: preserve-3d;
     will-change: transform;
-    min-height: 232px;
+    min-height: 198px;
   }
   .skill-card::before {
     content: '';
@@ -1265,7 +1221,7 @@
     cursor: pointer;
     text-decoration: none;
     display: grid;
-    grid-template-columns: minmax(220px, 28%) 1fr;
+    grid-template-columns: minmax(240px, 34%) 1fr;
     align-items: start;
     gap: 0;
     color: inherit;
@@ -1273,6 +1229,9 @@
     transform-style: preserve-3d;
     will-change: transform;
     isolation: isolate;
+  }
+  .project-card.dense {
+    grid-template-columns: minmax(220px, 26%) 1fr;
   }
   .project-card::before {
     content: '';
@@ -1298,9 +1257,8 @@
     box-shadow: 0 22px 44px rgba(3,10,16,0.42), 0 0 26px rgba(84,191,216,0.13), inset 0 0 26px rgba(84,191,216,0.04);
     z-index: 1;
   }
-  .project-card.alt {
-    grid-template-columns: 1fr minmax(220px, 28%);
-  }
+  .project-card.alt { grid-template-columns: 1fr minmax(240px, 34%); }
+  .project-card.dense.alt { grid-template-columns: 1fr minmax(220px, 26%); }
   .project-card.alt .project-img { order: 2; }
   .project-card.alt .project-body { order: 1; }
 
@@ -1368,7 +1326,7 @@
 
   .project-img {
     height: 100%;
-    min-height: 220px;
+    min-height: clamp(220px, 28vw, 420px);
     overflow: hidden;
     position: relative;
     background: #000;
@@ -1378,9 +1336,10 @@
   }
   .project-img img {
     width: 100%; height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: all 0.5s;
     filter: brightness(0.9) saturate(1);
+    padding: 10px;
   }
   .project-img-placeholder {
     width: 100%; height: 100%;
@@ -1523,7 +1482,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 10px;
     position: relative;
     z-index: 1;
   }
@@ -1576,7 +1535,7 @@
     overflow: hidden;
   }
   .project-card:not(.featured) .project-body {
-    padding: 20px 24px;
+    padding: 22px 24px 24px;
   }
   .project-card:not(.featured) .project-title {
     font-size: 16px;
@@ -1584,7 +1543,7 @@
 
   .project-specs {
     display: flex; flex-wrap: wrap; gap: 6px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
   .spec-chip {
     font-family: 'Space Mono', monospace;
@@ -1602,16 +1561,19 @@
 
   .project-links {
     display: flex; gap: 12px;
+    flex-wrap: wrap;
+    row-gap: 10px;
     padding-top: 16px;
     border-top: 1px solid var(--border);
+    margin-top: auto;
   }
   .project-card:not(.featured) .project-specs {
-    margin-bottom: 12px;
-    max-height: 46px;
-    overflow: hidden;
+    margin-bottom: 14px;
+    max-height: none;
+    overflow: visible;
   }
   .project-card:not(.featured) .project-links {
-    padding-top: 10px;
+    padding-top: 12px;
   }
   .project-link {
     font-family: 'Space Mono', monospace;
@@ -1709,14 +1671,70 @@
     background: rgba(255,59,59,1);
   }
 
+  .project-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 180;
+    background: rgba(2,8,13,0.95);
+    padding: min(4vh, 28px);
+    display: none;
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.8fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+  .project-lightbox.open { display: grid; }
+  .project-lightbox-img-wrap {
+    border: 1px solid rgba(84,191,216,0.3);
+    background: rgba(6,14,20,0.82);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .project-lightbox img {
+    max-width: 100%;
+    max-height: 82vh;
+    object-fit: contain;
+  }
+  .project-lightbox-side {
+    border: 1px solid rgba(84,191,216,0.22);
+    background: rgba(10,19,26,0.9);
+    padding: 16px;
+  }
+  .project-lightbox-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: #edf6fc;
+    margin-bottom: 10px;
+  }
+  .project-lightbox-specs {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: 0.8px;
+    color: #c5dbe7;
+    white-space: pre-line;
+  }
+  .project-lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(212,130,26,0.5);
+    background: rgba(212,130,26,0.12);
+    color: #f4d9ad;
+    font-family: var(--font-mono);
+    cursor: pointer;
+  }
+
   /* Featured card spans full width */
   .project-card.featured {
     grid-column: 1 / -1;
-    grid-template-columns: minmax(260px, 30%) 1fr;
+    grid-template-columns: minmax(280px, 38%) 1fr;
     border-color: rgba(87,215,164,0.4);
     box-shadow: 0 24px 54px rgba(2,10,14,0.42), 0 0 32px rgba(87,215,164,0.16);
   }
-  .project-card.featured .project-img { min-height: 540px; }
+  .project-card.featured .project-img { min-height: clamp(320px, 36vw, 520px); }
   .project-card.featured .project-title { font-size: 24px; }
   .project-card.featured .project-body { padding: 30px 34px; }
   @media (max-width: 900px) {
@@ -1733,8 +1751,11 @@
   /* ABOUT / CONTACT */
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.35fr 0.65fr;
     gap: 14px;
+  }
+  .about-card#contact {
+    padding: 30px;
   }
   .about-card {
     --tilt-x: 0deg;
@@ -1916,11 +1937,13 @@
     background: linear-gradient(145deg, rgba(12,23,31,0.82), rgba(8,16,23,0.9));
     margin: 0 24px 26px;
     border-radius: 14px;
-    padding: 34px 44px;
+    padding: 42px 44px;
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    align-items: start;
-    gap: 24px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    align-items: center;
+    gap: 14px;
     position: relative; z-index: 3;
     box-shadow: 0 18px 38px rgba(2,8,14,0.34);
   }
@@ -1959,8 +1982,10 @@
   }
   .footer-copy {
     font-family: 'Space Mono', monospace;
-    font-size: 13px; color: var(--text-muted);
+    font-size: 12px; color: var(--text-muted);
     letter-spacing: 1.2px;
+    line-height: 1.7;
+    max-width: 860px;
   }
   .footer-meta {
     font-family: 'Space Mono', monospace;
@@ -1969,7 +1994,7 @@
     letter-spacing: 0.8px;
     margin-top: 6px;
   }
-  .footer-socials { display: flex; gap: 16px; }
+  .footer-socials { display: flex; gap: 16px; justify-content: center; }
   .footer-social {
     width: 32px; height: 32px;
     border: 1px solid rgba(84,191,216,0.3);
@@ -1981,6 +2006,31 @@
     background: rgba(84,191,216,0.06);
   }
   .footer-social:hover { border-color: var(--accent3); color: var(--accent3); background: rgba(212,130,26,0.1); }
+  .footer-power {
+    grid-column: 1 / -1;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+    margin-top: 12px;
+    border: 1px solid rgba(84,191,216,0.22);
+    width: fit-content;
+    place-self: center;
+    overflow: hidden;
+  }
+  .footer-power span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    color: #f1f8fd;
+    border-right: 1px solid rgba(8,18,25,0.25);
+  }
+  .footer-power span:last-child { border-right: 0; }
+  .footer-power .a { background: #c96e2e; }
+  .footer-power .b { background: #b5612c; }
+  .footer-power .c { background: #9ebd3e; }
+  .footer-power .d { background: #5f9c46; }
 
   /* Animations */
   .intro-loader {
@@ -1990,7 +2040,7 @@
     display: grid;
     place-items: center;
     background: #040a10;
-    transition: opacity 1.5s ease, visibility 1.5s ease;
+    transition: opacity 1.4s ease, visibility 1.4s ease;
   }
 
   .site-toast {
@@ -2043,11 +2093,33 @@
     transform: none;
   }
   .intro-progress {
-    margin-top: 10px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: min(520px, 90vw);
+  }
+  .intro-progress-bar {
+    flex: 1;
+    height: 4px;
+    border: 1px solid rgba(212,130,26,0.42);
+    background: rgba(212,130,26,0.1);
+    overflow: hidden;
+  }
+  .intro-progress-fill {
+    display: block;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #d4821a, #54bfd8);
+    transition: width 0.18s linear;
+  }
+  .intro-progress-value {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 1px;
     color: #f1d8ae;
+    min-width: 40px;
+    text-align: right;
   }
   @keyframes introPulse {
     0% { opacity: 0; transform: scale(0.8); filter: blur(8px); }
@@ -2197,20 +2269,22 @@
     section:not(.hero) { margin: 0 12px 18px; padding: 72px 22px; }
     .marquee-strip { margin: 0 12px 14px; }
     .skills-visuals { grid-template-columns: 1fr; }
-    .skill-bar-row { grid-template-columns: 1fr; gap: 6px; }
     .hero-stats { gap: 24px; }
     .stat-item { min-width: calc(50% - 12px); }
     .hero-meta { position: static; justify-items: start; margin-bottom: 16px; }
     .terminal-wrap { margin: 0 12px 18px; padding: 0 18px 24px; }
     .terminal { font-size: 12px; line-height: 1.75; }
     .terminal-live { min-height: 140px; }
+    .project-lightbox { grid-template-columns: 1fr; padding: 14px; }
+    .project-lightbox-side { max-height: 30vh; overflow: auto; }
     .sticky-section-label { display: none; }
     .projects-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
-    footer { margin: 0 12px 18px; padding: 24px; grid-template-columns: 1fr; text-align: left; }
+    footer { margin: 0 12px 18px; padding: 28px 22px; grid-template-columns: 1fr; text-align: center; }
     .footer-brand { font-size: clamp(26px, 9vw, 44px); }
     .footer-cta { font-size: 21px; }
-    .footer-socials { justify-content: flex-start; }
+    .footer-socials { justify-content: center; }
+    .footer-power { place-self: center; }
     .scroll-hint { left: 24px; }
     .corner-deco { display: none; }
   }
@@ -2220,8 +2294,11 @@
 
 <div class="intro-loader" id="intro-loader" aria-hidden="true">
   <div>
-    <div class="intro-mark boot" id="intro-mark">[ 0.000 ] Booting Ibrar Ahmad v2.0 ...</div>
-    <div class="intro-progress" id="intro-progress">[██████░░░░░░░░] 42% - Loading firmware stack...</div>
+    <div class="intro-mark" id="intro-mark">IA</div>
+    <div class="intro-progress" id="intro-progress">
+      <span class="intro-progress-bar"><span class="intro-progress-fill" id="intro-progress-fill"></span></span>
+      <span class="intro-progress-value" id="intro-progress-value">0%</span>
+    </div>
   </div>
 </div>
 <div class="scroll-progress-top" aria-hidden="true"></div>
@@ -2230,8 +2307,18 @@
 <div class="circuit-bg"></div>
 <div class="scanline"></div>
 <div class="noise-overlay"></div>
-<div class="sticky-section-label" id="sticky-section-label">01 // TECH STACK</div>
+<div class="sticky-section-label" id="sticky-section-label">00 // HERO</div>
 <div class="site-toast" id="site-toast" role="status" aria-live="polite"></div>
+<div class="project-lightbox" id="project-lightbox" aria-hidden="true">
+  <button class="project-lightbox-close" id="project-lightbox-close" type="button" aria-label="Close image">X</button>
+  <div class="project-lightbox-img-wrap">
+    <img id="project-lightbox-img" alt="Project preview">
+  </div>
+  <div class="project-lightbox-side">
+    <div class="project-lightbox-title" id="project-lightbox-title">Project</div>
+    <div class="project-lightbox-specs" id="project-lightbox-specs"></div>
+  </div>
+</div>
 <div class="corner-deco tl"></div>
 <div class="corner-deco tr"></div>
 <div class="corner-deco bl"></div>
@@ -2241,13 +2328,13 @@
 <nav>
   <div class="nav-brand">
     <a href="#" class="nav-logo">IA<span>.</span>DEV</a>
-    <span class="nav-counter" id="nav-counter">[0 PROJECTS]</span>
+    <span class="nav-counter" id="nav-counter">[4 PROJECTS · 2 LIVE · 2 IN DEV]</span>
   </div>
   <ul class="nav-links">
+    <li><a href="#home">About Me</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">Contact</a></li>
   </ul>
   <div class="nav-status">
     <span class="status-dot"></span>
@@ -2260,10 +2347,10 @@
 <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
   <button class="nav-overlay-close" id="nav-overlay-close" type="button" aria-label="Close menu">X</button>
   <ul class="nav-overlay-menu">
+    <li><a href="#home">About Me</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">Contact</a></li>
   </ul>
 </div>
 
@@ -2271,14 +2358,14 @@
 <main>
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
-    <span>PCB DESIGN</span><span>·</span><span>EMBEDDED LINUX</span><span>·</span><span>YOCTO BSP</span><span>·</span><span>NXP iMX6UL</span><span>·</span><span>FIRMWARE DEV</span><span>·</span><span>MEDICAL GRADE</span><span>·</span><span>ROHS COMPLIANT</span><span>·</span>
-    <span>PCB DESIGN</span><span>·</span><span>EMBEDDED LINUX</span><span>·</span><span>YOCTO BSP</span><span>·</span><span>NXP iMX6UL</span><span>·</span><span>FIRMWARE DEV</span><span>·</span><span>MEDICAL GRADE</span><span>·</span><span>ROHS COMPLIANT</span><span>·</span>
+    <span>PCB DESIGN</span><span>·</span><span>EEG HARDWARE</span><span>·</span><span>TWS AUDIO</span><span>·</span><span>NXP iMX6UL</span><span>·</span><span>FIRMWARE DEV</span><span>·</span><span>MEDICAL GRADE</span><span>·</span><span>ROHS COMPLIANT</span><span>·</span>
+    <span>PCB DESIGN</span><span>·</span><span>EEG HARDWARE</span><span>·</span><span>TWS AUDIO</span><span>·</span><span>NXP iMX6UL</span><span>·</span><span>FIRMWARE DEV</span><span>·</span><span>MEDICAL GRADE</span><span>·</span><span>ROHS COMPLIANT</span><span>·</span>
   </div>
 </div>
 <section class="hero" id="home">
   <div class="hero-meta">
     <div class="hero-clock" id="hero-clock">PKT 00:00:00</div>
-    <div class="hero-coords" id="hero-coords">33.9098° N · 72.4918° E — Hazro, Pakistan</div>
+    <div class="hero-coords" id="hero-coords">33.6844° N · 73.0479° E — Islamabad, Pakistan</div>
     <div class="hero-coords" id="hero-currently">▶ CURRENTLY: Advanced PCB fabrication on Carvera CNC</div>
   </div>
   <div class="hero-traces" aria-hidden="true">
@@ -2301,7 +2388,7 @@
       <span class="line1" id="hero-first">IBRAR</span>
       <span class="line2" id="hero-last">AHMAD</span>
     </div>
-    <div class="hero-title" id="hero-role">PCB Designer · Firmware Dev · Embedded Linux</div>
+    <div class="hero-title" id="hero-role">PCB Designer · Firmware Dev · EEG Hardware</div>
     <p class="hero-desc" id="hero-bio"></p>
 
     <div class="hero-stats" id="hero-stats"></div>
@@ -2339,22 +2426,45 @@
   <div class="skills-visuals fade-in">
     <div class="skills-radar">
       <div class="skills-radar-title">Skill Radar</div>
-      <svg class="radar-svg" id="skills-radar" viewBox="0 0 320 320" aria-label="Radar chart"></svg>
-    </div>
-    <div class="skills-bars">
-      <div class="skills-bars-title">Tool Strength</div>
-      <div class="skill-bars-list" id="skills-bars"></div>
+      <svg class="radar-svg" id="skills-radar" viewBox="0 0 320 260" aria-label="Radar chart"></svg>
     </div>
   </div>
   <div class="tool-logo-grid fade-in">
     <div class="tool-logo"><img src="https://cdn.simpleicons.org/kicad/54bfd8" alt="KiCad logo" loading="lazy"><span>KiCad</span></div>
-    <div class="tool-logo"><img src="https://cdn.simpleicons.org/altiumdesigner/54bfd8" alt="Altium logo" loading="lazy"><span>Altium</span></div>
+    <div class="tool-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M4 20L12 4l8 16"/>
+        <path d="M8.8 13.5h6.4"/>
+      </svg>
+      <span>Altium</span>
+    </div>
     <div class="tool-logo"><img src="https://cdn.simpleicons.org/nxp/54bfd8" alt="NXP logo" loading="lazy"><span>NXP</span></div>
-    <div class="tool-logo"><img src="https://cdn.simpleicons.org/visualstudiocode/54bfd8" alt="VS Code logo" loading="lazy"><span>VS Code</span></div>
-    <div class="tool-logo"><img src="https://cdn.simpleicons.org/git/54bfd8" alt="Git logo" loading="lazy"><span>Git</span></div>
+    <div class="tool-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none"/>
+        <path d="M12 5.5v2.1M12 16.4v2.1M5.5 12h2.1M16.4 12h2.1"/>
+        <path d="M7.8 7.8l1.5 1.5M14.7 14.7l1.5 1.5M16.2 7.8l-1.5 1.5M9.3 14.7l-1.5 1.5"/>
+      </svg>
+      <span>NRF5340</span>
+    </div>
+    <div class="tool-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M20 12a8 8 0 1 1-2.35-5.66"/>
+        <path d="M20 4v6h-6"/>
+        <path d="M9.6 12.2l1.7 1.7 3.3-3.4"/>
+      </svg>
+      <span>FreeRTOS</span>
+    </div>
+    <div class="tool-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <rect x="3.5" y="4.5" width="6.5" height="9.5" rx="3.2"/>
+        <rect x="14" y="4.5" width="6.5" height="9.5" rx="3.2"/>
+        <path d="M6.7 14v5.5M17.3 14v5.5"/>
+      </svg>
+      <span>TWS Audio</span>
+    </div>
     <div class="tool-logo"><img src="https://cdn.simpleicons.org/stmicroelectronics/54bfd8" alt="STM logo" loading="lazy"><span>STM32</span></div>
   </div>
-  <div class="skills-domains fade-in" id="skills-domains"></div>
   <div class="skills-grid fade-in" id="skills-grid"></div>
 </section>
 
@@ -2529,20 +2639,20 @@
         <div class="project-meta">
           <span class="project-year">2026</span>
           <span class="project-dot"></span>
-          <span class="project-client">NXP i.MX6UL Platform</span>
+          <span class="project-client">TWS Earbud Platform</span>
         </div>
-        <div class="project-title">YOCTO LINUX BSP — iMX6UL</div>
+        <div class="project-title">TWS AUDIO EARBUD PLATFORM</div>
         <p class="project-desc">
-          Custom Board Support Package for NXP i.MX6UL. Includes U-Boot 2017.03, 
-          Linux 4.9.11 kernel, device tree customization, and full driver stack 
-          for all peripherals on DermScope REVIVE.
+          Low-power true-wireless stereo earbud firmware and audio control stack.
+          Includes Bluetooth LE audio pairing, audio codec control, and ANC-ready
+          signal path for compact wearable products.
         </p>
         <div class="project-specs">
-          <span class="spec-chip">Yocto Project</span>
-          <span class="spec-chip">U-Boot 2017.03</span>
-          <span class="spec-chip">Linux 4.9.11</span>
-          <span class="spec-chip">Device Tree</span>
-          <span class="spec-chip">Qt5 / Wayland</span>
+          <span class="spec-chip">Bluetooth LE Audio</span>
+          <span class="spec-chip">TWS Pairing</span>
+          <span class="spec-chip">nRF5340</span>
+          <span class="spec-chip">Audio Codec</span>
+          <span class="spec-chip">ANC Ready</span>
         </div>
       </div>
     </div>
@@ -2616,7 +2726,7 @@
       <div class="about-actions" id="about-actions"></div>
       <div class="about-links" id="about-links"></div>
       <div class="github-heatmap">
-        <img src="https://ghchart.rshah.org/54bfd8/hiibrarahmad" alt="GitHub contribution heatmap for hiibrarahmad" loading="lazy">
+        <img src="https://ghchart.rshah.org/hiibrarahmad" alt="GitHub contribution heatmap for hiibrarahmad" loading="lazy">
       </div>
     </div>
     <div class="about-card" id="contact">
@@ -2643,10 +2753,13 @@
       <a href="#" target="_blank" class="footer-social" id="footer-linkedin" style="display:none">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6S0 4.88 0 3.5 1.1 1 2.5 1 4.98 2.12 4.98 3.5zM0 24h5V7H0v17zM8 7h4.8v2.3h.07c.67-1.27 2.32-2.6 4.78-2.6C21.4 6.7 24 9.2 24 13.9V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8V7z"/></svg>
       </a>
-      <a href="#" target="_blank" class="footer-social" id="footer-fiverr" style="display:none">
-        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.6px">FI</span>
-      </a>
     </div>
+  </div>
+  <div class="footer-power" aria-hidden="true">
+    <span class="a">Built With</span>
+    <span class="b">Love</span>
+    <span class="c">Powered By</span>
+    <span class="d">Electricity</span>
   </div>
 </footer>
 
@@ -2665,6 +2778,16 @@
   let rx = mx;
   let ry = my;
 
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  });
+
   if (customCursorEnabled) {
     document.body.classList.add('custom-cursor-active');
     cursor.style.left = `${mx - 5}px`;
@@ -2680,6 +2803,7 @@
       ring.style.opacity = '1';
     };
     const hideCursor = () => {
+      visible = false;
       cursor.style.opacity = '0';
       ring.style.opacity = '0';
     };
@@ -2692,7 +2816,7 @@
       if (!visible) showCursor();
     });
     document.addEventListener('mouseleave', hideCursor);
-    document.addEventListener('mouseenter', () => { if (visible) showCursor(); });
+    document.addEventListener('mouseenter', showCursor);
 
     function animRing() {
       rx += (mx - rx) * 0.17;
@@ -2750,11 +2874,11 @@
     hero: {
       firstName: 'IBRAR',
       lastName: 'AHMAD',
-      role: 'PCB Designer · Firmware Dev · Embedded Linux',
+      role: 'PCB Designer · Firmware Dev · EEG Hardware',
       bio: 'Designing hardware that ships from schematic to production.',
       timezone: 'Asia/Karachi',
       tzLabel: 'PKT',
-      coordinates: '33.9098° N · 72.4918° E — Hazro, Pakistan',
+      coordinates: '33.6844° N · 73.0479° E — Islamabad, Pakistan',
       stat1: '8+',
       stat1l: 'Projects',
       stat2: '4L',
@@ -2764,12 +2888,14 @@
     },
     about: {
       p1: "I'm Ibrar Ahmad, a hardware and embedded systems engineer focused on real-world products.",
-      p2: 'I work from schematic and PCB layout to firmware and Linux BSP integration.',
+      p2: 'I work from schematic and PCB layout to firmware and embedded bring-up.',
       p3: 'Available for freelance and remote embedded projects.'
     },
     contacts: [
       { icon: 'github', label: 'GitHub', value: 'github.com/hiibrarahmad', url: 'https://github.com/hiibrarahmad', color: 'c' }
     ],
+    email: 'hiibrarahmad@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/hiibrarahmad/',
     skills: [],
     projects: []
   };
@@ -2807,6 +2933,21 @@
     return fallbackArr;
   }
 
+  function normalizeSkillTags(skillsList) {
+    const list = Array.isArray(skillsList) ? skillsList : [];
+    return list.map(skill => {
+      const tags = (Array.isArray(skill?.tags) ? skill.tags : [])
+        .map(tag => cleanText(tag))
+        .map(tag => {
+          if (/yocto/i.test(tag) || /linux\s*bsp/i.test(tag)) return '';
+          if (/freertos/i.test(tag)) return 'FreeRTOS';
+          return tag;
+        })
+        .filter(Boolean);
+      return { ...skill, tags };
+    });
+  }
+
   function getPortfolioData() {
     try {
       const stored = localStorage.getItem('portfolio_data');
@@ -2824,7 +2965,7 @@
         hero: { ...FALLBACK_DATA.hero, ...(secondary.hero || {}), ...(primary.hero || {}) },
         about: { ...FALLBACK_DATA.about, ...(secondary.about || {}), ...(primary.about || {}) },
         contacts: pickNonEmptyArray(primary.contacts, secondary.contacts, FALLBACK_DATA.contacts),
-        skills: pickNonEmptyArray(primary.skills, secondary.skills, FALLBACK_DATA.skills),
+        skills: normalizeSkillTags(pickNonEmptyArray(primary.skills, secondary.skills, FALLBACK_DATA.skills)),
         projects: ensureFeaturedProject(mergeProjects(primary.projects, secondary.projects))
       };
 
@@ -2852,7 +2993,7 @@
   }
 
   function renderRolePills(roleText) {
-    const raw = String(roleText || '').trim();
+    const raw = String(roleText || '').replace(/embedded linux/ig, 'EEG Hardware').trim();
     if (!raw) return '';
     const parts = raw.split(/[·|,]/g).map(p => p.trim()).filter(Boolean);
     if (!parts.length) return '';
@@ -2861,8 +3002,9 @@
 
   function tagColorClass(seed) {
     let hash = 0;
-    for (let i = 0; i < seed.length; i++) {
-      hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+    const text = String(seed || '');
+    for (let i = 0; i < text.length; i++) {
+      hash = ((hash << 5) - hash) + text.charCodeAt(i);
       hash |= 0;
     }
     const idx = Math.abs(hash) % 5;
@@ -2880,6 +3022,7 @@
     const client = escapeHtml(p.client || '');
     const id = escapeHtml(p.id || '');
     const tags = Array.isArray(p.tags) ? p.tags : [];
+    const denseClass = !p.featured && tags.length >= 9 ? ' dense' : '';
     const liveUrl = p.liveUrl || '';
     const repoUrl = p.repoUrl || '';
     const clickUrl = liveUrl || repoUrl;
@@ -2935,8 +3078,8 @@
         imageInner = `
           <div class="project-img pcb-switch" data-view="top">
             <div class="pcb-stage">
-              <img class="pcb-view pcb-top" src="${escapeHtml(imgUrl)}" alt="${title} Top" loading="lazy">
-              <img class="pcb-view pcb-bottom" src="${escapeHtml(imgUrlBottom)}" alt="${title} Bottom" loading="lazy">
+              <img class="pcb-view pcb-top" src="${escapeHtml(imgUrl)}" alt="${title} Top" loading="lazy" data-lightbox-src="${escapeHtml(imgUrl)}" data-lightbox-title="${escapeHtml(`${title} Top`)}" data-lightbox-specs="${escapeHtml(tags.join(' · '))}">
+              <img class="pcb-view pcb-bottom" src="${escapeHtml(imgUrlBottom)}" alt="${title} Bottom" loading="lazy" data-lightbox-src="${escapeHtml(imgUrlBottom)}" data-lightbox-title="${escapeHtml(`${title} Bottom`)}" data-lightbox-specs="${escapeHtml(tags.join(' · '))}">
             </div>
             <div class="pcb-toggle">
               <button class="pcb-tab active" type="button" data-view="top">Top</button>
@@ -2951,7 +3094,7 @@
       } else {
         imageInner = `
           <div class="project-img">
-            <img src="${escapeHtml(imgUrl)}" alt="${title}" loading="lazy">
+            <img src="${escapeHtml(imgUrl)}" alt="${title}" loading="lazy" data-lightbox-src="${escapeHtml(imgUrl)}" data-lightbox-title="${escapeHtml(title)}" data-lightbox-specs="${escapeHtml(tags.join(' · '))}">
             ${clickUrl ? `<div class="project-overlay"><span class="view-label">${liveLabel} &rarr;</span></div>` : ''}
             ${wipOverlay}
             <span class="project-badge ${badgeClass}">${badgeLabel}</span>
@@ -2974,7 +3117,7 @@
     }
 
     return `
-      <div class="project-card${featuredClass}${altClass}${wipClass} fade-in"${clickUrl ? ` data-live-url="${escapeHtml(clickUrl)}"` : ''}>
+      <div class="project-card${featuredClass}${altClass}${wipClass}${denseClass} fade-in"${clickUrl ? ` data-live-url="${escapeHtml(clickUrl)}"` : ''}>
         <span class="project-ghost">${ghostOrder}</span>
         ${imageInner}
         <div class="project-body">
@@ -2999,8 +3142,11 @@
     const el = document.getElementById('nav-counter');
     if (!el || !data) return;
     const projects = Array.isArray(data.projects) ? data.projects : [];
-    const live = projects.filter(p => String(p.status || '').toLowerCase() === 'live').length;
-    el.textContent = `[${projects.length} PROJECTS · ${live} LIVE]`;
+    const visible = projects.filter(p => String(p.status || '').toLowerCase() !== 'hidden');
+    const live = visible.filter(p => String(p.status || '').toLowerCase() === 'live').length;
+    const inDev = visible.filter(p => ['wip', 'in-dev', 'dev', 'coming-soon'].includes(String(p.status || '').toLowerCase())).length;
+    const total = visible.filter(p => ['live', 'wip', 'in-dev', 'dev', 'coming-soon'].includes(String(p.status || '').toLowerCase())).length || visible.length;
+    el.textContent = `[${total} PROJECTS · ${live} LIVE · ${inDev} IN DEV]`;
   }
 
   function renderHero() {
@@ -3025,8 +3171,15 @@
       role.innerHTML = renderRolePills(h.role || '');
       role.dataset.typing = 'off';
     }
-    if (bio) bio.textContent = h.bio || '';
-    if (coords) coords.textContent = h.coordinates || '33.9098° N · 72.4918° E — Hazro, Pakistan';
+    if (bio) {
+      const normalizedBio = String(h.bio || '')
+        .replace(/NXP\s*\/\s*STM32/ig, 'NXP/nRF')
+        .replace(/NXP\s+and\s+STM32/ig, 'NXP and nRF')
+        .replace(/\bSTM32\b/ig, 'nRF')
+        .replace(/linux\s*bsp/ig, 'embedded firmware');
+      bio.textContent = normalizedBio;
+    }
+    if (coords) coords.textContent = h.coordinates || '33.6844° N · 73.0479° E — Islamabad, Pakistan';
 
     if (stats) {
       const projects = Array.isArray(data.projects) ? data.projects : [];
@@ -3057,7 +3210,8 @@
     if (ctas) {
       const cvUrl = h.cvUrl || '';
       const links = [
-        `<a href="#projects" class="btn-primary">View Projects</a>`
+        `<a href="#projects" class="btn-primary">View Projects</a>`,
+        `<a href="#about" class="btn-outline">Get In Touch</a>`
       ];
       if (cvUrl) {
         links.push(`<a href="${escapeHtml(cvUrl)}" target="_blank" class="btn-outline">Download CV</a>`);
@@ -3067,15 +3221,8 @@
     renderNavCounter(data);
   }
 
-  let activeSkillFilter = 'all';
-
-  function slugifyCategory(value) {
-    return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-  }
-
   function renderSkills() {
     const data = getPortfolioData();
-    renderSkillDomains(data);
     renderSkillVisuals(data);
     const grid = document.getElementById('skills-grid');
     if (!grid || !data || !Array.isArray(data.skills)) return;
@@ -3083,9 +3230,8 @@
       const tagClass = skillTagClass(s.color);
       const tags = Array.isArray(s.tags) ? s.tags : [];
       const level = Math.max(40, Math.min(96, 30 + tags.length * 8));
-      const catSlug = slugifyCategory(s.cat || s.name || 'misc');
       return `
-        <div class="skill-card fade-in" data-skill-cat="${escapeHtml(catSlug)}">
+        <div class="skill-card fade-in">
           <div class="skill-cat">${escapeHtml(s.cat || '')}</div>
           <div class="skill-name">${escapeHtml(s.name || '')}</div>
           <div class="skill-meter"><span class="skill-meter-fill" style="width:${level}%"></span></div>
@@ -3094,80 +3240,23 @@
           </div>
         </div>`;
     }).join('');
-    applySkillFilter();
-  }
-
-  function renderSkillDomains(data) {
-    const wrap = document.getElementById('skills-domains');
-    if (!wrap || !data || !Array.isArray(data.skills)) return;
-    const categories = Array.from(new Set(data.skills.map(s => s.cat || s.name || 'Domain').filter(Boolean)));
-    if (!categories.length) {
-      wrap.innerHTML = '';
-      return;
-    }
-
-    wrap.innerHTML = [
-      { key: 'all', label: 'ALL' },
-      ...categories.map(c => ({ key: slugifyCategory(c), label: c }))
-    ].map(item => `
-      <button class="domain-row${activeSkillFilter === item.key ? ' active' : ''}" type="button" data-skill-filter="${escapeHtml(item.key)}">
-        <span class="domain-label">[ ${escapeHtml(String(item.label).toUpperCase())} ]</span>
-      </button>
-    `).join('');
-
-    wrap.querySelectorAll('[data-skill-filter]').forEach(btn => {
-      if (btn.dataset.bound) return;
-      btn.dataset.bound = '1';
-      btn.addEventListener('click', () => {
-        activeSkillFilter = btn.dataset.skillFilter || 'all';
-        wrap.querySelectorAll('[data-skill-filter]').forEach(el => el.classList.toggle('active', el === btn));
-        applySkillFilter();
-      });
-    });
-  }
-
-  function applySkillFilter() {
-    document.querySelectorAll('.skill-card[data-skill-cat]').forEach(card => {
-      const keep = activeSkillFilter === 'all' || card.dataset.skillCat === activeSkillFilter;
-      card.style.display = keep ? '' : 'none';
-    });
-  }
-
-  function getSkillScore(skills, tokens) {
-    const text = (Array.isArray(skills) ? skills : []).map(s => {
-      const parts = [s.cat || '', s.name || '', ...(Array.isArray(s.tags) ? s.tags : [])];
-      return parts.join(' ').toLowerCase();
-    }).join(' ');
-    const hits = tokens.reduce((sum, token) => sum + (text.includes(token) ? 1 : 0), 0);
-    return Math.max(40, Math.min(95, 35 + (hits * 15)));
   }
 
   function renderSkillVisuals(data) {
-    const skills = Array.isArray(data?.skills) ? data.skills : [];
     const radarEl = document.getElementById('skills-radar');
-    const barsEl = document.getElementById('skills-bars');
-    if (!radarEl || !barsEl) return;
+    if (!radarEl) return;
 
     const domains = [
-      { label: 'PCB Design', value: getSkillScore(skills, ['pcb', 'kicad', 'altium', 'layout']) },
-      { label: 'Firmware', value: getSkillScore(skills, ['firmware', 'stm32', 'freertos', 'uart']) },
-      { label: 'Linux BSP', value: getSkillScore(skills, ['yocto', 'linux', 'u-boot', 'device tree']) },
-      { label: 'Schematics', value: getSkillScore(skills, ['schematic', 'design', 'hardware']) },
-      { label: 'Signal Integrity', value: getSkillScore(skills, ['mipi', 'impedance', 'ddr', 'usb']) }
-    ];
-
-    const tools = [
-      { label: 'KiCad', value: getSkillScore(skills, ['kicad']) },
-      { label: 'Altium', value: getSkillScore(skills, ['altium']) },
-      { label: 'Yocto', value: getSkillScore(skills, ['yocto']) },
-      { label: 'NXP i.MX6UL', value: getSkillScore(skills, ['imx6ul', 'nxp']) },
-      { label: 'STM32', value: getSkillScore(skills, ['stm32']) },
-      { label: 'FreeRTOS', value: getSkillScore(skills, ['freertos']) }
+      { label: 'PCB Design', value: 90 },
+      { label: 'Firmware', value: 84 },
+      { label: 'TWS Audio', value: 74 },
+      { label: 'Schematics', value: 88 },
+      { label: 'Signal Integrity', value: 76 }
     ];
 
     const cx = 160;
-    const cy = 160;
-    const maxR = 112;
+    const cy = 132;
+    const maxR = 74;
     const levels = [0.2, 0.4, 0.6, 0.8, 1];
     const angleStep = (Math.PI * 2) / domains.length;
     const toPoint = (value, idx) => {
@@ -3187,11 +3276,14 @@
       const end = toPoint(1, idx).split(',');
       const lx = Number(end[0]);
       const ly = Number(end[1]);
-      const labelX = cx + (lx - cx) * 1.14;
-      const labelY = cy + (ly - cy) * 1.14;
+      const dx = lx - cx;
+      const dy = ly - cy;
+      const labelX = cx + dx * 1.24 + (dx > 14 ? 8 : dx < -14 ? -8 : 0);
+      const labelY = cy + dy * 1.24 + (dy > 14 ? 3 : dy < -14 ? -3 : 0);
+      const anchor = dx > 18 ? 'start' : (dx < -18 ? 'end' : 'middle');
       return `
         <line x1="${cx}" y1="${cy}" x2="${lx}" y2="${ly}" stroke="rgba(84,191,216,0.22)" stroke-width="1"/>
-        <text x="${labelX.toFixed(1)}" y="${labelY.toFixed(1)}" fill="#c6d9e3" font-size="10" text-anchor="middle">${escapeHtml(d.label)}</text>
+        <text x="${labelX.toFixed(1)}" y="${labelY.toFixed(1)}" fill="#c6d9e3" font-size="9" text-anchor="${anchor}">${escapeHtml(d.label)}</text>
       `;
     }).join('');
 
@@ -3207,47 +3299,29 @@
       ${axes}
       <polygon points="${dataPoints}" fill="url(#radar-fill)" stroke="rgba(212,130,26,0.88)" stroke-width="2"/>
     `;
-
-    barsEl.innerHTML = tools.map(t => `
-      <div class="skill-bar-row" style="--value:${Math.round(t.value)}%">
-        <div class="skill-bar-label">${escapeHtml(t.label)}</div>
-        <div class="skill-bar-track"><span class="skill-bar-fill"></span></div>
-        <div class="skill-bar-value">${Math.round(t.value)}%</div>
-      </div>
-    `).join('');
-    initSkillBarsObserver();
-  }
-
-  let barsObserver;
-  function initSkillBarsObserver() {
-    const rows = Array.from(document.querySelectorAll('.skill-bar-row'));
-    if (!rows.length) return;
-    if (barsObserver) barsObserver.disconnect();
-    barsObserver = new IntersectionObserver(entries => {
-      entries.forEach((entry, idx) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), idx * 90);
-          barsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.35 });
-    rows.forEach(row => barsObserver.observe(row));
   }
 
   function renderAbout() {
     const data = getPortfolioData();
     const wrap = document.getElementById('about-paragraphs');
     const statsWrap = document.getElementById('about-stats');
+    const actionsWrap = document.getElementById('about-actions');
+    const linksWrap = document.getElementById('about-links');
     if (!wrap || !data || !data.about) return;
     const a = data.about;
     const fallback = [
-      "I'm Ibrar Ahmad, a hardware and embedded systems engineer focused on product-grade electronics.",
-      'I design high-speed PCBs, develop firmware, and bring up Linux BSPs for production devices.',
-      'Available for remote and freelance PCB, firmware, and embedded Linux work.'
+      "I'm Ibrar Ahmad, a hardware and embedded systems engineer focused on EEG and biosensor electronics.",
+      'I design high-speed PCBs, develop firmware, and bring up embedded software for production devices.',
+      'Available for remote and freelance PCB, firmware, and biosensor hardware work.'
     ];
     const paras = [a.p1, a.p2, a.p3].filter(Boolean);
     const safe = paras.length ? paras : fallback;
-    wrap.innerHTML = safe.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+    wrap.innerHTML = safe.map(p => {
+      const normalized = String(p || '')
+        .replace(/\bSTM32\b/ig, 'nRF')
+        .replace(/linux\s*bsp/ig, 'embedded firmware');
+      return `<p>${escapeHtml(normalized)}</p>`;
+    }).join('');
 
     if (statsWrap) {
       const projects = Array.isArray(data.projects) ? data.projects : [];
@@ -3260,6 +3334,76 @@
       ];
       statsWrap.innerHTML = stats.map(s => `<span class="about-mini-stat">${escapeHtml(s)}</span>`).join('');
     }
+
+    const contacts = getNormalizedContacts(data);
+    const email = String(data.email || extractEmailFromContacts(contacts) || '').trim();
+    if (actionsWrap) {
+      const cvUrl = data?.hero?.cvUrl || '';
+      const actions = [];
+      if (email) actions.push(`<a href="mailto:${escapeHtml(email)}" class="about-email" data-copy-email-trigger="true">${escapeHtml(email)}</a>`);
+      if (cvUrl) actions.push(`<a href="${escapeHtml(cvUrl)}" target="_blank" class="about-link-chip">Download CV</a>`);
+      actionsWrap.innerHTML = actions.join('');
+    }
+    if (linksWrap) {
+      const socials = contacts.filter(c => {
+        const token = `${c.icon || ''} ${c.label || ''} ${c.url || ''}`.toLowerCase();
+        return token.includes('github') || token.includes('linkedin');
+      });
+      linksWrap.innerHTML = socials.map(c => {
+        const iconKey = String(c.icon || '').toLowerCase();
+        const icon = contactIconSvg(iconKey, '#b9d5e3');
+        const label = escapeHtml(c.label || iconKey || 'Link');
+        const url = escapeHtml(c.url || '#');
+        return `<a href="${url}" target="_blank" class="about-link-chip">${icon}<span>${label}</span></a>`;
+      }).join('');
+    }
+  }
+
+  function extractEmailFromContacts(contacts) {
+    const list = Array.isArray(contacts) ? contacts : [];
+    const hit = list.find(c => {
+      const icon = String(c.icon || '').toLowerCase();
+      const value = String(c.value || '');
+      const url = String(c.url || '');
+      return icon === 'mail' || icon === 'email' || value.includes('@') || url.startsWith('mailto:');
+    });
+    if (!hit) return '';
+    const value = String(hit.value || '');
+    if (value.includes('@')) return value.replace(/^mailto:/i, '').trim();
+    const url = String(hit.url || '');
+    if (url.startsWith('mailto:')) return url.replace(/^mailto:/i, '').trim();
+    return '';
+  }
+
+  function getNormalizedContacts(data) {
+    const source = Array.isArray(data?.contacts) ? data.contacts.map(c => ({ ...c })) : [];
+    const list = source.filter(Boolean).filter(c => {
+      const token = `${c.icon || ''} ${c.label || ''} ${c.value || ''} ${c.url || ''}`.toLowerCase();
+      return !token.includes('fiverr');
+    });
+
+    const email = String(data?.email || '').trim();
+    if (email && !extractEmailFromContacts(list)) {
+      list.unshift({ icon: 'mail', label: 'Email', value: email, url: `mailto:${email}`, color: 'o' });
+    }
+
+    const hasGitHub = list.some(c => `${c.icon || ''} ${c.label || ''} ${c.url || ''}`.toLowerCase().includes('github'));
+    if (!hasGitHub) {
+      list.push({ icon: 'github', label: 'GitHub', value: 'github.com/hiibrarahmad', url: 'https://github.com/hiibrarahmad', color: 'c' });
+    }
+
+    const linkedinUrl = String(data?.linkedin || '').trim();
+    const hasLinkedIn = list.some(c => `${c.icon || ''} ${c.label || ''} ${c.url || ''}`.toLowerCase().includes('linkedin'));
+    if (linkedinUrl && !hasLinkedIn) {
+      list.push({ icon: 'linkedin', label: 'LinkedIn', value: 'linkedin.com/in/hiibrarahmad', url: linkedinUrl, color: 'g' });
+    }
+
+    const hasCv = list.some(c => String(c.icon || '').toLowerCase() === 'cv');
+    if (!hasCv && data?.hero?.cvUrl) {
+      list.push({ icon: 'cv', label: 'Curriculum Vitae', value: 'View / Download PDF Resume', url: data.hero.cvUrl, color: 'p' });
+    }
+
+    return list;
   }
 
   function contactIconSvg(type, color) {
@@ -3280,12 +3424,7 @@
     const data = getPortfolioData();
     const container = document.getElementById('contact-items');
     if (!container || !data) return;
-    const contacts = (Array.isArray(data.contacts) && data.contacts.length)
-      ? data.contacts
-      : [
-          { icon: 'github', label: 'GitHub', value: 'github.com/hiibrarahmad', url: 'https://github.com/hiibrarahmad', color: 'c' },
-          { icon: 'cv', label: 'Curriculum Vitae', value: 'View / Download Resume', url: data?.hero?.cvUrl || '#', color: 'p' }
-        ];
+    const contacts = getNormalizedContacts(data);
     const colorMap = {
       c: { fg: 'var(--accent)', bg: 'rgba(84,191,216,0.1)', bd: 'rgba(84,191,216,0.3)' },
       g: { fg: 'var(--accent2)', bg: 'rgba(87,215,164,0.1)', bd: 'rgba(87,215,164,0.3)' },
@@ -3324,21 +3463,10 @@
 
     const footerEmail = document.getElementById('footer-email');
     if (footerEmail) {
-      const emailItem = contacts.find(c => {
-        const icon = String(c.icon || '').toLowerCase();
-        const value = String(c.value || '');
-        return icon === 'mail' || icon === 'email' || value.includes('@');
-      });
-      if (emailItem) {
-        const val = String(emailItem.value || '').trim();
-        const address = val.includes('@') ? val.replace(/^mailto:/i, '').trim() : '';
-        if (address) {
-          footerEmail.textContent = address;
-          footerEmail.href = `mailto:${address}`;
-        } else if (emailItem.url) {
-          footerEmail.textContent = emailItem.value || emailItem.url;
-          footerEmail.href = emailItem.url;
-        }
+      const email = String(data.email || extractEmailFromContacts(contacts) || '').trim();
+      if (email) {
+        footerEmail.textContent = email;
+        footerEmail.href = `mailto:${email}`;
       }
     }
   }
@@ -3353,28 +3481,29 @@
   }
 
   function initCopyEmail() {
-    const emailEl = document.getElementById('footer-email');
-    if (!emailEl || emailEl.dataset.bound) return;
-    emailEl.dataset.bound = '1';
-    emailEl.addEventListener('click', async e => {
-      e.preventDefault();
-      const value = String(emailEl.textContent || '').trim();
-      if (!value) return;
-      try {
-        await navigator.clipboard.writeText(value);
-        showSiteToast('✓ Copied to clipboard');
-      } catch {
-        showSiteToast('Clipboard permission blocked');
-      }
+    document.querySelectorAll('#footer-email, [data-copy-email-trigger="true"]').forEach(emailEl => {
+      if (!emailEl || emailEl.dataset.bound) return;
+      emailEl.dataset.bound = '1';
+      emailEl.addEventListener('click', async e => {
+        e.preventDefault();
+        const value = String(emailEl.textContent || '').trim();
+        if (!value) return;
+        try {
+          await navigator.clipboard.writeText(value);
+          showSiteToast('✓ Copied to clipboard');
+        } catch {
+          showSiteToast('Clipboard permission blocked');
+        }
+      });
     });
   }
 
   function getPrimaryEmail() {
     const data = getPortfolioData();
-    const contacts = Array.isArray(data.contacts) ? data.contacts : [];
-    const emailItem = contacts.find(c => String(c.value || '').includes('@'));
-    if (!emailItem) return '';
-    return String(emailItem.value || '').replace(/^mailto:/i, '').trim();
+    const email = String(data?.email || '').trim();
+    if (email) return email;
+    const contacts = getNormalizedContacts(data);
+    return extractEmailFromContacts(contacts);
   }
 
   function initWipActions() {
@@ -3440,7 +3569,7 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') close();
     });
-    overlay.querySelectorAll('a[href^="#"]').forEach(link => {
+    overlay.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => close());
     });
   }
@@ -3469,6 +3598,26 @@
     };
     tick();
     setInterval(tick, 1000);
+  }
+
+  function initHeroTicker() {
+    const ticker = document.getElementById('hero-currently');
+    if (!ticker || ticker.dataset.bound) return;
+    ticker.dataset.bound = '1';
+    const lines = [
+      'Biosensor & EEG Hardware Engineering',
+      'Medical-Grade PCB Design',
+      'High-Speed Impedance-Controlled Layout',
+      'NXP i.MX6UL Embedded Platform Dev',
+      'Analog Front-End Circuit Design'
+    ];
+    let idx = 0;
+    const update = () => {
+      ticker.textContent = `▶ CURRENTLY: ${lines[idx]}`;
+      idx = (idx + 1) % lines.length;
+    };
+    update();
+    setInterval(update, 4000);
   }
 
   function initHeroNameGlitch() {
@@ -3704,6 +3853,8 @@
   function initIntroLoader() {
     const loader = document.getElementById('intro-loader');
     const mark = document.getElementById('intro-mark');
+    const progressFill = document.getElementById('intro-progress-fill');
+    const progressValue = document.getElementById('intro-progress-value');
     if (!loader) return;
     if (reducedMotion) {
       loader.classList.add('done');
@@ -3711,29 +3862,50 @@
     }
     const key = 'portfolio_intro_seen_v1';
     if (sessionStorage.getItem(key) === '1') {
-      loader.classList.add('done');
+      if (mark) {
+        mark.classList.add('boot');
+        mark.textContent = '[ 0.000 ] Session resume.';
+      }
+      if (progressFill) progressFill.style.width = '100%';
+      if (progressValue) progressValue.textContent = '100%';
+      setTimeout(() => loader.classList.add('done'), 500);
       return;
     }
-    const bootLines = [
-      '[ 0.000 ] Booting Ibrar Ahmad v2.0 ...',
-      '[ 0.246 ] Loading PCB toolchain...',
-      '[ 0.691 ] Syncing embedded modules...',
-      '[ 1.213 ] Interface online.'
+    const bootSteps = [
+      { line: '[ 0.000 ] Booting Ibrar Ahmad v2.0 ...', pct: 12 },
+      { line: '[ 0.312 ] Loading hardware stack ... OK', pct: 34 },
+      { line: '[ 0.891 ] Mounting biosensor modules ... OK', pct: 58 },
+      { line: '[ 1.204 ] Calibrating EEG frontend ... OK', pct: 80 },
+      { line: '[ 1.847 ] All systems nominal. Welcome, Engineer.', pct: 100 }
     ];
+
+    if (mark) {
+      mark.classList.remove('boot');
+      mark.textContent = 'IA';
+    }
+    if (progressFill) progressFill.style.width = '0%';
+    if (progressValue) progressValue.textContent = '0%';
+
     let idx = 0;
     const step = () => {
-      if (mark) mark.textContent = bootLines.slice(0, idx + 1).join('\n');
+      const current = bootSteps[idx];
+      if (mark) mark.textContent = bootSteps.slice(0, idx + 1).map(s => s.line).join('\n');
+      if (progressFill) progressFill.style.width = `${current.pct}%`;
+      if (progressValue) progressValue.textContent = `${current.pct}%`;
       idx += 1;
-      if (idx < bootLines.length) {
-        setTimeout(step, 280);
+      if (idx < bootSteps.length) {
+        setTimeout(step, 400);
       } else {
         setTimeout(() => {
           loader.classList.add('done');
           sessionStorage.setItem(key, '1');
-        }, 420);
+        }, 540);
       }
     };
-    step();
+    setTimeout(() => {
+      if (mark) mark.classList.add('boot');
+      step();
+    }, 260);
   }
 
   function bindHoverTargets() {
@@ -3759,10 +3931,54 @@
       if (card.dataset.clickBound) return;
       card.dataset.clickBound = '1';
       card.addEventListener('click', e => {
-        if (e.target.closest('a, button')) return;
+        if (e.target.closest('a, button, [data-lightbox-src]')) return;
         const url = card.dataset.liveUrl;
         if (url) window.open(url, '_blank');
       });
+    });
+  }
+
+  function initProjectLightbox() {
+    const lightbox = document.getElementById('project-lightbox');
+    const img = document.getElementById('project-lightbox-img');
+    const title = document.getElementById('project-lightbox-title');
+    const specs = document.getElementById('project-lightbox-specs');
+    const closeBtn = document.getElementById('project-lightbox-close');
+    if (!lightbox || !img || !title || !specs || !closeBtn || lightbox.dataset.bound) return;
+    lightbox.dataset.bound = '1';
+
+    const close = () => {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    const open = target => {
+      const src = target.dataset.lightboxSrc;
+      if (!src) return;
+      img.src = src;
+      img.alt = target.alt || 'Project image';
+      title.textContent = target.dataset.lightboxTitle || 'Project';
+      const rawSpecs = String(target.dataset.lightboxSpecs || '').split('·').map(v => v.trim()).filter(Boolean);
+      specs.textContent = rawSpecs.length ? rawSpecs.map((v, i) => `SPEC-${String(i + 1).padStart(2, '0')}  ${v}`).join('\n') : 'No specs available.';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    document.addEventListener('click', e => {
+      const target = e.target.closest('[data-lightbox-src]');
+      if (!target) return;
+      e.preventDefault();
+      e.stopPropagation();
+      open(target);
+    });
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
     });
   }
 
@@ -3877,6 +4093,7 @@
   renderAbout();
   renderContacts();
   initHeroClock();
+  initHeroTicker();
   initHeroNameGlitch();
   initNavOverlay();
   initCopyEmail();
@@ -3890,6 +4107,7 @@
   initMagneticButtons();
   bindHoverTargets();
   bindProjectCardClicks();
+  initProjectLightbox();
 
   // Scroll fade in
   const observer = new IntersectionObserver(entries => {
@@ -3920,6 +4138,7 @@
     renderAbout();
     renderContacts();
     initHeroNameGlitch();
+    initHeroTicker();
     initCopyEmail();
     renderTerminalLoop();
     animateTerminalLines();
@@ -3931,6 +4150,7 @@
     initMagneticButtons();
     bindHoverTargets();
     bindProjectCardClicks();
+    initProjectLightbox();
     observeFades();
   });
 
@@ -3947,7 +4167,6 @@
 
   // Nav active state and scroll-driven UI
   const sections = Array.from(document.querySelectorAll('section[id]'));
-  const contactAnchor = document.getElementById('contact');
   const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
   const stickySectionLabel = document.getElementById('sticky-section-label');
   const heroTraces = document.querySelector('.hero-traces');
@@ -3956,8 +4175,7 @@
     home: '00 // HERO',
     skills: '01 // TECH STACK',
     projects: '02 // PROJECT SHOWCASE',
-    about: '03 // ABOUT & CONTACT',
-    contact: '03 // CONTACT'
+    about: '03 // ABOUT & CONTACT'
   };
 
   function setActiveNav(sectionId) {
@@ -3987,7 +4205,6 @@
     sections.forEach(section => {
       if (window.scrollY >= section.offsetTop - 120) current = section.id;
     });
-    if (contactAnchor && window.scrollY >= contactAnchor.offsetTop - 140) current = 'contact';
     if (current) setActiveNav(current);
 
     const traceShift = Math.min(window.scrollY * 0.3, 220);

@@ -205,6 +205,10 @@ select option{background:var(--surface2)}
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Export Data JS
     </button>
+    <button class="btn btn-g btn-sm" onclick="updateDataJSFile()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Update JS File
+    </button>
     <button class="btn btn-g btn-sm" onclick="saveAll()">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
       Save All
@@ -292,7 +296,7 @@ select option{background:var(--surface2)}
           <div class="fgroup"><label>Last Name</label><input id="h-lastName" placeholder="AHMAD"></div>
         </div>
         <div class="form-row full">
-          <div class="fgroup"><label>Role / Tagline (shown under name)</label><input id="h-role" placeholder="PCB Designer · Firmware Dev · Embedded Linux"></div>
+          <div class="fgroup"><label>Role / Tagline (shown under name)</label><input id="h-role" placeholder="PCB Designer · Firmware Dev · EEG Hardware"></div>
         </div>
         <div class="form-row full">
           <div class="fgroup"><label>CV / Resume URL</label><input id="h-cvUrl" placeholder="https://..."></div>
@@ -358,12 +362,20 @@ select option{background:var(--surface2)}
     <div class="panel" id="panel-about">
       <div class="panel-header">
         <div class="panel-title">ABOUT ME</div>
-        <div class="panel-sub">// THREE PARAGRAPHS IN THE ABOUT SECTION</div>
+        <div class="panel-sub">// ABOUT TEXT + GLOBAL CONTACT FIELDS</div>
       </div>
       <div class="panel-body">
         <div class="form-row full"><div class="fgroup"><label>Paragraph 1 (introduction)</label><textarea id="ab-p1" rows="4"></textarea></div></div>
         <div class="form-row full"><div class="fgroup"><label>Paragraph 2 (focus / expertise)</label><textarea id="ab-p2" rows="4"></textarea></div></div>
         <div class="form-row full"><div class="fgroup"><label>Paragraph 3 (availability / location)</label><textarea id="ab-p3" rows="4"></textarea></div></div>
+        <div class="sdiv">GLOBAL FIELDS</div>
+        <div class="form-row">
+          <div class="fgroup"><label>Email (footer + about)</label><input id="ab-email" placeholder="hiibrarahmad@gmail.com"></div>
+          <div class="fgroup"><label>LinkedIn URL</label><input id="ab-linkedin" placeholder="https://www.linkedin.com/in/hiibrarahmad/"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fgroup"><label>Hero Coordinates / Location</label><input id="ab-coords" placeholder="33.6844° N · 73.0479° E — Islamabad, Pakistan"></div>
+        </div>
         <button class="btn btn-g btn-sm" onclick="saveAbout()">Save About</button>
       </div>
     </div>
@@ -561,12 +573,31 @@ select option{background:var(--surface2)}
 <script>
 // â”€â”€â”€ DATA HELPERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DEFAULT = window.PORTFOLIO_DATA || {
-  updatedAt: "2026-02-20T00:00:00Z",
-  hero:{firstName:"IBRAR",lastName:"AHMAD",role:"PCB Designer Â· Firmware Dev Â· Embedded Linux",bio:"Designing hardware that ships â€” from schematic to silicon to software. Specializing in high-speed PCB design, NXP/STM32 embedded systems, medical & industrial IoT, and full-stack firmware development.",stat1:"10+",stat1l:"PCB Projects",stat2:"4L",stat2l:"Max Stack",stat3:"2026",stat3l:"Active",cvUrl:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/"},
-  about:{p1:"I'm Ibrar Ahmad â€” a hardware and embedded systems engineer with a passion for building purpose-driven electronics. From schematic capture to PCB layout, firmware development to Linux BSP, I work across the full hardware-software stack.",p2:"My current focus is medical-grade embedded systems, high-speed PCB design with controlled impedance, and deploying secure Linux platforms on NXP SoMs.",p3:"Based in Hazro, Punjab â€” available for freelance PCB design, firmware consulting, and embedded systems development globally."},
-  contacts:[{icon:"github",label:"GitHub",value:"github.com/hiibrarahmad",url:"https://github.com/hiibrarahmad",color:"c"},{icon:"cv",label:"Curriculum Vitae",value:"View / Download PDF Resume",url:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",color:"p"},{icon:"pcb",label:"Interactive PCB Demo",value:"DermScope REVIVE â€” Live Viewer",url:"https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",color:"g"}],
-  skills:[{cat:"Hardware Design",name:"PCB LAYOUT & DESIGN",color:"c",tags:["Altium Designer","KiCad","4-Layer","MIPI CSI/DSI","USB 2.0 HS","Impedance Control","ENIG","DDR3"]},{cat:"Embedded Systems",name:"FIRMWARE & BSP",color:"g",tags:["NXP i.MX6UL","STM32","ARM Cortex-A7","U-Boot","Yocto Linux","FreeRTOS","Device Tree"]},{cat:"Software & Tools",name:"DEVELOPMENT",color:"o",tags:["Python","C / C++","Shell Script","Git","VS Code","LaTeX","GitHub Actions"]},{cat:"Connectivity",name:"INTERFACES & COMMS",color:"p",tags:["SPI Â· I2C Â· UART","USB OTG","4G LTE / NB-IoT","Wi-Fi Â· BT 4.2","MQTT Â· AMQP","GNSS / GPS","Ethernet"]},{cat:"Documentation",name:"TECHNICAL WRITING",color:"c",tags:["LaTeX / XeLaTeX","Markdown","GitHub Pages","Bilingual EN/ID","BOM / Gerber"]},{cat:"Cloud & Security",name:"PLATFORM & OTA",color:"g",tags:["AWS Â· Azure Â· GCP","ARM TrustZone","Secure Boot","AES-256","OTA Updates","TLS / DTLS"]}],
-  projects:[{id:"PRJ-2026-PCB-0005",featured:true,status:"live",badge:"pcb",badgeLabel:"PCB DESIGN",year:"2026",client:"Revive Medical Technology",title:"DERMSCOPE REVIVE â€” Carrier PCB",desc:"Advanced high-speed carrier PCB for handheld dermatology imaging. 4-layer ENIG board hosting INVENSOM-6UL SOM.",imgUrl:"https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png",imgUrlBottom:"https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png",tags:["4 LAYERS","90Ã—62mm","NXP iMX6UL","MIPI CSI/DSI","ENIG","100Î© DIFF","4G LTE","Wi-Fi+BT","GPS/GNSS","TP4056"],liveUrl:"https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",repoUrl:"https://github.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io",liveBtnLabel:"VIEW INTERACTIVE PCB"},{id:"PRJ-2026-DOC-0003",featured:false,status:"live",badge:"doc",badgeLabel:"DOCUMENTATION",year:"2026",client:"Personal Â· Dual Language",title:"PROFESSIONAL CV â€” LaTeX",desc:"Dual-language curriculum vitae (English & Indonesian) built with Awesome-CV LaTeX template.",imgUrl:"",imgUrlBottom:"",tags:["LaTeX / XeLaTeX","Awesome-CV","English + Indonesian","GitHub Pages","PDF Output"],liveUrl:"https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",repoUrl:"https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",liveBtnLabel:"VIEW CV ONLINE"},{id:"PRJ-2026-FW-0001",featured:false,status:"wip",badge:"fw",badgeLabel:"FIRMWARE",year:"2026",client:"NXP i.MX6UL Platform",title:"YOCTO LINUX BSP â€” iMX6UL",desc:"Custom Board Support Package for NXP i.MX6UL including U-Boot, Linux kernel, and device tree customization.",imgUrl:"",imgUrlBottom:"",tags:["Yocto Project","U-Boot 2017.03","Linux 4.9.11","Device Tree","Qt5 / Wayland"],liveUrl:"",repoUrl:"",liveBtnLabel:"VIEW PROJECT"},{id:"PRJ-2026-HW-0002",featured:false,status:"wip",badge:"pcb",badgeLabel:"IOT GATEWAY",year:"2026",client:"Industrial IoT",title:"INDUSTRIAL IoT GATEWAY PCB",desc:"Multi-protocol industrial gateway supporting MQTT, AMQP, OPC-UA, 4G LTE and Ethernet.",imgUrl:"",imgUrlBottom:"",tags:["4G LTE","Ethernet","MQTT / OPC-UA","Modbus RTU","DIN Rail"],liveUrl:"",repoUrl:"",liveBtnLabel:"VIEW PROJECT"}]
+  updatedAt: new Date().toISOString(),
+  email: "hiibrarahmad@gmail.com",
+  linkedin: "https://www.linkedin.com/in/hiibrarahmad/",
+  hero: {
+    firstName: "IBRAR",
+    lastName: "AHMAD",
+    role: "PCB Designer | Firmware Dev | EEG Hardware",
+    bio: "Designing hardware that ships from schematic to silicon to software. Focused on EEG and biosensor hardware, high-speed PCB design, and embedded firmware on NXP and nRF platforms.",
+    stat1: "4",
+    stat1l: "Projects",
+    stat2: "2",
+    stat2l: "Live",
+    stat3: "2",
+    stat3l: "In Dev",
+    cvUrl: "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
+    coordinates: "33.6844 N | 73.0479 E - Islamabad, Pakistan"
+  },
+  about: {
+    p1: "I'm Ibrar Ahmad - a hardware and embedded systems engineer and biosensor/EEG hardware designer.",
+    p2: "From schematic capture to PCB layout, biosensor front-end circuits to EEG acquisition hardware, and embedded firmware - I work across the full hardware-software stack.",
+    p3: "Based in Islamabad, Pakistan and available globally for freelance PCB and embedded systems projects."
+  },
+  contacts: [],
+  skills: [],
+  projects: []
 };
 
 const TEXT_FIXUPS = [
@@ -592,7 +623,50 @@ function cleanData(value){
   }
   return value;
 }
-function load(){try{return cleanData(JSON.parse(localStorage.getItem('portfolio_data'))||DEFAULT)}catch{return cleanData(DEFAULT)}}
+function normalizeData(data){
+  const d = cleanData(data || {});
+  if (d && typeof d === 'object') {
+    delete d.fiverr;
+    if (Array.isArray(d.contacts)) {
+      d.contacts = d.contacts.filter(c => {
+        const token = `${c?.icon || ''} ${c?.label || ''} ${c?.value || ''} ${c?.url || ''}`.toLowerCase();
+        return !token.includes('fiverr');
+      });
+    }
+    if (Array.isArray(d.skills)) {
+      d.skills = d.skills.map(s => {
+        const tags = (Array.isArray(s?.tags) ? s.tags : [])
+          .map(t => String(t || '').trim())
+          .map(t => {
+            if (/yocto/i.test(t) || /linux\s*bsp/i.test(t)) return '';
+            if (/freertos/i.test(t)) return 'FreeRTOS';
+            return t;
+          })
+          .filter(Boolean);
+        return { ...s, tags };
+      });
+    }
+    if (d.hero && typeof d.hero === 'object' && typeof d.hero.role === 'string') {
+      d.hero.role = d.hero.role.replace(/embedded linux/ig, 'EEG Hardware');
+    }
+    if (d.about && typeof d.about === 'object') {
+      ['p1', 'p2', 'p3'].forEach(k => {
+        if (typeof d.about[k] !== 'string') return;
+        d.about[k] = d.about[k]
+          .replace(/\bSTM32\b/ig, 'nRF')
+          .replace(/linux\s*bsp/ig, 'embedded firmware');
+      });
+    }
+  }
+  return d;
+}
+function load(){
+  try{
+    return normalizeData(JSON.parse(localStorage.getItem('portfolio_data')) || DEFAULT);
+  }catch{
+    return normalizeData(DEFAULT);
+  }
+}
 function updateSaveIndicator(iso){
   const el=document.getElementById('save-indicator');
   if(!el)return;
@@ -600,7 +674,7 @@ function updateSaveIndicator(iso){
   el.textContent='Last saved: '+dt.toLocaleString();
 }
 function save(d,opts={}){
-  d = cleanData(d);
+  d = normalizeData(d);
   d.updatedAt = new Date().toISOString();
   localStorage.setItem('portfolio_data',JSON.stringify(d));
   updateSaveIndicator(d.updatedAt);
@@ -613,10 +687,18 @@ function toast(msg,type='success'){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-async function copyDataJS(){
+let dataJsHandle = null;
+function getDataJsPayload(){
   const data = load();
   data.updatedAt = new Date().toISOString();
-  const content='window.PORTFOLIO_DATA = '+JSON.stringify(data,null,2)+';';
+  return {
+    data,
+    content: 'window.PORTFOLIO_DATA = ' + JSON.stringify(data,null,2) + ';'
+  };
+}
+
+async function copyDataJS(){
+  const { content } = getDataJsPayload();
   try{
     await navigator.clipboard.writeText(content);
     toast('Copied portfolio-data.js to clipboard','success');
@@ -700,7 +782,7 @@ function initAutosave(){
     el.dataset.autosaveBound='1';
     el.addEventListener('input',()=>queueAutosave('hero'));
   });
-  document.querySelectorAll('#panel-about textarea').forEach(el=>{
+  document.querySelectorAll('#panel-about textarea,#panel-about input').forEach(el=>{
     if(el.dataset.autosaveBound)return;
     el.dataset.autosaveBound='1';
     el.addEventListener('input',()=>queueAutosave('about'));
@@ -769,14 +851,21 @@ function saveHero(silent=false){
 
 // â”€â”€â”€ ABOUT FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderAboutForm(){
-  const a=load().about;
+  const d=load();
+  const a=d.about || {};
   document.getElementById('ab-p1').value=a.p1||'';
   document.getElementById('ab-p2').value=a.p2||'';
   document.getElementById('ab-p3').value=a.p3||'';
+  document.getElementById('ab-email').value=d.email||'';
+  document.getElementById('ab-linkedin').value=d.linkedin||'';
+  document.getElementById('ab-coords').value=d.hero?.coordinates||'';
 }
 function saveAbout(silent=false){
   const d=load();
   d.about={p1:document.getElementById('ab-p1').value,p2:document.getElementById('ab-p2').value,p3:document.getElementById('ab-p3').value};
+  d.email=document.getElementById('ab-email').value;
+  d.linkedin=document.getElementById('ab-linkedin').value;
+  d.hero={...(d.hero||{}),coordinates:document.getElementById('ab-coords').value};
   save(d,{silent});
 }
 
@@ -976,11 +1065,59 @@ function exportJSON(){
 }
 
 function exportDataJS(){
-  const data = load();
-  data.updatedAt = new Date().toISOString();
-  const content='window.PORTFOLIO_DATA = '+JSON.stringify(data,null,2)+';';
+  const { content } = getDataJsPayload();
   const blob=new Blob([content],{type:'application/javascript'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio-data.js';a.click();
+}
+
+async function updateDataJSFile(){
+  const { data, content } = getDataJsPayload();
+  try{
+    if(window.showOpenFilePicker){
+      if(!dataJsHandle){
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [{ description: 'JavaScript', accept: { 'application/javascript': ['.js'] } }]
+        });
+        dataJsHandle = handle;
+      }
+      const permission = dataJsHandle.requestPermission ? await dataJsHandle.requestPermission({ mode: 'readwrite' }) : 'granted';
+      if(permission !== 'granted'){
+        toast('Write permission denied','error');
+        return;
+      }
+      const writable = await dataJsHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      save(data,{silent:true});
+      toast('portfolio-data.js updated','success');
+      return;
+    }
+
+    if(window.showSaveFilePicker){
+      const handle = await window.showSaveFilePicker({
+        suggestedName: 'portfolio-data.js',
+        types: [{ description: 'JavaScript', accept: { 'application/javascript': ['.js'] } }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      save(data,{silent:true});
+      toast('portfolio-data.js updated','success');
+      return;
+    }
+
+    exportDataJS();
+    toast('Direct file update not supported. Exported Data JS instead.','error');
+  }catch(err){
+    if(err && err.name === 'AbortError')return;
+    try{
+      await navigator.clipboard.writeText(content);
+      toast('File write failed. Data JS copied to clipboard.','error');
+    }catch{
+      toast('File write failed. Use Export Data JS.','error');
+    }
+  }
 }
 
 // â”€â”€â”€ SAVE ALL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

@@ -1,45 +1,64 @@
-window.PORTFOLIO_DATA = {
-  "updatedAt": "2026-02-22T18:33:44.373Z",
-  "hero": {
-    "firstName": "IBRAR",
-    "lastName": "AHMAD",
-    "role": "PCB Designer · Firmware Dev · Embedded Linux",
-    "bio": "Designing hardware that ships — from schematic to silicon to software. Specializing in high-speed PCB design, NXP/STM32 embedded systems, medical & industrial IoT, and full-stack firmware development.",
-    "cvUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
-    "stat1": "53+",
-    "stat1l": "PCB Projects",
-    "stat2": "8L",
-    "stat2l": "Max Stack",
-    "stat3": "2026",
-    "stat3l": "Active"
+﻿window.PORTFOLIO_DATA = {
+  updatedAt: "2026-02-23T02:15:00.000Z",
+  email: "hiibrarahmad@gmail.com",
+  linkedin: "https://www.linkedin.com/in/hiibrarahmad/",
+  hero: {
+    firstName: "IBRAR",
+    lastName: "AHMAD",
+    role: "PCB Designer | Firmware Dev | EEG Hardware",
+    bio: "Designing hardware that ships from schematic to silicon to software. Focused on EEG and biosensor hardware, high-speed PCB design, and embedded firmware on NXP and nRF platforms.",
+    cvUrl: "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
+    timezone: "Asia/Karachi",
+    tzLabel: "PKT",
+    coordinates: "33.6844 N | 73.0479 E - Islamabad, Pakistan",
+    stat1: "4",
+    stat1l: "Projects",
+    stat2: "2",
+    stat2l: "Live",
+    stat3: "2",
+    stat3l: "In Dev"
   },
-  "about": {
-    "p1": "I'm Ibrar Ahmad — a hardware and embedded systems engineer with a passion for building purpose-driven electronics. From schematic capture to PCB layout, firmware development to Linux BSP, I work across the full hardware-software stack.",
-    "p2": "My current focus is medical-grade embedded systems, high-speed PCB design with controlled impedance, and deploying secure Linux platforms on NXP SoMs.",
-    "p3": "Based in Hazro, Punjab — available for freelance PCB design, firmware consulting, and embedded systems development globally."
+  about: {
+    p1: "I'm Ibrar Ahmad - a hardware and embedded systems engineer and biosensor/EEG hardware designer.",
+    p2: "From schematic capture to PCB layout, biosensor front-end circuits to EEG acquisition hardware, and embedded firmware - I work across the full hardware-software stack.",
+    p3: "Current focus: medical-grade biosensor and EEG systems, high-speed controlled-impedance PCB design, and embedded platforms on NXP and nRF devices. Based in Islamabad, Pakistan and available globally for freelance PCB and embedded systems projects."
   },
-  "contacts": [
+  contacts: [
     {
-      "icon": "github",
-      "label": "GitHub",
-      "value": "github.com/hiibrarahmad",
-      "url": "https://github.com/hiibrarahmad",
-      "color": "c"
+      icon: "mail",
+      label: "Email",
+      value: "hiibrarahmad@gmail.com",
+      url: "mailto:hiibrarahmad@gmail.com",
+      color: "o"
     },
     {
-      "icon": "cv",
-      "label": "Curriculum Vitae",
-      "value": "View / Download PDF Resume",
-      "url": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
-      "color": "p"
+      icon: "github",
+      label: "GitHub",
+      value: "github.com/hiibrarahmad",
+      url: "https://github.com/hiibrarahmad",
+      color: "c"
+    },
+    {
+      icon: "linkedin",
+      label: "LinkedIn",
+      value: "linkedin.com/in/hiibrarahmad",
+      url: "https://www.linkedin.com/in/hiibrarahmad/",
+      color: "g"
+    },
+    {
+      icon: "cv",
+      label: "Curriculum Vitae",
+      value: "View / Download PDF Resume",
+      url: "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
+      color: "p"
     }
   ],
-  "skills": [
+  skills: [
     {
-      "cat": "Hardware Design",
-      "name": "PCB LAYOUT & DESIGN",
-      "color": "c",
-      "tags": [
+      cat: "Hardware Design",
+      name: "PCB LAYOUT & DESIGN",
+      color: "c",
+      tags: [
         "Altium Designer",
         "KiCad",
         "4-Layer",
@@ -51,52 +70,53 @@ window.PORTFOLIO_DATA = {
       ]
     },
     {
-      "cat": "Embedded Systems",
-      "name": "FIRMWARE & BSP",
-      "color": "g",
-      "tags": [
+      cat: "Embedded Systems",
+      name: "FIRMWARE & BSP",
+      color: "g",
+      tags: [
         "NXP i.MX6UL",
-        "STM32",
+        "nRF5340",
         "ARM Cortex-A7",
-        "U-Boot",
-        "Yocto Linux",
+        "Bluetooth LE Audio",
+        "TWS Pairing",
         "FreeRTOS",
-        "Device Tree"
+        "Audio Codec Control"
       ]
     },
     {
-      "cat": "Software & Tools",
-      "name": "DEVELOPMENT",
-      "color": "o",
-      "tags": [
-        "Python",
-        "C / C++",
-        "Shell Script",
-        "Git",
-        "VS Code",
-        "LaTeX",
-        "GitHub Actions"
+      cat: "Biosensor & EEG",
+      name: "MEDICAL SIGNAL HARDWARE",
+      color: "o",
+      tags: [
+        "ADS1299",
+        "Instrumentation Amp",
+        "AFE Design",
+        "EEG Electrodes",
+        "EMI Shielding",
+        "Low-Noise Layout",
+        "Medical Isolation",
+        "Bio-Impedance"
       ]
     },
     {
-      "cat": "Connectivity",
-      "name": "INTERFACES & COMMS",
-      "color": "p",
-      "tags": [
-        "SPI · I2C · UART",
+      cat: "Connectivity",
+      name: "INTERFACES & COMMS",
+      color: "p",
+      tags: [
+        "SPI | I2C | UART",
         "USB OTG",
         "4G LTE / NB-IoT",
-        "Wi-Fi · BT 4.2",
-        "MQTT · AMQP",
+        "Wi-Fi | BT 5.x",
+        "MQTT | AMQP",
         "GNSS / GPS",
         "Ethernet"
       ]
     },
     {
-      "cat": "Documentation",
-      "name": "TECHNICAL WRITING",
-      "color": "c",
-      "tags": [
+      cat: "Documentation",
+      name: "TECHNICAL WRITING",
+      color: "c",
+      tags: [
         "LaTeX / XeLaTeX",
         "Markdown",
         "GitHub Pages",
@@ -105,11 +125,11 @@ window.PORTFOLIO_DATA = {
       ]
     },
     {
-      "cat": "Cloud & Security",
-      "name": "PLATFORM & OTA",
-      "color": "g",
-      "tags": [
-        "AWS · Azure · GCP",
+      cat: "Cloud & Security",
+      name: "PLATFORM & OTA",
+      color: "g",
+      tags: [
+        "AWS | Azure | GCP",
         "ARM TrustZone",
         "Secure Boot",
         "AES-256",
@@ -118,158 +138,105 @@ window.PORTFOLIO_DATA = {
       ]
     }
   ],
-  "projects": [
+  projects: [
     {
-      "id": "PRJ-2026-PCB-0005",
-      "year": "2026",
-      "client": "Revive Medical Technology",
-      "badge": "pcb",
-      "badgeLabel": "PCB DESIGN",
-      "status": "live",
-      "title": "DERMSCOPE REVIVE — Carrier PCB",
-      "desc": "Advanced high-speed carrier PCB for handheld dermatology imaging. 4-layer ENIG board hosting INVENSOM-6UL SOM.",
-      "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png",
-      "tags": [
+      id: "PRJ-2026-PCB-0005",
+      year: "2026",
+      client: "Revive Medical Technology",
+      badge: "pcb",
+      badgeLabel: "PCB DESIGN",
+      status: "live",
+      title: "DERMSCOPE REVIVE - Carrier PCB",
+      desc: "Advanced high-speed carrier PCB for handheld dermatology imaging. 4-layer ENIG board hosting INVENSOM-6UL SOM.",
+      imgUrl: "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png",
+      imgUrlBottom: "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png",
+      tags: [
         "4 LAYERS",
-        "90×62mm",
+        "90x62mm",
         "NXP iMX6UL",
         "MIPI CSI/DSI",
         "ENIG",
-        "100Ω DIFF",
+        "100ohm DIFF",
         "4G LTE",
         "Wi-Fi+BT",
         "GPS/GNSS",
         "TP4056"
       ],
-      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",
-      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io",
-      "liveBtnLabel": "VIEW INTERACTIVE PCB",
-      "featured": false,
-      "imgUrlBottom": ""
+      liveUrl: "https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",
+      repoUrl: "https://github.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io",
+      liveBtnLabel: "VIEW INTERACTIVE PCB",
+      featured: true
     },
     {
-      "id": "PRJ-2026-DOC-0003",
-      "year": "2026",
-      "client": "Personal · Dual Language",
-      "badge": "doc",
-      "badgeLabel": "DOCUMENTATION",
-      "status": "live",
-      "title": "PROFESSIONAL CV — LaTeX",
-      "desc": "Dual-language curriculum vitae (English & Indonesian) built with Awesome-CV LaTeX template.",
-      "imgUrl": "https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io/raw/main/cv_english/assets/image.png",
-      "imgUrlBottom": "",
-      "tags": [
+      id: "PRJ-2026-DOC-0003",
+      year: "2026",
+      client: "Personal | Dual Language",
+      badge: "doc",
+      badgeLabel: "DOCUMENTATION",
+      status: "live",
+      title: "PROFESSIONAL CV - LaTeX",
+      desc: "Dual-language curriculum vitae built with Awesome-CV and deployed via GitHub Pages.",
+      imgUrl: "https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io/raw/main/cv_english/assets/image.png",
+      imgUrlBottom: "",
+      tags: [
         "LaTeX / XeLaTeX",
         "Awesome-CV",
         "English + Indonesian",
         "GitHub Pages",
         "PDF Output"
       ],
-      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
-      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",
-      "liveBtnLabel": "VIEW CV ONLINE",
-      "featured": false
+      liveUrl: "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
+      repoUrl: "https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",
+      liveBtnLabel: "VIEW CV ONLINE",
+      featured: false
     },
     {
-      "id": "PRJ-2026-PCB-0002",
-      "year": "2026",
-      "client": "hiibrarahmad",
-      "badge": "pcb",
-      "badgeLabel": "PCB DESIGN",
-      "status": "live",
-      "title": "PRJ-2026-PCB-0002-SMART_WATCH",
-      "desc": "Dual-Board Smart Watch PCB featuring a main application board powered by nRF5340 SoC with 1.54\" IPS & e-Paper display, BLE 5.3, 6-axis IMU, environmental & air quality sensing, and a dedicated wireless Qi charging board with battery management and PPG/SpO2/ECG health sensing via MAX86150.",
-      "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg",
-      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg",
-      "tags": [
+      id: "PRJ-2026-FW-0001",
+      featured: false,
+      status: "wip",
+      badge: "fw",
+      badgeLabel: "FIRMWARE",
+      year: "2026",
+      client: "TWS Earbud Platform",
+      title: "TWS AUDIO EARBUD PLATFORM",
+      desc: "Low-power true-wireless stereo earbud firmware and audio control platform with Bluetooth LE audio stack and ANC-ready signal path.",
+      imgUrl: "",
+      imgUrlBottom: "",
+      tags: [
+        "Bluetooth LE Audio",
+        "TWS Pairing",
         "nRF5340",
-        "BLE 5.3",
-        "Qi Wireless Charging",
-        "4-Layer PCB",
-        "Wearable",
-        "Smart Watch",
-        "BME680",
-        "CCS811",
-        "MAX86150",
-        "BQ51003",
-        "BQ25100",
-        "Zephyr RTOS",
-        "RoHS"
+        "Audio Codec",
+        "ANC Ready"
       ],
-      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-PCB-0002-SMART_WATCH.github.io/",
-      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io",
-      "liveBtnLabel": "View Interactive PCB",
-      "featured": false
+      liveUrl: "",
+      repoUrl: "",
+      liveBtnLabel: "VIEW PROJECT",
+      releaseDate: "2026-06-30T00:00:00Z"
     },
     {
-      "id": "PRJ-2026-PCB-0001",
-      "year": "2026",
-      "client": "",
-      "badge": "pcb",
-      "badgeLabel": "PCB DESIGN",
-      "status": "live",
-      "title": "UNO V1 — Custom Arduino UNO Compatible Board",
-      "desc": "Custom Arduino UNO compatible development board built around the ATmega328P with modern USB Type-C via CH340G, onboard 3.3V & 5V regulation, SMD components, and full Arduino UNO shield connector compatibility.",
-      "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1.jpg",
-      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1bot.jpg",
-      "tags": [
-        "ATmega328P",
-        "CH340G",
-        "USB Type-C",
-        "16 MHz",
-        "AVR",
-        "Arduino UNO"
-      ],
-      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-PCB-0001-UNO-V1.github.io/",
-      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io",
-      "liveBtnLabel": "View PCB",
-      "featured": false
-    },
-    {
-      "id": "PRJ-2026-FW-0001",
-      "featured": false,
-      "status": "wip",
-      "badge": "fw",
-      "badgeLabel": "FIRMWARE",
-      "year": "2026",
-      "client": "NXP i.MX6UL Platform",
-      "title": "YOCTO LINUX BSP — iMX6UL",
-      "desc": "Custom Board Support Package for NXP i.MX6UL including U-Boot, Linux kernel, and device tree customization.",
-      "imgUrl": "",
-      "tags": [
-        "Yocto Project",
-        "U-Boot 2017.03",
-        "Linux 4.9.11",
-        "Device Tree",
-        "Qt5 / Wayland"
-      ],
-      "liveUrl": "",
-      "repoUrl": "",
-      "liveBtnLabel": "VIEW PROJECT",
-      "imgUrlBottom": ""
-    },
-    {
-      "id": "PRJ-2026-HW-0002",
-      "featured": false,
-      "status": "wip",
-      "badge": "pcb",
-      "badgeLabel": "IOT GATEWAY",
-      "year": "2026",
-      "client": "Industrial IoT",
-      "title": "INDUSTRIAL IoT GATEWAY PCB",
-      "desc": "Multi-protocol industrial gateway supporting MQTT, AMQP, OPC-UA, 4G LTE and Ethernet.",
-      "imgUrl": "",
-      "tags": [
+      id: "PRJ-2026-HW-0002",
+      featured: false,
+      status: "wip",
+      badge: "pcb",
+      badgeLabel: "IOT GATEWAY",
+      year: "2026",
+      client: "Industrial IoT",
+      title: "INDUSTRIAL IOT GATEWAY PCB",
+      desc: "Multi-protocol industrial gateway supporting MQTT, AMQP, OPC-UA, 4G LTE, and Ethernet.",
+      imgUrl: "",
+      imgUrlBottom: "",
+      tags: [
         "4G LTE",
         "Ethernet",
         "MQTT / OPC-UA",
         "Modbus RTU",
         "DIN Rail"
       ],
-      "liveUrl": "",
-      "repoUrl": "",
-      "liveBtnLabel": "VIEW PROJECT",
-      "imgUrlBottom": ""
+      liveUrl: "",
+      repoUrl: "",
+      liveBtnLabel: "VIEW PROJECT",
+      releaseDate: "2026-09-15T00:00:00Z"
     }
   ]
 };
