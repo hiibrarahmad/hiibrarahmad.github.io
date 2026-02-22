@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://hiibrarahmad.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23040a10'/%3E%3Cpath d='M14 50V14h7v36zm15 0V14h7v36zM18 21h28v6H18zm0 16h28v6H18z' fill='%23d4821a'/%3E%3C/svg%3E">
-<title>Ibrar Ahmad - Hardware & Embedded Systems Engineer</title>
+<title>Ibrar Ahmad | PCB Designer & Embedded Systems Engineer - Hazro, Pakistan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700;800&family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
@@ -499,17 +499,30 @@
     color: #bdced8;
     text-transform: uppercase;
   }
+  #hero-currently {
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    animation: currentTicker 11s linear infinite;
+    color: #e9cf9f;
+  }
+  @keyframes currentTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-30%); }
+  }
   .hero-traces {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.55;
+    opacity: 0.78;
     mix-blend-mode: screen;
   }
   .hero-traces svg {
     width: 100%;
     height: 100%;
+    animation: tracesPan 20s ease-in-out infinite alternate;
   }
   .hero-traces .trace-base {
     stroke: rgba(84,191,216,0.22);
@@ -535,6 +548,10 @@
   @keyframes traceRun {
     from { stroke-dashoffset: 0; }
     to { stroke-dashoffset: -240; }
+  }
+  @keyframes tracesPan {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-20px); }
   }
 
   .hero-ghost {
@@ -577,6 +594,42 @@
     justify-content: flex-end;
     z-index: 2;
   }
+  .hero-portrait-shell {
+    position: relative;
+    width: min(38vw, 448px);
+    aspect-ratio: 3 / 4;
+    padding: 2px;
+    clip-path: polygon(17% 0%, 83% 0%, 100% 22%, 100% 78%, 83% 100%, 17% 100%, 0% 78%, 0% 22%);
+    background: rgba(8,16,22,0.72);
+    box-shadow: 0 0 26px rgba(212,130,26,0.24);
+    overflow: hidden;
+  }
+  .hero-portrait-shell::before {
+    content: '';
+    position: absolute;
+    inset: -18%;
+    background: conic-gradient(rgba(212,130,26,0.08), rgba(212,130,26,0.92), rgba(84,191,216,0.42), rgba(212,130,26,0.08));
+    animation: borderScan 10s linear infinite;
+    z-index: 0;
+  }
+  .hero-portrait-shell > * { position: relative; z-index: 1; }
+  @keyframes borderScan {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .reticle-corner {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border: 2px solid rgba(212,130,26,0.9);
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.9;
+  }
+  .reticle-corner.tl { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+  .reticle-corner.tr { top: 8px; right: 8px; border-left: none; border-bottom: none; }
+  .reticle-corner.bl { bottom: 8px; left: 8px; border-right: none; border-top: none; }
+  .reticle-corner.br { bottom: 8px; right: 8px; border-left: none; border-top: none; }
 
   .hero-portrait {
     --rx: 0deg;
@@ -584,7 +637,7 @@
     --lift: 0px;
     --shine-x: 50%;
     position: relative;
-    width: min(38vw, 440px);
+    width: 100%;
     aspect-ratio: 3 / 4;
     border: 1px solid rgba(84,191,216,0.38);
     background: linear-gradient(135deg, rgba(84,191,216,0.12), rgba(87,215,164,0.08));
@@ -614,9 +667,10 @@
     background-image:
       linear-gradient(rgba(84,191,216,0.08) 1px, transparent 1px),
       linear-gradient(90deg, rgba(84,191,216,0.08) 1px, transparent 1px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.07), rgba(255,255,255,0.07) 1px, transparent 1px, transparent 3px),
       radial-gradient(circle at var(--shine-x) -10%, rgba(255,255,255,0.42), transparent 42%);
-    background-size: 32px 32px, 32px 32px, auto;
-    opacity: 0.42;
+    background-size: 32px 32px, 32px 32px, auto, auto;
+    opacity: 0.5;
     mix-blend-mode: screen;
     pointer-events: none;
   }
@@ -671,8 +725,8 @@
   }
   .hero-name .line2 {
     color: rgba(0,0,0,0);
-    -webkit-text-stroke: 1px rgba(84,191,216,0.72);
-    text-shadow: 0 0 22px rgba(84,191,216,0.18);
+    -webkit-text-stroke: 2px rgba(212,130,26,0.82);
+    text-shadow: 0 0 22px rgba(212,130,26,0.2);
     display: block;
   }
   .hero-name.glitching .line1,
@@ -978,35 +1032,31 @@
 
   /* SKILLS */
   .skills-domains {
-    display: grid;
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 22px;
   }
   .domain-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 14px;
-    border: 1px solid rgba(84,191,216,0.18);
-    background: rgba(8,18,25,0.65);
-    border-radius: 10px;
+    border: 1px solid rgba(84,191,216,0.22);
+    background: rgba(8,18,25,0.66);
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .domain-row.active {
+    border-color: rgba(212,130,26,0.6);
+    background: rgba(212,130,26,0.14);
+  }
+  .domain-row:hover {
+    border-color: rgba(84,191,216,0.45);
   }
   .domain-label {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 1.2px;
-    color: var(--accent2);
+    color: #d6e7f1;
     text-transform: uppercase;
-  }
-  .domain-chip {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.8px;
-    color: #d7eaf3;
-    border: 1px solid rgba(212,130,26,0.35);
-    background: rgba(212,130,26,0.1);
-    padding: 3px 8px;
   }
   .skills-visuals {
     display: grid;
@@ -1116,6 +1166,7 @@
     transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(var(--lift));
     transform-style: preserve-3d;
     will-change: transform;
+    min-height: 232px;
   }
   .skill-card::before {
     content: '';
@@ -1760,6 +1811,63 @@
     margin-bottom: 16px;
     font-family: 'Cormorant Garamond', serif;
   }
+  .about-actions {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .about-email {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #f0d3a8;
+    text-decoration: none;
+    border: 1px solid rgba(212,130,26,0.5);
+    background: rgba(212,130,26,0.12);
+    padding: 8px 10px;
+  }
+  .about-email:hover {
+    color: #081118;
+    background: rgba(212,130,26,0.92);
+  }
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .about-link-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d4e7f1;
+    text-decoration: none;
+    border: 1px solid rgba(84,191,216,0.32);
+    background: rgba(84,191,216,0.08);
+    padding: 6px 8px;
+  }
+  .about-link-chip:hover {
+    border-color: rgba(212,130,26,0.62);
+    color: #f2d8ae;
+    background: rgba(212,130,26,0.13);
+  }
+  .github-heatmap {
+    margin-top: 14px;
+    border: 1px solid rgba(84,191,216,0.22);
+    padding: 8px;
+    background: rgba(8,18,25,0.7);
+  }
+  .github-heatmap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
   .contact-items { display: flex; flex-direction: column; gap: 16px; }
   .contact-item {
@@ -1882,7 +1990,7 @@
     display: grid;
     place-items: center;
     background: #040a10;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
   }
 
   .site-toast {
@@ -1933,6 +2041,13 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+  .intro-progress {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #f1d8ae;
   }
   @keyframes introPulse {
     0% { opacity: 0; transform: scale(0.8); filter: blur(8px); }
@@ -2074,7 +2189,7 @@
     .hero { min-height: auto; padding: 50px 24px 60px; flex-direction: column; align-items: flex-start; gap: 28px; }
     .hero-content { padding: 24px 20px; width: 100%; }
     .hero-visual { width: 100%; justify-content: center; }
-    .hero-portrait { width: min(82vw, 360px); }
+    .hero-portrait-shell { width: min(82vw, 360px); }
     .hero-ghost { display: none; }
     .hero-title { gap: 8px; }
     .hero-pill { font-size: 11px; padding: 6px 10px; }
@@ -2104,7 +2219,10 @@
 <body>
 
 <div class="intro-loader" id="intro-loader" aria-hidden="true">
-  <div class="intro-mark boot" id="intro-mark">[ 0.000 ] Booting Ibrar Ahmad v2.0 ...</div>
+  <div>
+    <div class="intro-mark boot" id="intro-mark">[ 0.000 ] Booting Ibrar Ahmad v2.0 ...</div>
+    <div class="intro-progress" id="intro-progress">[██████░░░░░░░░] 42% - Loading firmware stack...</div>
+  </div>
 </div>
 <div class="scroll-progress-top" aria-hidden="true"></div>
 <div class="cursor" id="cursor"></div>
@@ -2161,6 +2279,7 @@
   <div class="hero-meta">
     <div class="hero-clock" id="hero-clock">PKT 00:00:00</div>
     <div class="hero-coords" id="hero-coords">33.9098° N · 72.4918° E — Hazro, Pakistan</div>
+    <div class="hero-coords" id="hero-currently">▶ CURRENTLY: Advanced PCB fabrication on Carvera CNC</div>
   </div>
   <div class="hero-traces" aria-hidden="true">
     <svg viewBox="0 0 1600 900" preserveAspectRatio="none">
@@ -2191,8 +2310,14 @@
   </div>
 
   <div class="hero-visual">
-    <div class="hero-portrait" id="heroPortrait">
-      <img src="update/ibrar.jpeg" alt="Ibrar Ahmad portrait" loading="eager" decoding="async">
+    <div class="hero-portrait-shell">
+      <span class="reticle-corner tl"></span>
+      <span class="reticle-corner tr"></span>
+      <span class="reticle-corner bl"></span>
+      <span class="reticle-corner br"></span>
+      <div class="hero-portrait" id="heroPortrait">
+        <img src="update/ibrar.jpeg" alt="Ibrar Ahmad portrait" loading="eager" decoding="async">
+      </div>
     </div>
   </div>
 
@@ -2488,6 +2613,11 @@
         </div>
       </div>
       <div id="about-paragraphs"></div>
+      <div class="about-actions" id="about-actions"></div>
+      <div class="about-links" id="about-links"></div>
+      <div class="github-heatmap">
+        <img src="https://ghchart.rshah.org/54bfd8/hiibrarahmad" alt="GitHub contribution heatmap for hiibrarahmad" loading="lazy">
+      </div>
     </div>
     <div class="about-card" id="contact">
       <h3>// GET IN TOUCH</h3>
@@ -2512,6 +2642,9 @@
       </a>
       <a href="#" target="_blank" class="footer-social" id="footer-linkedin" style="display:none">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6S0 4.88 0 3.5 1.1 1 2.5 1 4.98 2.12 4.98 3.5zM0 24h5V7H0v17zM8 7h4.8v2.3h.07c.67-1.27 2.32-2.6 4.78-2.6C21.4 6.7 24 9.2 24 13.9V24h-5v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24H8V7z"/></svg>
+      </a>
+      <a href="#" target="_blank" class="footer-social" id="footer-fiverr" style="display:none">
+        <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.6px">FI</span>
       </a>
     </div>
   </div>
@@ -2934,6 +3067,12 @@
     renderNavCounter(data);
   }
 
+  let activeSkillFilter = 'all';
+
+  function slugifyCategory(value) {
+    return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
   function renderSkills() {
     const data = getPortfolioData();
     renderSkillDomains(data);
@@ -2944,8 +3083,9 @@
       const tagClass = skillTagClass(s.color);
       const tags = Array.isArray(s.tags) ? s.tags : [];
       const level = Math.max(40, Math.min(96, 30 + tags.length * 8));
+      const catSlug = slugifyCategory(s.cat || s.name || 'misc');
       return `
-        <div class="skill-card fade-in">
+        <div class="skill-card fade-in" data-skill-cat="${escapeHtml(catSlug)}">
           <div class="skill-cat">${escapeHtml(s.cat || '')}</div>
           <div class="skill-name">${escapeHtml(s.name || '')}</div>
           <div class="skill-meter"><span class="skill-meter-fill" style="width:${level}%"></span></div>
@@ -2954,27 +3094,43 @@
           </div>
         </div>`;
     }).join('');
+    applySkillFilter();
   }
 
   function renderSkillDomains(data) {
     const wrap = document.getElementById('skills-domains');
     if (!wrap || !data || !Array.isArray(data.skills)) return;
-    const rows = data.skills
-      .filter(s => Array.isArray(s.tags) && s.tags.length)
-      .slice(0, 4)
-      .map(s => ({ label: s.cat || s.name || 'Domain', tags: s.tags.slice(0, 4) }));
-
-    if (!rows.length) {
+    const categories = Array.from(new Set(data.skills.map(s => s.cat || s.name || 'Domain').filter(Boolean)));
+    if (!categories.length) {
       wrap.innerHTML = '';
       return;
     }
 
-    wrap.innerHTML = rows.map(r => `
-      <div class="domain-row">
-        <span class="domain-label">[ ${escapeHtml(String(r.label).toUpperCase())} ]</span>
-        ${r.tags.map(t => `<span class="domain-chip">${escapeHtml(t)}</span>`).join('')}
-      </div>
+    wrap.innerHTML = [
+      { key: 'all', label: 'ALL' },
+      ...categories.map(c => ({ key: slugifyCategory(c), label: c }))
+    ].map(item => `
+      <button class="domain-row${activeSkillFilter === item.key ? ' active' : ''}" type="button" data-skill-filter="${escapeHtml(item.key)}">
+        <span class="domain-label">[ ${escapeHtml(String(item.label).toUpperCase())} ]</span>
+      </button>
     `).join('');
+
+    wrap.querySelectorAll('[data-skill-filter]').forEach(btn => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', () => {
+        activeSkillFilter = btn.dataset.skillFilter || 'all';
+        wrap.querySelectorAll('[data-skill-filter]').forEach(el => el.classList.toggle('active', el === btn));
+        applySkillFilter();
+      });
+    });
+  }
+
+  function applySkillFilter() {
+    document.querySelectorAll('.skill-card[data-skill-cat]').forEach(card => {
+      const keep = activeSkillFilter === 'all' || card.dataset.skillCat === activeSkillFilter;
+      card.style.display = keep ? '' : 'none';
+    });
   }
 
   function getSkillScore(skills, tokens) {
