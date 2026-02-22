@@ -1,5 +1,5 @@
 window.PORTFOLIO_DATA = {
-  "updatedAt": "2026-02-21T20:37:40.753Z",
+  "updatedAt": "2026-02-22T18:33:44.373Z",
   "hero": {
     "firstName": "IBRAR",
     "lastName": "AHMAD",
@@ -168,6 +168,37 @@ window.PORTFOLIO_DATA = {
       "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
       "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-DOC-0003-Personal-CV.github.io",
       "liveBtnLabel": "VIEW CV ONLINE",
+      "featured": false
+    },
+    {
+      "id": "PRJ-2026-PCB-0002",
+      "year": "2026",
+      "client": "hiibrarahmad",
+      "badge": "pcb",
+      "badgeLabel": "PCB DESIGN",
+      "status": "live",
+      "title": "PRJ-2026-PCB-0002-SMART_WATCH",
+      "desc": "Dual-Board Smart Watch PCB featuring a main application board powered by nRF5340 SoC with 1.54\" IPS & e-Paper display, BLE 5.3, 6-axis IMU, environmental & air quality sensing, and a dedicated wireless Qi charging board with battery management and PPG/SpO2/ECG health sensing via MAX86150.",
+      "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg",
+      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg",
+      "tags": [
+        "nRF5340",
+        "BLE 5.3",
+        "Qi Wireless Charging",
+        "4-Layer PCB",
+        "Wearable",
+        "Smart Watch",
+        "BME680",
+        "CCS811",
+        "MAX86150",
+        "BQ51003",
+        "BQ25100",
+        "Zephyr RTOS",
+        "RoHS"
+      ],
+      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-PCB-0002-SMART_WATCH.github.io/",
+      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io",
+      "liveBtnLabel": "View Interactive PCB",
       "featured": false
     },
     {
