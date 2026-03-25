@@ -1,14 +1,10 @@
-window.PORTFOLIO_DATA = {
-  "schemaVersion": 3,
-  "updatedAt": "2026-02-23T06:58:02.294Z",
-  "email": "hiibrarahmad@gmail.com",
-  "linkedin": "https://www.linkedin.com/in/hiibrarahmad/",
+﻿window.PORTFOLIO_DATA = {
+  "updatedAt": "2026-03-25T13:00:27.451Z",
   "hero": {
     "firstName": "IBRAR",
     "lastName": "AHMAD",
-    "role": "PCB Designer | Firmware Dev | EEG Hardware",
+    "role": "PCB Designer | Firmware Dev | EEG Hardware ",
     "bio": "Designing hardware that ships from schematic to silicon to software. Focused on EEG and biosensor hardware, high-speed PCB design, and embedded firmware on NXP and nRF platforms.",
-    "cvUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
     "timezone": "Asia/Karachi",
     "tzLabel": "PKT",
     "coordinates": "33.6844 N | 73.0479 E - Islamabad, Pakistan",
@@ -17,7 +13,8 @@ window.PORTFOLIO_DATA = {
     "stat2": "2",
     "stat2l": "Live",
     "stat3": "2",
-    "stat3l": "In Dev"
+    "stat3l": "In Dev",
+    "cvUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/"
   },
   "about": {
     "p1": "I'm Ibrar Ahmad - a hardware and embedded systems engineer and biosensor/EEG hardware designer.",
@@ -150,7 +147,6 @@ window.PORTFOLIO_DATA = {
       "title": "DERMSCOPE REVIVE - Carrier PCB",
       "desc": "Advanced high-speed carrier PCB for handheld dermatology imaging. 4-layer ENIG board hosting INVENSOM-6UL SOM.",
       "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.png",
-      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png",
       "tags": [
         "4 LAYERS",
         "90x62mm",
@@ -166,7 +162,8 @@ window.PORTFOLIO_DATA = {
       "liveUrl": "https://hiibrarahmad.github.io/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/",
       "repoUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io",
       "liveBtnLabel": "VIEW INTERACTIVE PCB",
-      "featured": true
+      "featured": true,
+      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE.github.io/main/ASSETS/PRJ-2026-PCB-0005-DERMSCOPE-REVIVE%20bot.png"
     },
     {
       "id": "PRJ-2026-DOC-0003",
@@ -199,7 +196,7 @@ window.PORTFOLIO_DATA = {
       "badgeLabel": "Smart Warch",
       "status": "live",
       "title": "SMART WATCH",
-      "desc": "Dual-Board Smart Watch PCB — nRF5340 main board with IPS & e-Paper display, BLE 5.3, IMU, BME680, CCS811 + Wireless Qi charging board with BQ51003, BQ25100 & MAX86150 health sensor",
+      "desc": "Dual-Board Smart Watch PCB â€” nRF5340 main board with IPS & e-Paper display, BLE 5.3, IMU, BME680, CCS811 + Wireless Qi charging board with BQ51003, BQ25100 & MAX86150 health sensor",
       "imgUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/raw/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg",
       "imgUrlBottom": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/raw/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg",
       "tags": [
@@ -226,7 +223,7 @@ window.PORTFOLIO_DATA = {
       "badgeLabel": "PCB DESIGN",
       "status": "live",
       "title": "UNO-V1",
-      "desc": "Custom Arduino UNO compatible board — ATmega328P · USB Type-C · CH340G · 2-Layer FR4 PCB · Full UNO shield compatibility",
+      "desc": "Custom Arduino UNO compatible board â€” ATmega328P Â· USB Type-C Â· CH340G Â· 2-Layer FR4 PCB Â· Full UNO shield compatibility",
       "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1.jpg",
       "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1bot.jpg",
       "tags": [
@@ -286,6 +283,26 @@ window.PORTFOLIO_DATA = {
       "repoUrl": "",
       "liveBtnLabel": "VIEW PROJECT",
       "featured": false
+    },
+    {
+      "id": "try",
+      "year": "2026",
+      "client": "",
+      "badge": "pcb",
+      "badgeLabel": "",
+      "status": "live",
+      "title": "",
+      "desc": "",
+      "imgUrl": "",
+      "imgUrlBottom": "",
+      "tags": [],
+      "liveUrl": "",
+      "repoUrl": "",
+      "liveBtnLabel": "",
+      "featured": false
     }
-  ]
+  ],
+  "email": "hiibrarahmad@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/hiibrarahmad/",
+  "schemaVersion": 3
 };
