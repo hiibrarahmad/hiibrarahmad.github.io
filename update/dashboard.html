@@ -1,0 +1,1162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Dashboard - Ibrar Ahmad</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;600;700&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#081118;--surface:#0d1a22;--surface2:#12222b;--surface3:#162a35;
+  --border:#1f3646;--border2:#2b4b60;
+  --accent:#54bfd8;--accent2:#57d7a4;--accent3:#e58f64;--accent4:#9f83cf;
+  --text:#dce9f2;--text-dim:#8ea4b2;--text-muted:#647f8f;
+  --danger:#ff4444;--success:#00ff88;--warn:#ffbb33;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;display:flex;flex-direction:column}
+
+/* TOPBAR */
+.topbar{height:56px;background:var(--surface);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;z-index:10}
+.tb-brand{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;color:var(--accent);letter-spacing:1.6px}
+.tb-brand em{color:var(--accent2);font-style:normal}
+.tb-center{display:flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1.2px}
+.tb-right{display:flex;gap:8px}
+.save-indicator{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:.8px;padding:0 8px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* LAYOUT */
+.app{display:flex;flex:1;overflow:hidden}
+
+/* SIDEBAR */
+.sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-logo{padding:20px 16px 12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.nav-item{display:flex;align-items:center;gap:10px;padding:12px 16px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.8px;color:var(--text-dim);cursor:pointer;border-left:2px solid transparent;transition:all .15s;text-transform:uppercase}
+.nav-item:hover{color:var(--text);background:rgba(84,191,216,.05)}
+.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:rgba(84,191,216,.08)}
+.nav-item svg{width:14px;height:14px;flex-shrink:0}
+.nav-item:focus-visible{outline:2px solid var(--accent2);outline-offset:-2px}
+
+.sidebar-footer{margin-top:auto;padding:12px 16px;border-top:1px solid var(--border)}
+
+/* MAIN AREA */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+
+/* PANEL */
+.panel{display:none;flex:1;flex-direction:column}
+.panel.active{display:flex}
+.panel-header{padding:24px 32px 0;border-bottom:1px solid var(--border);flex-shrink:0}
+.panel-title{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;color:#fff;letter-spacing:1.4px;margin-bottom:4px}
+.panel-sub{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1.2px;margin-bottom:20px}
+.panel-body{flex:1;padding:28px 32px;overflow-y:auto}
+
+/* FORM ELEMENTS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-row.full{grid-template-columns:1fr}
+.form-row.three{grid-template-columns:1fr 1fr 1fr}
+.fgroup{display:flex;flex-direction:column;gap:6px}
+label{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1.2px;text-transform:uppercase}
+input,textarea,select{background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:10px 12px;transition:border-color .2s;outline:none;width:100%;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 1px rgba(0,212,255,.1)}
+textarea{min-height:80px;line-height:1.6}
+select option{background:var(--surface2)}
+
+/* SECTION DIVIDER */
+.sdiv{font-family:'Orbitron',monospace;font-size:13px;color:var(--accent);letter-spacing:1.8px;text-transform:uppercase;padding-bottom:12px;border-bottom:1px solid var(--border2);margin:28px 0 20px}
+
+/* PROJECT CARDS IN DASHBOARD */
+.proj-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.proj-row{background:var(--surface);display:flex;align-items:center;gap:16px;padding:14px 16px;transition:background .15s;position:relative}
+.proj-row:hover{background:var(--surface2)}
+.proj-row.dragging{opacity:.4;background:var(--surface3)}
+.proj-thumb{width:48px;height:36px;object-fit:cover;border:1px solid var(--border2);flex-shrink:0;background:var(--surface3);display:flex;align-items:center;justify-content:center}
+.proj-thumb img{width:100%;height:100%;object-fit:cover}
+.proj-info{flex:1;min-width:0}
+.proj-id{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:.8px;margin-bottom:2px}
+.proj-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-meta2{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.8px;margin-top:2px}
+.proj-actions{display:flex;gap:6px;flex-shrink:0}
+.badge-tiny{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.8px;padding:2px 7px;border:1px solid}
+.badge-tiny.live{color:var(--accent2);border-color:rgba(0,255,136,.3)}
+.badge-tiny.wip{color:var(--accent3);border-color:rgba(255,107,53,.3)}
+.badge-tiny.featured{color:var(--accent4);border-color:rgba(168,85,247,.3)}
+
+/* BUTTONS */
+.btn{padding:9px 18px;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;text-decoration:none;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.btn-p{background:var(--accent);color:#040c10}
+.btn-p:hover{background:var(--accent2);box-shadow:0 0 12px rgba(87,215,164,.22)}
+.btn-o{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn-o:hover{background:rgba(84,191,216,.08)}
+.btn-d{background:transparent;color:var(--danger);border:1px solid rgba(255,68,68,.3)}
+.btn-d:hover{background:rgba(255,68,68,.08)}
+.btn-sm{padding:6px 12px;font-size:10px}
+.btn-g{background:var(--accent2);color:#040c10}
+.btn-g:hover{box-shadow:0 0 12px rgba(87,215,164,.22)}
+.btn-icon{background:transparent;color:var(--text-dim);border:1px solid var(--border2);padding:6px 8px;clip-path:none;transition:all .15s}
+.btn-icon:hover{color:var(--accent);border-color:var(--accent)}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent2);outline-offset:1px}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border2);width:100%;max-width:720px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.modal-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;color:#fff;letter-spacing:1.4px}
+.modal-close{background:none;border:none;color:var(--text-dim);font-size:20px;cursor:pointer;padding:4px;line-height:1;transition:color .15s}
+.modal-close:hover{color:#fff}
+.modal-body{padding:24px;overflow-y:auto;flex:1}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
+
+/* TAGS EDITOR */
+.tags-editor{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:var(--surface2);border:1px solid var(--border2);min-height:44px;align-items:flex-start}
+.tag-chip{display:flex;align-items:center;gap:4px;padding:3px 8px;border:1px solid rgba(84,191,216,.3);background:rgba(84,191,216,.07);font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.8px}
+.tag-chip button{background:none;border:none;color:var(--text-dim);cursor:pointer;padding:0;font-size:11px;line-height:1;transition:color .15s}
+.tag-chip button:hover{color:var(--danger)}
+.tag-input-wrap{display:flex;gap:6px;margin-top:6px}
+.tag-input-wrap input{flex:1;min-width:120px;padding:6px 10px;font-size:12px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;z-index:999;padding:12px 20px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:1.2px;border:1px solid;transform:translateX(120%);transition:transform .3s ease;display:flex;align-items:center;gap:10px}
+.toast.success{background:rgba(0,255,136,.1);border-color:var(--accent2);color:var(--accent2)}
+.toast.error{background:rgba(255,68,68,.1);border-color:var(--danger);color:var(--danger)}
+.toast.show{transform:translateX(0)}
+
+/* PREVIEW iframe */
+.preview-bar{padding:16px 32px 0;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.preview-url{flex:1;background:var(--surface2);border:1px solid var(--border2);padding:7px 12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:.8px}
+.iframe-wrap{flex:1;margin:16px 32px;border:1px solid var(--border2);overflow:hidden;position:relative}
+.iframe-wrap iframe{width:100%;height:100%;border:none;transform-origin:top left}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:28px}
+.stat-box{background:var(--surface);padding:16px 20px}
+.stat-box-n{font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.stat-box-l{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1.2px;text-transform:uppercase}
+
+/* JSON editor */
+.json-area{font-family:'Space Mono',monospace;font-size:12px;min-height:300px;line-height:1.7;color:#c8e6ff}
+
+/* Toggle */
+.toggle{display:flex;align-items:center;gap:10px;cursor:pointer}
+.toggle input{display:none}
+.toggle-track{width:36px;height:20px;background:var(--border2);border-radius:10px;position:relative;transition:background .2s;flex-shrink:0}
+.toggle input:checked + .toggle-track{background:var(--accent)}
+.toggle-track::after{content:'';width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:left .2s}
+.toggle input:checked + .toggle-track::after{left:19px}
+.toggle-label{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:.8px}
+
+/* Drag handle */
+.drag-handle{color:var(--text-muted);cursor:grab;padding:4px;margin-right:4px;user-select:none}
+.drag-handle:active{cursor:grabbing}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+@media (max-width:960px){
+  .topbar{height:auto;min-height:56px;padding:10px 16px;gap:8px;flex-wrap:wrap}
+  .tb-center{order:3;width:100%;justify-content:flex-start}
+  .panel-header{padding:20px 22px 0}
+  .panel-body{padding:22px}
+  .form-row,.form-row.three{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width:720px){
+  html,body{overflow:auto}
+  .app{flex-direction:column;overflow:visible}
+  .sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border);max-height:44vh;overflow:auto}
+  .main{min-height:0}
+  .panel-header{padding:16px 16px 0}
+  .panel-body{padding:16px}
+  .preview-bar{padding:12px 16px 0}
+  .iframe-wrap{margin:12px 16px}
+  .stat-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-brand">IA<em>.</em>DASH</div>
+  <div class="tb-center">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#00ff88" stroke-width="1"/><circle cx="5" cy="5" r="2" fill="#00ff88" opacity=".6"/></svg>
+    PORTFOLIO EDITOR · LOCAL STORAGE
+  </div>
+  <div class="tb-right">
+    <span class="save-indicator" id="save-indicator">Last saved: --</span>
+    <button class="btn btn-o btn-sm" onclick="copyDataJS()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy Data JS
+    </button>
+    <button class="btn btn-o btn-sm" onclick="document.getElementById('import-json-file').click()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Import JSON
+    </button>
+    <button class="btn btn-o btn-sm" onclick="exportJSON()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export JSON
+    </button>
+    <button class="btn btn-o btn-sm" onclick="exportDataJS()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Export Data JS
+    </button>
+    <button class="btn btn-g btn-sm" onclick="updateDataJSFile()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Update JS File
+    </button>
+    <button class="btn btn-g btn-sm" onclick="saveAll()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Save All
+    </button>
+    <a href="../index.html" target="_blank" class="btn btn-sm" style="background:transparent;color:var(--text-dim);border:1px solid var(--border2);clip-path:none">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View Portfolio
+    </a>
+  </div>
+</div>
+<input id="import-json-file" class="sr-only" type="file" accept="application/json,.json" onchange="importJSONFile(event)">
+
+<!-- APP -->
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">// SECTIONS</div>
+    <div class="nav-item active" data-panel="overview" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Overview
+    </div>
+    <div class="nav-item" data-panel="hero" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Hero / Bio
+    </div>
+    <div class="nav-item" data-panel="projects" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Projects
+    </div>
+    <div class="nav-item" data-panel="skills" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Skills
+    </div>
+    <div class="nav-item" data-panel="about" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      About
+    </div>
+    <div class="nav-item" data-panel="contacts" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 8a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.7 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17v-.08z"/></svg>
+      Contacts
+    </div>
+    <div class="nav-item" data-panel="json" onclick="switchPanel(this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      JSON Editor
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-d btn-sm" onclick="resetToDefault()" style="width:100%;clip-path:none;justify-content:center">Reset Data</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- OVERVIEW PANEL -->
+    <div class="panel active" id="panel-overview">
+      <div class="panel-header">
+        <div class="panel-title">DASHBOARD OVERVIEW</div>
+        <div class="panel-sub">// PORTFOLIO STATUS AND QUICK STATS</div>
+      </div>
+      <div class="panel-body">
+        <div class="stat-row" id="overview-stats"></div>
+        <div class="sdiv">QUICK ACTIONS</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-p btn-sm" onclick="switchPanel(document.querySelector('[data-panel=projects]'))">+ Add Project</button>
+          <button class="btn btn-o btn-sm" onclick="switchPanel(document.querySelector('[data-panel=hero]'))">Edit Hero</button>
+          <a href="../index.html" target="_blank" class="btn btn-sm" style="background:transparent;border:1px solid var(--border2);color:var(--text-dim);clip-path:none">Open Portfolio</a>
+        </div>
+        <div class="sdiv" style="margin-top:32px">RECENT PROJECTS</div>
+        <div class="proj-list" id="overview-projects"></div>
+      </div>
+    </div>
+
+    <!-- HERO PANEL -->
+    <div class="panel" id="panel-hero">
+      <div class="panel-header">
+        <div class="panel-title">HERO SECTION</div>
+        <div class="panel-sub">// NAME, ROLE, BIO & STATS</div>
+      </div>
+      <div class="panel-body">
+        <div class="sdiv">IDENTITY</div>
+        <div class="form-row">
+          <div class="fgroup"><label>First Name</label><input id="h-firstName" placeholder="IBRAR"></div>
+          <div class="fgroup"><label>Last Name</label><input id="h-lastName" placeholder="AHMAD"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fgroup"><label>Role / Tagline (shown under name)</label><input id="h-role" placeholder="PCB Designer · Firmware Dev · EEG Hardware"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fgroup"><label>CV / Resume URL</label><input id="h-cvUrl" placeholder="https://..."></div>
+        </div>
+        <div class="form-row full">
+          <div class="fgroup"><label>Bio (short paragraph)</label><textarea id="h-bio" rows="4"></textarea></div>
+        </div>
+
+        <div class="sdiv">STATS BAR (3 boxes below name)</div>
+        <div class="form-row three">
+          <div class="fgroup"><label>Stat 1 Number</label><input id="h-s1" placeholder="10+"></div>
+          <div class="fgroup"><label>Stat 1 Label</label><input id="h-sl1" placeholder="PCB Projects"></div>
+          <div></div>
+        </div>
+        <div class="form-row three">
+          <div class="fgroup"><label>Stat 2 Number</label><input id="h-s2" placeholder="4L"></div>
+          <div class="fgroup"><label>Stat 2 Label</label><input id="h-sl2" placeholder="Max Stack"></div>
+          <div></div>
+        </div>
+        <div class="form-row three">
+          <div class="fgroup"><label>Stat 3 Number</label><input id="h-s3" placeholder="2026"></div>
+          <div class="fgroup"><label>Stat 3 Label</label><input id="h-sl3" placeholder="Active"></div>
+          <div></div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:12px">
+          <button class="btn btn-g btn-sm" onclick="saveHero()">Save Hero</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS PANEL -->
+    <div class="panel" id="panel-projects">
+      <div class="panel-header">
+        <div class="panel-title">PROJECTS</div>
+        <div class="panel-sub">// ADD, EDIT, REORDER & DELETE PROJECTS</div>
+      </div>
+      <div class="panel-body">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">DRAG TO REORDER · CLICK EDIT TO MODIFY</span>
+          <button class="btn btn-p btn-sm" onclick="openProjectModal()">+ ADD PROJECT</button>
+        </div>
+        <div class="proj-list" id="proj-list-editor"></div>
+      </div>
+    </div>
+
+    <!-- SKILLS PANEL -->
+    <div class="panel" id="panel-skills">
+      <div class="panel-header">
+        <div class="panel-title">SKILLS / TECH STACK</div>
+        <div class="panel-sub">// EDIT SKILL CARDS AND TAGS</div>
+      </div>
+      <div class="panel-body">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">SKILL CARDS APPEAR IN TECH STACK SECTION</span>
+          <button class="btn btn-p btn-sm" onclick="openSkillModal()">+ ADD SKILL</button>
+        </div>
+        <div class="proj-list" id="skill-list-editor"></div>
+      </div>
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="panel" id="panel-about">
+      <div class="panel-header">
+        <div class="panel-title">ABOUT ME</div>
+        <div class="panel-sub">// ABOUT TEXT + GLOBAL CONTACT FIELDS</div>
+      </div>
+      <div class="panel-body">
+        <div class="form-row full"><div class="fgroup"><label>Paragraph 1 (introduction)</label><textarea id="ab-p1" rows="4"></textarea></div></div>
+        <div class="form-row full"><div class="fgroup"><label>Paragraph 2 (focus / expertise)</label><textarea id="ab-p2" rows="4"></textarea></div></div>
+        <div class="form-row full"><div class="fgroup"><label>Paragraph 3 (availability / location)</label><textarea id="ab-p3" rows="4"></textarea></div></div>
+        <div class="sdiv">GLOBAL FIELDS</div>
+        <div class="form-row">
+          <div class="fgroup"><label>Email (footer + about)</label><input id="ab-email" placeholder="hiibrarahmad@gmail.com"></div>
+          <div class="fgroup"><label>LinkedIn URL</label><input id="ab-linkedin" placeholder="https://www.linkedin.com/in/hiibrarahmad/"></div>
+        </div>
+        <div class="form-row full">
+          <div class="fgroup"><label>Hero Coordinates / Location</label><input id="ab-coords" placeholder="33.6844° N · 73.0479° E — Islamabad, Pakistan"></div>
+        </div>
+        <button class="btn btn-g btn-sm" onclick="saveAbout()">Save About</button>
+      </div>
+    </div>
+
+    <!-- CONTACTS PANEL -->
+    <div class="panel" id="panel-contacts">
+      <div class="panel-header">
+        <div class="panel-title">CONTACT LINKS</div>
+        <div class="panel-sub">// LINKS SHOWN IN CONTACT SECTION</div>
+      </div>
+      <div class="panel-body">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1.2px">THESE APPEAR AS CLICKABLE CARDS IN CONTACT SECTION</span>
+          <button class="btn btn-p btn-sm" onclick="openContactModal()">+ ADD CONTACT</button>
+        </div>
+        <div class="proj-list" id="contact-list-editor"></div>
+      </div>
+    </div>
+
+    <!-- JSON PANEL -->
+    <div class="panel" id="panel-json">
+      <div class="panel-header">
+        <div class="panel-title">RAW JSON EDITOR</div>
+        <div class="panel-sub">// ADVANCED: DIRECTLY EDIT THE PORTFOLIO DATA</div>
+      </div>
+      <div class="panel-body">
+        <div style="display:flex;gap:10px;margin-bottom:16px">
+          <button class="btn btn-o btn-sm" onclick="refreshJson()">Refresh from storage</button>
+          <button class="btn btn-g btn-sm" onclick="saveJson()">Apply JSON</button>
+          <button class="btn btn-sm btn-icon" onclick="exportJSON()" style="clip-path:none">Export .json file</button>
+        </div>
+        <textarea class="json-area" id="json-editor" spellcheck="false" style="width:100%;min-height:500px;font-size:12px"></textarea>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-bg" id="proj-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="proj-modal-title">ADD PROJECT</div>
+      <button class="modal-close" onclick="closeModal('proj-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="fgroup"><label>Project ID</label><input id="pm-id" placeholder="PRJ-2026-PCB-0001"></div>
+        <div class="fgroup"><label>Year</label><input id="pm-year" placeholder="2026"></div>
+      </div>
+      <div class="form-row">
+        <div class="fgroup"><label>Client / Company</label><input id="pm-client" placeholder="Client Name"></div>
+        <div class="fgroup">
+          <label>Badge Type</label>
+          <select id="pm-badge">
+            <option value="pcb">PCB</option>
+            <option value="fw">Firmware</option>
+            <option value="sw">Software</option>
+            <option value="doc">Documentation</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="fgroup"><label>Badge Label (e.g. PCB DESIGN)</label><input id="pm-badgeLabel" placeholder="PCB DESIGN"></div>
+        <div class="fgroup">
+          <label>Status</label>
+          <select id="pm-status">
+            <option value="live">Live / Published</option>
+            <option value="wip">In Development (WIP)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="fgroup"><label>Project Title</label><input id="pm-title" placeholder="PROJECT NAME - Subtitle"></div>
+      </div>
+      <div class="form-row full">
+        <div class="fgroup"><label>Description</label><textarea id="pm-desc" rows="3"></textarea></div>
+      </div>
+      <div class="form-row full">
+        <div class="fgroup"><label>Image URL (direct link to image, or GitHub raw URL)</label><input id="pm-imgUrl" placeholder="https://raw.githubusercontent.com/..."></div>
+      </div>
+      <div class="form-row full">
+        <div class="fgroup"><label>Bottom Image URL (optional for PCB top/bottom)</label><input id="pm-imgUrlBottom" placeholder="https://raw.githubusercontent.com/..."></div>
+      </div>
+      <div class="form-row">
+        <div class="fgroup"><label>Live / Demo URL</label><input id="pm-liveUrl" placeholder="https://..."></div>
+        <div class="fgroup"><label>GitHub Repo URL</label><input id="pm-repoUrl" placeholder="https://github.com/..."></div>
+      </div>
+      <div class="form-row">
+        <div class="fgroup"><label>Live Button Label</label><input id="pm-liveBtnLabel" placeholder="VIEW INTERACTIVE PCB"></div>
+        <div class="fgroup" style="justify-content:flex-end;padding-top:24px">
+          <label class="toggle">
+            <input type="checkbox" id="pm-featured">
+            <span class="toggle-track"></span>
+            <span class="toggle-label">Featured (full width)</span>
+          </label>
+        </div>
+      </div>
+      <div class="fgroup" style="margin-top:8px">
+        <label>Tags / Specs (press Enter or comma to add)</label>
+        <div class="tags-editor" id="pm-tags-display"></div>
+        <div class="tag-input-wrap">
+          <input id="pm-tag-input" placeholder="Add tag... (Enter to add)" onkeydown="handleTagKey(event,'pm')">
+          <button class="btn btn-o btn-sm" onclick="addTag('pm')">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-o btn-sm" onclick="closeModal('proj-modal')">Cancel</button>
+      <button class="btn btn-g btn-sm" onclick="saveProject()">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKILL MODAL -->
+<div class="modal-bg" id="skill-modal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <div class="modal-title" id="skill-modal-title">ADD SKILL CARD</div>
+      <button class="modal-close" onclick="closeModal('skill-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row full"><div class="fgroup"><label>Category (small text)</label><input id="sm-cat" placeholder="Hardware Design"></div></div>
+      <div class="form-row">
+        <div class="fgroup"><label>Card Name (bold)</label><input id="sm-name" placeholder="PCB LAYOUT & DESIGN"></div>
+        <div class="fgroup">
+          <label>Color</label>
+          <select id="sm-color">
+            <option value="c">Cyan (PCB/Hardware)</option>
+            <option value="g">Green (Firmware)</option>
+            <option value="o">Orange (Software)</option>
+            <option value="p">Purple (Cloud/Security)</option>
+          </select>
+        </div>
+      </div>
+      <div class="fgroup" style="margin-top:8px">
+        <label>Tags (press Enter to add)</label>
+        <div class="tags-editor" id="sm-tags-display"></div>
+        <div class="tag-input-wrap">
+          <input id="sm-tag-input" placeholder="Add tag..." onkeydown="handleTagKey(event,'sm')">
+          <button class="btn btn-o btn-sm" onclick="addTag('sm')">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-o btn-sm" onclick="closeModal('skill-modal')">Cancel</button>
+      <button class="btn btn-g btn-sm" onclick="saveSkill()">Save Skill</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-bg" id="contact-modal">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-title" id="contact-modal-title">ADD CONTACT</div>
+      <button class="modal-close" onclick="closeModal('contact-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="fgroup">
+          <label>Icon Type</label>
+          <select id="cm-icon">
+            <option value="github">GitHub</option>
+            <option value="email">Email</option>
+            <option value="cv">CV / Resume</option>
+            <option value="pcb">PCB / Demo</option>
+            <option value="link">Generic Link</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label>Color</label>
+          <select id="cm-color">
+            <option value="c">Cyan</option>
+            <option value="g">Green</option>
+            <option value="p">Purple</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full"><div class="fgroup"><label>Label (small text)</label><input id="cm-label" placeholder="GitHub"></div></div>
+      <div class="form-row full"><div class="fgroup"><label>Value (main text)</label><input id="cm-value" placeholder="github.com/yourusername"></div></div>
+      <div class="form-row full"><div class="fgroup"><label>URL</label><input id="cm-url" placeholder="https://github.com/..."></div></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-o btn-sm" onclick="closeModal('contact-modal')">Cancel</button>
+      <button class="btn btn-g btn-sm" onclick="saveContact()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="portfolio-data.js"></script>
+<script>
+// â”€â”€â”€ DATA HELPERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const DEFAULT = window.PORTFOLIO_DATA || {
+  schemaVersion: 3,
+  updatedAt: new Date().toISOString(),
+  email: "hiibrarahmad@gmail.com",
+  linkedin: "https://www.linkedin.com/in/hiibrarahmad/",
+  hero: {
+    firstName: "IBRAR",
+    lastName: "AHMAD",
+    role: "PCB Designer | Firmware Dev | EEG Hardware",
+    bio: "Designing hardware that ships from schematic to silicon to software. Focused on EEG and biosensor hardware, high-speed PCB design, and embedded firmware on NXP and nRF platforms.",
+    stat1: "4",
+    stat1l: "Projects",
+    stat2: "2",
+    stat2l: "Live",
+    stat3: "2",
+    stat3l: "In Dev",
+    cvUrl: "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
+    coordinates: "33.6844 N | 73.0479 E - Islamabad, Pakistan"
+  },
+  about: {
+    p1: "I'm Ibrar Ahmad - a hardware and embedded systems engineer and biosensor/EEG hardware designer.",
+    p2: "From schematic capture to PCB layout, biosensor front-end circuits to EEG acquisition hardware, and embedded firmware - I work across the full hardware-software stack.",
+    p3: "Based in Islamabad, Pakistan and available globally for freelance PCB and embedded systems projects."
+  },
+  contacts: [],
+  skills: [],
+  projects: []
+};
+
+const TEXT_FIXUPS = [
+  ['Â·', '·'],
+  ['â€”', '—'],
+  ['Ã—', '×'],
+  ['Î©', 'Ω'],
+  ['90Ã—62mm', '90×62mm'],
+  ['100Î©', '100Ω']
+];
+function cleanText(value){
+  let out=String(value ?? '');
+  TEXT_FIXUPS.forEach(([bad,good])=>{ out=out.split(bad).join(good); });
+  return out;
+}
+function cleanData(value){
+  if(typeof value==='string') return cleanText(value);
+  if(Array.isArray(value)) return value.map(cleanData);
+  if(value && typeof value==='object'){
+    const out={};
+    Object.keys(value).forEach(k=>{ out[k]=cleanData(value[k]); });
+    return out;
+  }
+  return value;
+}
+function normalizeData(data){
+  const d = cleanData(data || {});
+  if (d && typeof d === 'object') {
+    delete d.fiverr;
+    if (Array.isArray(d.contacts)) {
+      d.contacts = d.contacts.filter(c => {
+        const token = `${c?.icon || ''} ${c?.label || ''} ${c?.value || ''} ${c?.url || ''}`.toLowerCase();
+        return !token.includes('fiverr');
+      });
+    }
+    if (Array.isArray(d.skills)) {
+      d.skills = d.skills.map(s => {
+        const tags = (Array.isArray(s?.tags) ? s.tags : [])
+          .map(t => String(t || '').trim())
+          .map(t => {
+            if (/yocto/i.test(t) || /linux\s*bsp/i.test(t)) return '';
+            if (/freertos/i.test(t)) return 'FreeRTOS';
+            return t;
+          })
+          .filter(Boolean);
+        return { ...s, tags };
+      });
+    }
+    if (d.hero && typeof d.hero === 'object' && typeof d.hero.role === 'string') {
+      d.hero.role = d.hero.role.replace(/embedded linux/ig, 'EEG Hardware');
+    }
+    if (d.about && typeof d.about === 'object') {
+      ['p1', 'p2', 'p3'].forEach(k => {
+        if (typeof d.about[k] !== 'string') return;
+        d.about[k] = d.about[k]
+          .replace(/\bSTM32\b/ig, 'nRF')
+          .replace(/linux\s*bsp/ig, 'embedded firmware');
+      });
+    }
+  }
+  return d;
+}
+function load(){
+  try{
+    const localRaw = localStorage.getItem('portfolio_data');
+    const localData = localRaw ? normalizeData(JSON.parse(localRaw)) : null;
+    const fileData = normalizeData(DEFAULT);
+    const fileVersion = Number(fileData?.schemaVersion || 1);
+    const localVersion = Number(localData?.schemaVersion || 0);
+    const fileTime = Date.parse(fileData?.updatedAt || 0) || 0;
+    const localTime = Date.parse(localData?.updatedAt || 0) || 0;
+    const localCompatible = !!localData && localVersion >= fileVersion;
+    const useLocal = localCompatible && localTime >= fileTime;
+    const chosen = useLocal ? localData : fileData;
+    chosen.schemaVersion = fileVersion;
+    if (!useLocal) {
+      localStorage.setItem('portfolio_data', JSON.stringify(chosen));
+    }
+    return normalizeData(chosen);
+  }catch{
+    return normalizeData(DEFAULT);
+  }
+}
+function updateSaveIndicator(iso){
+  const el=document.getElementById('save-indicator');
+  if(!el)return;
+  const dt=iso?new Date(iso):new Date();
+  el.textContent='Last saved: '+dt.toLocaleString();
+}
+function save(d,opts={}){
+  d = normalizeData(d);
+  d.schemaVersion = Number(DEFAULT?.schemaVersion || 1);
+  d.updatedAt = new Date().toISOString();
+  localStorage.setItem('portfolio_data',JSON.stringify(d));
+  updateSaveIndicator(d.updatedAt);
+  if(!opts.silent)toast('Saved!','success');
+}
+
+function toast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+type;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+let dataJsHandle = null;
+function getDataJsPayload(){
+  const data = load();
+  data.updatedAt = new Date().toISOString();
+  return {
+    data,
+    content: 'window.PORTFOLIO_DATA = ' + JSON.stringify(data,null,2) + ';'
+  };
+}
+
+async function copyDataJS(){
+  const { content } = getDataJsPayload();
+  try{
+    await navigator.clipboard.writeText(content);
+    toast('Copied portfolio-data.js to clipboard','success');
+  }catch(err){
+    toast('Clipboard blocked, exporting file instead','error');
+    exportDataJS();
+  }
+}
+
+function importJSONFile(event){
+  const file=event?.target?.files?.[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const parsed=JSON.parse(String(reader.result||'{}'));
+      save(parsed,{silent:true});
+      toast('JSON imported','success');
+      renderPanel(document.querySelector('.nav-item.active').dataset.panel);
+      refreshJson();
+    }catch(err){
+      toast('Import failed: '+err.message,'error');
+    }finally{
+      event.target.value='';
+    }
+  };
+  reader.readAsText(file);
+}
+
+// â”€â”€â”€ PANEL SWITCHING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function switchPanel(el){
+  document.querySelectorAll('.nav-item').forEach(n=>{n.classList.remove('active');n.setAttribute('aria-pressed','false');});
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  el.setAttribute('aria-pressed','true');
+  const panelId='panel-'+el.dataset.panel;
+  document.getElementById(panelId).classList.add('active');
+  renderPanel(el.dataset.panel);
+}
+
+function renderPanel(name){
+  if(name==='overview')renderOverview();
+  else if(name==='hero')renderHeroForm();
+  else if(name==='projects')renderProjectList();
+  else if(name==='skills')renderSkillList();
+  else if(name==='about')renderAboutForm();
+  else if(name==='contacts')renderContactList();
+  else if(name==='json')refreshJson();
+}
+
+function initAccessibility(){
+  document.querySelectorAll('.nav-item').forEach(item=>{
+    item.setAttribute('role','button');
+    item.setAttribute('tabindex','0');
+    item.setAttribute('aria-pressed',item.classList.contains('active')?'true':'false');
+    item.setAttribute('aria-label','Open '+(item.dataset.panel||'panel'));
+    item.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        switchPanel(item);
+      }
+    });
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    document.querySelectorAll('.modal-bg.open').forEach(m=>m.classList.remove('open'));
+  });
+}
+
+let autosaveTimer;
+function queueAutosave(section){
+  clearTimeout(autosaveTimer);
+  autosaveTimer=setTimeout(()=>{
+    if(section==='hero')saveHero(true);
+    if(section==='about')saveAbout(true);
+  },500);
+}
+function initAutosave(){
+  document.querySelectorAll('#panel-hero input,#panel-hero textarea').forEach(el=>{
+    if(el.dataset.autosaveBound)return;
+    el.dataset.autosaveBound='1';
+    el.addEventListener('input',()=>queueAutosave('hero'));
+  });
+  document.querySelectorAll('#panel-about textarea,#panel-about input').forEach(el=>{
+    if(el.dataset.autosaveBound)return;
+    el.dataset.autosaveBound='1';
+    el.addEventListener('input',()=>queueAutosave('about'));
+  });
+}
+
+// â”€â”€â”€ OVERVIEW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function renderOverview(){
+  const d=load();
+  const stats=document.getElementById('overview-stats');
+  stats.innerHTML=`
+    <div class="stat-box"><div class="stat-box-n">${d.projects.length}</div><div class="stat-box-l">Projects</div></div>
+    <div class="stat-box"><div class="stat-box-n">${d.projects.filter(p=>p.status==='live').length}</div><div class="stat-box-l">Live</div></div>
+    <div class="stat-box"><div class="stat-box-n">${d.skills.length}</div><div class="stat-box-l">Skill Cards</div></div>
+    <div class="stat-box"><div class="stat-box-n">${d.contacts.length}</div><div class="stat-box-l">Contacts</div></div>`;
+  document.getElementById('overview-projects').innerHTML=d.projects.map(p=>`
+    <div class="proj-row">
+      <div class="proj-thumb">${p.imgUrl?`<img src="${p.imgUrl}" onerror="this.style.display='none'">`:'<span style="font-size:18px">ðŸ”²</span>'}</div>
+      <div class="proj-info">
+        <div class="proj-id">${p.id}</div>
+        <div class="proj-name">${p.title}</div>
+        <div class="proj-meta2">${p.client} · ${p.year}</div>
+      </div>
+      <span class="badge-tiny ${p.status}">${p.status.toUpperCase()}</span>
+      ${p.featured?'<span class="badge-tiny featured">FEATURED</span>':''}
+    </div>`).join('');
+}
+
+// â”€â”€â”€ HERO FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function renderHeroForm(){
+  const h=load().hero;
+  ['firstName','lastName','role','bio','cvUrl','s1','sl1','s2','sl2','s3','sl3'].forEach(k=>{
+    const el=document.getElementById('h-'+k);
+    if(el)el.value=h[k.replace('s1','stat1').replace('sl1','stat1l').replace('s2','stat2').replace('sl2','stat2l').replace('s3','stat3').replace('sl3','stat3l')]||'';
+  });
+  // manual map
+  document.getElementById('h-firstName').value=h.firstName||'';
+  document.getElementById('h-lastName').value=h.lastName||'';
+  document.getElementById('h-role').value=h.role||'';
+  document.getElementById('h-bio').value=h.bio||'';
+  document.getElementById('h-cvUrl').value=h.cvUrl||'';
+  document.getElementById('h-s1').value=h.stat1||'';
+  document.getElementById('h-sl1').value=h.stat1l||'';
+  document.getElementById('h-s2').value=h.stat2||'';
+  document.getElementById('h-sl2').value=h.stat2l||'';
+  document.getElementById('h-s3').value=h.stat3||'';
+  document.getElementById('h-sl3').value=h.stat3l||'';
+}
+function saveHero(silent=false){
+  const d=load();
+  d.hero={
+    firstName:document.getElementById('h-firstName').value,
+    lastName:document.getElementById('h-lastName').value,
+    role:document.getElementById('h-role').value,
+    bio:document.getElementById('h-bio').value,
+    cvUrl:document.getElementById('h-cvUrl').value,
+    stat1:document.getElementById('h-s1').value,
+    stat1l:document.getElementById('h-sl1').value,
+    stat2:document.getElementById('h-s2').value,
+    stat2l:document.getElementById('h-sl2').value,
+    stat3:document.getElementById('h-s3').value,
+    stat3l:document.getElementById('h-sl3').value
+  };
+  save(d,{silent});
+}
+
+// â”€â”€â”€ ABOUT FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function renderAboutForm(){
+  const d=load();
+  const a=d.about || {};
+  document.getElementById('ab-p1').value=a.p1||'';
+  document.getElementById('ab-p2').value=a.p2||'';
+  document.getElementById('ab-p3').value=a.p3||'';
+  document.getElementById('ab-email').value=d.email||'';
+  document.getElementById('ab-linkedin').value=d.linkedin||'';
+  document.getElementById('ab-coords').value=d.hero?.coordinates||'';
+}
+function saveAbout(silent=false){
+  const d=load();
+  d.about={p1:document.getElementById('ab-p1').value,p2:document.getElementById('ab-p2').value,p3:document.getElementById('ab-p3').value};
+  d.email=document.getElementById('ab-email').value;
+  d.linkedin=document.getElementById('ab-linkedin').value;
+  d.hero={...(d.hero||{}),coordinates:document.getElementById('ab-coords').value};
+  save(d,{silent});
+}
+
+// â”€â”€â”€ PROJECTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+let editingProjectIdx = -1;
+let currentTags = {pm:[], sm:[]};
+
+function renderProjectList(){
+  const d=load();
+  document.getElementById('proj-list-editor').innerHTML=d.projects.map((p,i)=>`
+    <div class="proj-row" draggable="true" data-idx="${i}" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event,'projects')">
+      <span class="drag-handle" title="Drag to reorder">â ¿</span>
+      <div class="proj-thumb">${p.imgUrl?`<img src="${p.imgUrl}" onerror="this.style.display='none'">`:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a3548" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="12" cy="12" r="5"/></svg>'}</div>
+      <div class="proj-info">
+        <div class="proj-id">${p.id}</div>
+        <div class="proj-name">${p.title}</div>
+        <div class="proj-meta2">${p.client} · ${p.year}</div>
+      </div>
+      <span class="badge-tiny ${p.status}">${p.status}</span>
+      ${p.featured?'<span class="badge-tiny featured">FEATURED</span>':''}
+      <div class="proj-actions">
+        <button class="btn btn-icon btn-sm" onclick="editProject(${i})" title="Edit">âœŽ</button>
+        <button class="btn btn-d btn-sm" onclick="deleteProject(${i})" title="Delete" style="clip-path:none">âœ•</button>
+      </div>
+    </div>`).join('');
+}
+
+function openProjectModal(idx=-1){
+  editingProjectIdx=idx;
+  const isEdit=idx>=0;
+  document.getElementById('proj-modal-title').textContent=isEdit?'EDIT PROJECT':'ADD PROJECT';
+  const p=isEdit?load().projects[idx]:{id:'',year:'2026',client:'',badge:'pcb',badgeLabel:'',status:'live',title:'',desc:'',imgUrl:'',imgUrlBottom:'',tags:[],liveUrl:'',repoUrl:'',liveBtnLabel:'',featured:false};
+  document.getElementById('pm-id').value=p.id||'';
+  document.getElementById('pm-year').value=p.year||'2026';
+  document.getElementById('pm-client').value=p.client||'';
+  document.getElementById('pm-badge').value=p.badge||'pcb';
+  document.getElementById('pm-badgeLabel').value=p.badgeLabel||'';
+  document.getElementById('pm-status').value=p.status||'live';
+  document.getElementById('pm-title').value=p.title||'';
+  document.getElementById('pm-desc').value=p.desc||'';
+  document.getElementById('pm-imgUrl').value=p.imgUrl||'';
+  document.getElementById('pm-imgUrlBottom').value=p.imgUrlBottom||'';
+  document.getElementById('pm-liveUrl').value=p.liveUrl||'';
+  document.getElementById('pm-repoUrl').value=p.repoUrl||'';
+  document.getElementById('pm-liveBtnLabel').value=p.liveBtnLabel||'';
+  document.getElementById('pm-featured').checked=p.featured||false;
+  currentTags.pm=[...(p.tags||[])];
+  renderTagsDisplay('pm');
+  document.getElementById('proj-modal').classList.add('open');
+}
+function editProject(idx){openProjectModal(idx)}
+function deleteProject(idx){if(!confirm('Delete this project?'))return;const d=load();d.projects.splice(idx,1);save(d);renderProjectList()}
+function saveProject(){
+  const d=load();
+  const p={
+    id:document.getElementById('pm-id').value,year:document.getElementById('pm-year').value,
+    client:document.getElementById('pm-client').value,badge:document.getElementById('pm-badge').value,
+    badgeLabel:document.getElementById('pm-badgeLabel').value,status:document.getElementById('pm-status').value,
+    title:document.getElementById('pm-title').value,desc:document.getElementById('pm-desc').value,
+    imgUrl:document.getElementById('pm-imgUrl').value,
+    imgUrlBottom:document.getElementById('pm-imgUrlBottom').value,
+    tags:[...currentTags.pm],
+    liveUrl:document.getElementById('pm-liveUrl').value,repoUrl:document.getElementById('pm-repoUrl').value,
+    liveBtnLabel:document.getElementById('pm-liveBtnLabel').value,featured:document.getElementById('pm-featured').checked
+  };
+  if(editingProjectIdx>=0)d.projects[editingProjectIdx]=p;
+  else d.projects.push(p);
+  save(d);closeModal('proj-modal');renderProjectList();
+}
+
+// â”€â”€â”€ SKILLS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+let editingSkillIdx=-1;
+function renderSkillList(){
+  const d=load();
+  document.getElementById('skill-list-editor').innerHTML=d.skills.map((s,i)=>`
+    <div class="proj-row" draggable="true" data-idx="${i}" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dropItem(event,'skills')">
+      <span class="drag-handle">â ¿</span>
+      <div class="proj-info">
+        <div class="proj-id">${s.cat}</div>
+        <div class="proj-name">${s.name}</div>
+        <div class="proj-meta2" style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px">${s.tags.slice(0,5).map(t=>`<span style="font-family:'Space Mono',monospace;font-size:9px;padding:1px 6px;border:1px solid var(--border2);color:var(--text-dim)">${t}</span>`).join('')}${s.tags.length>5?`<span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted)">+${s.tags.length-5} more</span>`:''}</div>
+      </div>
+      <div class="proj-actions">
+        <button class="btn btn-icon btn-sm" onclick="editSkill(${i})">âœŽ</button>
+        <button class="btn btn-d btn-sm" onclick="deleteSkill(${i})" style="clip-path:none">âœ•</button>
+      </div>
+    </div>`).join('');
+}
+function openSkillModal(idx=-1){
+  editingSkillIdx=idx;
+  const isEdit=idx>=0;
+  document.getElementById('skill-modal-title').textContent=isEdit?'EDIT SKILL':'ADD SKILL CARD';
+  const s=isEdit?load().skills[idx]:{cat:'',name:'',color:'c',tags:[]};
+  document.getElementById('sm-cat').value=s.cat||'';
+  document.getElementById('sm-name').value=s.name||'';
+  document.getElementById('sm-color').value=s.color||'c';
+  currentTags.sm=[...(s.tags||[])];
+  renderTagsDisplay('sm');
+  document.getElementById('skill-modal').classList.add('open');
+}
+function editSkill(idx){openSkillModal(idx)}
+function deleteSkill(idx){if(!confirm('Delete skill?'))return;const d=load();d.skills.splice(idx,1);save(d);renderSkillList()}
+function saveSkill(){
+  const d=load();
+  const s={cat:document.getElementById('sm-cat').value,name:document.getElementById('sm-name').value,color:document.getElementById('sm-color').value,tags:[...currentTags.sm]};
+  if(editingSkillIdx>=0)d.skills[editingSkillIdx]=s;else d.skills.push(s);
+  save(d);closeModal('skill-modal');renderSkillList();
+}
+
+// â”€â”€â”€ CONTACTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+let editingContactIdx=-1;
+function renderContactList(){
+  const d=load();
+  document.getElementById('contact-list-editor').innerHTML=d.contacts.map((c,i)=>`
+    <div class="proj-row">
+      <div class="proj-info">
+        <div class="proj-id">${c.icon.toUpperCase()} · ${c.label}</div>
+        <div class="proj-name">${c.value}</div>
+        <div class="proj-meta2" style="color:var(--accent)">${c.url}</div>
+      </div>
+      <div class="proj-actions">
+        <button class="btn btn-icon btn-sm" onclick="editContact(${i})">âœŽ</button>
+        <button class="btn btn-d btn-sm" onclick="deleteContact(${i})" style="clip-path:none">âœ•</button>
+      </div>
+    </div>`).join('');
+}
+function openContactModal(idx=-1){
+  editingContactIdx=idx;
+  const isEdit=idx>=0;
+  document.getElementById('contact-modal-title').textContent=isEdit?'EDIT CONTACT':'ADD CONTACT';
+  const c=isEdit?load().contacts[idx]:{icon:'github',label:'',value:'',url:'',color:'c'};
+  document.getElementById('cm-icon').value=c.icon||'github';
+  document.getElementById('cm-label').value=c.label||'';
+  document.getElementById('cm-value').value=c.value||'';
+  document.getElementById('cm-url').value=c.url||'';
+  document.getElementById('cm-color').value=c.color||'c';
+  document.getElementById('contact-modal').classList.add('open');
+}
+function editContact(idx){openContactModal(idx)}
+function deleteContact(idx){if(!confirm('Delete contact?'))return;const d=load();d.contacts.splice(idx,1);save(d);renderContactList()}
+function saveContact(){
+  const d=load();
+  const c={icon:document.getElementById('cm-icon').value,label:document.getElementById('cm-label').value,value:document.getElementById('cm-value').value,url:document.getElementById('cm-url').value,color:document.getElementById('cm-color').value};
+  if(editingContactIdx>=0)d.contacts[editingContactIdx]=c;else d.contacts.push(c);
+  save(d);closeModal('contact-modal');renderContactList();
+}
+
+// â”€â”€â”€ TAGS EDITOR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function renderTagsDisplay(prefix){
+  document.getElementById(prefix+'-tags-display').innerHTML=currentTags[prefix].map((t,i)=>`
+    <span class="tag-chip">${t}<button onclick="removeTag('${prefix}',${i})">&times;</button></span>`).join('');
+}
+function addTag(prefix){
+  const inp=document.getElementById(prefix+'-tag-input');
+  const val=inp.value.trim().replace(/,$/,'');
+  if(val&&!currentTags[prefix].includes(val)){currentTags[prefix].push(val);renderTagsDisplay(prefix)}
+  inp.value='';inp.focus();
+}
+function removeTag(prefix,idx){currentTags[prefix].splice(idx,1);renderTagsDisplay(prefix)}
+function handleTagKey(e,prefix){if(e.key==='Enter'||e.key===','){e.preventDefault();addTag(prefix)}}
+
+// â”€â”€â”€ DRAG & DROP REORDER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+let dragSrcIdx=-1;
+function dragStart(e){dragSrcIdx=+e.currentTarget.dataset.idx;e.currentTarget.classList.add('dragging')}
+function dragOver(e){e.preventDefault()}
+function dropItem(e,list){
+  e.preventDefault();
+  const destIdx=+e.currentTarget.dataset.idx;
+  if(dragSrcIdx===destIdx)return;
+  const d=load();
+  const arr=d[list];
+  const [item]=arr.splice(dragSrcIdx,1);
+  arr.splice(destIdx,0,item);
+  save(d);
+  if(list==='projects')renderProjectList();
+  else if(list==='skills')renderSkillList();
+}
+
+// â”€â”€â”€ MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')}));
+
+// â”€â”€â”€ JSON EDITOR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function refreshJson(){document.getElementById('json-editor').value=JSON.stringify(load(),null,2)}
+function saveJson(){
+  try{
+    const d=JSON.parse(document.getElementById('json-editor').value);
+    save(d,{silent:true});
+    toast('JSON applied!','success');
+  }catch(err){toast('Invalid JSON: '+err.message,'error')}
+}
+
+// â”€â”€â”€ EXPORT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(load(),null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio_data.json';a.click();
+}
+
+function exportDataJS(){
+  const { content } = getDataJsPayload();
+  const blob=new Blob([content],{type:'application/javascript'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='portfolio-data.js';a.click();
+}
+
+async function updateDataJSFile(){
+  const { data, content } = getDataJsPayload();
+  try{
+    if(window.showOpenFilePicker){
+      if(!dataJsHandle){
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [{ description: 'JavaScript', accept: { 'application/javascript': ['.js'] } }]
+        });
+        dataJsHandle = handle;
+      }
+      const permission = dataJsHandle.requestPermission ? await dataJsHandle.requestPermission({ mode: 'readwrite' }) : 'granted';
+      if(permission !== 'granted'){
+        toast('Write permission denied','error');
+        return;
+      }
+      const writable = await dataJsHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      save(data,{silent:true});
+      toast('portfolio-data.js updated','success');
+      return;
+    }
+
+    if(window.showSaveFilePicker){
+      const handle = await window.showSaveFilePicker({
+        suggestedName: 'portfolio-data.js',
+        types: [{ description: 'JavaScript', accept: { 'application/javascript': ['.js'] } }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      save(data,{silent:true});
+      toast('portfolio-data.js updated','success');
+      return;
+    }
+
+    exportDataJS();
+    toast('Direct file update not supported. Exported Data JS instead.','error');
+  }catch(err){
+    if(err && err.name === 'AbortError')return;
+    try{
+      await navigator.clipboard.writeText(content);
+      toast('File write failed. Data JS copied to clipboard.','error');
+    }catch{
+      toast('File write failed. Use Export Data JS.','error');
+    }
+  }
+}
+
+// â”€â”€â”€ SAVE ALL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function saveAll(){
+  const panel=document.querySelector('.panel.active').id.replace('panel-','');
+  if(panel==='hero')saveHero();
+  else if(panel==='about')saveAbout();
+  else toast('All changes already auto-saved!','success');
+}
+
+// â”€â”€â”€ RESET â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function resetToDefault(){
+  if(!confirm('Reset ALL portfolio data to defaults? This cannot be undone.'))return;
+  save(JSON.parse(JSON.stringify(DEFAULT)),{silent:true});
+  toast('Reset to defaults','success');
+  renderPanel(document.querySelector('.nav-item.active').dataset.panel);
+}
+
+// â”€â”€â”€ INIT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+updateSaveIndicator(load().updatedAt);
+initAccessibility();
+initAutosave();
+renderOverview();
+</script>
+</body>
+</html>
