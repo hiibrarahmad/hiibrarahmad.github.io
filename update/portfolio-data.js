@@ -1,20 +1,17 @@
 window.PORTFOLIO_DATA = {
-  "updatedAt": "2026-03-25T15:03:37.760Z",
+  "updatedAt": "2026-03-25T15:18:49.279Z",
   "hero": {
     "firstName": "IBRAR",
     "lastName": "AHMAD",
     "role": "PCB Designer | Firmware Dev | EEG Hardware",
     "bio": "Designing hardware that ships from schematic to silicon to software. Focused on EEG and biosensor hardware, high-speed PCB design, and embedded firmware on NXP and nRF platforms.",
-    "timezone": "Asia/Karachi",
-    "tzLabel": "PKT",
-    "coordinates": "33.6844 N | 73.0479 E - Islamabad, Pakistan",
-    "stat1": "4",
+    "cvUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/",
+    "stat1": "7",
     "stat1l": "Projects",
-    "stat2": "2",
+    "stat2": "5",
     "stat2l": "Live",
     "stat3": "2",
-    "stat3l": "In Dev",
-    "cvUrl": "https://hiibrarahmad.github.io/PRJ-2026-DOC-0003-Personal-CV.github.io/"
+    "stat3l": "In Dev"
   },
   "about": {
     "p1": "I'm Ibrar Ahmad - a hardware and embedded systems engineer and biosensor/EEG hardware designer.",
