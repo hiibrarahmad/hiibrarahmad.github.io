@@ -1,9 +1,9 @@
-﻿window.PORTFOLIO_DATA = {
-  "updatedAt": "2026-03-25T13:00:27.451Z",
+window.PORTFOLIO_DATA = {
+  "updatedAt": "2026-03-25T15:03:37.760Z",
   "hero": {
     "firstName": "IBRAR",
     "lastName": "AHMAD",
-    "role": "PCB Designer | Firmware Dev | EEG Hardware ",
+    "role": "PCB Designer | Firmware Dev | EEG Hardware",
     "bio": "Designing hardware that ships from schematic to silicon to software. Focused on EEG and biosensor hardware, high-speed PCB design, and embedded firmware on NXP and nRF platforms.",
     "timezone": "Asia/Karachi",
     "tzLabel": "PKT",
@@ -196,7 +196,7 @@
       "badgeLabel": "Smart Warch",
       "status": "live",
       "title": "SMART WATCH",
-      "desc": "Dual-Board Smart Watch PCB â€” nRF5340 main board with IPS & e-Paper display, BLE 5.3, IMU, BME680, CCS811 + Wireless Qi charging board with BQ51003, BQ25100 & MAX86150 health sensor",
+      "desc": "Dual-Board Smart Watch PCB — nRF5340 main board with IPS & e-Paper display, BLE 5.3, IMU, BME680, CCS811 + Wireless Qi charging board with BQ51003, BQ25100 & MAX86150 health sensor",
       "imgUrl": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/raw/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg",
       "imgUrlBottom": "https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/raw/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg",
       "tags": [
@@ -223,7 +223,7 @@
       "badgeLabel": "PCB DESIGN",
       "status": "live",
       "title": "UNO-V1",
-      "desc": "Custom Arduino UNO compatible board â€” ATmega328P Â· USB Type-C Â· CH340G Â· 2-Layer FR4 PCB Â· Full UNO shield compatibility",
+      "desc": "Custom Arduino UNO compatible board — ATmega328P · USB Type-C · CH340G · 2-Layer FR4 PCB · Full UNO shield compatibility",
       "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1.jpg",
       "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1bot.jpg",
       "tags": [
@@ -285,20 +285,30 @@
       "featured": false
     },
     {
-      "id": "try",
-      "year": "2026",
-      "client": "",
+      "id": "PRJ-2024-PCB-0020",
+      "year": "2024",
+      "client": "INTERNATIONAL",
       "badge": "pcb",
-      "badgeLabel": "",
+      "badgeLabel": "PCB DESIGN",
       "status": "live",
-      "title": "",
-      "desc": "",
-      "imgUrl": "",
-      "imgUrlBottom": "",
-      "tags": [],
-      "liveUrl": "",
-      "repoUrl": "",
-      "liveBtnLabel": "",
+      "title": "ULTRASOUND-DOPPLER",
+      "desc": "USB-controlled Ultrasonic Doppler Measurement Front-End (USD3.0) · NXP LPC4330 (Cortex-M4) · Lattice MachXO2 CPLD · AD9245 14-bit ADC · USB Micro-B · 4-Layer Research Prototype",
+      "imgUrl": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2024-PCB-0020-ULTRASOUND-DOPPLER.github.io/main/Assets/PRJ-2024-PCB-0020-ULTRASOUND-DOPPLER.github.io-TOP.jpg",
+      "imgUrlBottom": "https://raw.githubusercontent.com/hiibrarahmad/PRJ-2024-PCB-0020-ULTRASOUND-DOPPLER.github.io/main/Assets/PRJ-2024-PCB-0020-ULTRASOUND-DOPPLER.github.io-BOT.jpg",
+      "tags": [
+        "lpc4330",
+        "machxo2",
+        "cpld",
+        "ad9245",
+        "usb-micro-b",
+        "ultrasound",
+        "doppler",
+        "14-bit-adc",
+        "cortex-m4"
+      ],
+      "liveUrl": "https://hiibrarahmad.github.io/PRJ-2024-PCB-0020-ULTRASOUND-DOPPLER.github.io/",
+      "repoUrl": "https://github.com/hiibrarahmad/PRJ-2024-PCB-0020-ULTRASOUND-DOPPLER.github.io",
+      "liveBtnLabel": "VIEW INTERACTIVE PCB AND BOM",
       "featured": false
     }
   ],
