@@ -1,8 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { Project } from '../types';
 
-const ADMIN_PASSCODE = 'ibrar2026';
 const SESSION_KEY = 'ia_portfolio_admin_unlocked';
+
+// The passcode itself is never stored in source or in the built bundle — only its
+// SHA-256 hash is, injected at build time via the VITE_ADMIN_PASSCODE_HASH env var
+// (a GitHub Actions secret in production, or .env.local for local dev).
+const PASSCODE_HASH = import.meta.env.VITE_ADMIN_PASSCODE_HASH?.toLowerCase();
+
+async function sha256Hex(text: string): Promise<string> {
+  const data = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
 
 interface AdminDashboardProps {
   projects: Project[];
@@ -171,6 +181,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
+  const attemptUnlock = async () => {
+    if (!PASSCODE_HASH) return;
+    const inputHash = await sha256Hex(passInput);
+    if (inputHash === PASSCODE_HASH) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      setUnlocked(true);
+    } else {
+      setPassError(true);
+    }
+  };
+
   if (!unlocked) {
     return (
       <div className="min-h-screen bg-[#0c0c0e] flex items-center justify-center px-4">
@@ -178,39 +199,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <h1 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-[#F0F0F0]">
             MISSION CONTROL — ADMIN ACCESS
           </h1>
-          <p className="font-['JetBrains_Mono',monospace] text-xs text-[#c6c6c7]">
-            Enter passcode to edit project data. (Set in AdminDashboard.tsx — change it before deploying.)
-          </p>
+          {!PASSCODE_HASH ? (
+            <p className="font-['JetBrains_Mono',monospace] text-xs text-[#FF4D00]">
+              No passcode configured for this build. Set the VITE_ADMIN_PASSCODE_HASH secret (see README) and redeploy to enable admin access.
+            </p>
+          ) : (
+            <p className="font-['JetBrains_Mono',monospace] text-xs text-[#c6c6c7]">
+              Enter passcode to edit project data.
+            </p>
+          )}
           <input
             type="password"
             value={passInput}
             onChange={(e) => setPassInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                if (passInput === ADMIN_PASSCODE) {
-                  sessionStorage.setItem(SESSION_KEY, '1');
-                  setUnlocked(true);
-                } else {
-                  setPassError(true);
-                }
-              }
+              if (e.key === 'Enter') attemptUnlock();
             }}
             placeholder="Passcode"
             autoFocus
-            className="w-full bg-black/60 border border-white/15 focus:border-[#00F0FF] text-sm font-['JetBrains_Mono',monospace] text-white px-3 py-2 rounded focus:outline-none"
+            disabled={!PASSCODE_HASH}
+            className="w-full bg-black/60 border border-white/15 focus:border-[#00F0FF] text-sm font-['JetBrains_Mono',monospace] text-white px-3 py-2 rounded focus:outline-none disabled:opacity-40"
           />
           {passError && <p className="text-[#FF003C] text-xs font-['JetBrains_Mono',monospace]">Incorrect passcode.</p>}
           <div className="flex gap-2">
             <button
-              onClick={() => {
-                if (passInput === ADMIN_PASSCODE) {
-                  sessionStorage.setItem(SESSION_KEY, '1');
-                  setUnlocked(true);
-                } else {
-                  setPassError(true);
-                }
-              }}
-              className="flex-1 bg-[#00F0FF]/20 border border-[#00F0FF] text-[#00F0FF] font-['JetBrains_Mono',monospace] text-xs font-bold py-2 rounded"
+              onClick={attemptUnlock}
+              disabled={!PASSCODE_HASH}
+              className="flex-1 bg-[#00F0FF]/20 border border-[#00F0FF] text-[#00F0FF] font-['JetBrains_Mono',monospace] text-xs font-bold py-2 rounded disabled:opacity-40 disabled:cursor-not-allowed"
             >
               UNLOCK
             </button>

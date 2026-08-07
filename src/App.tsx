@@ -74,7 +74,7 @@ export default function App() {
   });
 
   return (
-    <div className="bg-[#131313] text-[#e2e2e2] font-['Plus_Jakarta_Sans',sans-serif] min-h-screen relative overflow-x-hidden selection:bg-[#00F0FF] selection:text-[#050505]">
+    <div className="hw-cursor-zone bg-[#131313] text-[#e2e2e2] font-['Plus_Jakarta_Sans',sans-serif] min-h-screen relative overflow-x-hidden selection:bg-[#00F0FF] selection:text-[#050505]">
       {/* WebGL Animated Background Shader */}
       <ShaderBackground />
 

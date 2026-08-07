@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 @media (min-width: 768px) {
-  *, *::before, *::after, body, html, button, a, input, select, textarea, [role="button"], canvas, svg, div, span, p, h1, h2, h3, h4, label {
+  .hw-cursor-zone,
+  .hw-cursor-zone *,
+  .hw-cursor-zone *::before,
+  .hw-cursor-zone *::after {
     cursor: none !important;
   }
 }
