@@ -175,7 +175,7 @@ export const PROJECTS: Project[] = [
     category: 'Power Electronics',
     status: 'IN DEV',
     leftImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
-    rightImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80',
+    rightImage: 'https://images.unsplash.com/photo-1620121692029-d088224ddc74?auto=format&fit=crop&w=800&q=80',
     description: 'Smart DC microgrid power distribution unit with GaN FET synchronous switching and milliohm current sense telemetry.',
     mcu: 'STM32G474 high-resolution PWM MCU',
     pcbLayers: 4,
