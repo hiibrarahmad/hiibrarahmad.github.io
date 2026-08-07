@@ -1,0 +1,6 @@
+{
+  "name": "Ibrar Ahmad Hardware Portfolio",
+  "description": "High-performance hardware engineering mission control portfolio featuring interactive 3D PCB schematic viewer, embedded firmware repositories, and system telemetry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

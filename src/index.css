@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@media (min-width: 768px) {
+  *, *::before, *::after, body, html, button, a, input, select, textarea, [role="button"], canvas, svg, div, span, p, h1, h2, h3, h4, label {
+    cursor: none !important;
+  }
+}
+
+@layer utilities {
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+  }
+  .glow-effect-red {
+    box-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+  }
+  .glow-effect-orange {
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.5);
+  }
+  .hud-overlay {
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes pulse-custom {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pulse-badge {
+  animation: pulse-custom 2s infinite;
+}
+
+.split-hover:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 60, 0.3);
+  transform: scale(1.01);
+  z-index: 30;
+}
+
+.split-hover:hover .split-left {
+  transform: translateX(-8%);
+}
+
+.split-hover:hover .split-right {
+  transform: translateX(8%);
+}
+
+.split-left, .split-right {
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Custom Scrollbar for Mission Control HUD */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0e0e0e;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00F0FF;
+}
