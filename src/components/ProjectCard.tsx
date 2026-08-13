@@ -4,9 +4,15 @@ import { Project } from '../types';
 interface ProjectCardProps {
   project: Project;
   onOpen3DViewer: (project: Project) => void;
+  /** Renders this card as a secondary banner for the same project (different images/title, same click target). */
+  banner?: { leftImage: string; rightImage: string; label: string };
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewer }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewer, banner }) => {
+  const leftImage = banner?.leftImage ?? project.leftImage;
+  const rightImage = banner?.rightImage ?? project.rightImage;
+  const title = banner?.label ?? project.title;
+
   return (
     <div
       onClick={() => onOpen3DViewer(project)}
@@ -49,7 +55,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
       {/* Text Overlay (Absolute Center) */}
       <div className="absolute inset-0 flex flex-col justify-center items-center z-20 pointer-events-none bg-black/40 group-hover:bg-black/20 transition-colors duration-500 px-4">
         <h3 className="font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl md:text-5xl font-bold text-[#F0F0F0] tracking-widest text-center group-hover:scale-105 transition-transform duration-500 drop-shadow-md">
-          {project.title}
+          {title}
         </h3>
 
         {/* Hover CTA Access 3D Data */}
@@ -63,9 +69,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
       {/* Left Image Split */}
       <div className="w-full md:w-1/2 h-full relative split-left bg-black">
         <img
-          src={project.leftImage}
-          alt={`${project.title} Render Left`}
-          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          src={leftImage}
+          alt={`${title} Render Left`}
+          className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
@@ -74,9 +80,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
       {/* Right Image Split */}
       <div className="w-full md:w-1/2 h-full relative split-right bg-black hidden md:block">
         <img
-          src={project.rightImage}
-          alt={`${project.title} Render Right`}
-          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          src={rightImage}
+          alt={`${title} Render Right`}
+          className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/20 to-transparent" />

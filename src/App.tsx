@@ -142,11 +142,19 @@ export default function App() {
               <div className="flex flex-col gap-16 md:gap-20">
                 {filteredProjects.length > 0 ? (
                   filteredProjects.map((project) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
-                      onOpen3DViewer={(p) => setActive3DProject(p)}
-                    />
+                    <div key={project.id} className="flex flex-col gap-4 md:gap-5">
+                      <ProjectCard
+                        project={project}
+                        onOpen3DViewer={(p) => setActive3DProject(p)}
+                      />
+                      {project.secondaryBanner && (
+                        <ProjectCard
+                          project={project}
+                          onOpen3DViewer={(p) => setActive3DProject(p)}
+                          banner={project.secondaryBanner}
+                        />
+                      )}
+                    </div>
                   ))
                 ) : (
                   <div className="text-center py-12 bg-white/5 border border-dashed border-white/20 rounded font-['JetBrains_Mono',monospace] text-xs text-[#c6c6c7]">

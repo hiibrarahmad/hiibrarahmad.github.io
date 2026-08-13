@@ -132,6 +132,11 @@ export const PROJECTS: Project[] = [
     status: 'LIVE',
     leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg',
     rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg',
+    secondaryBanner: {
+      leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH-CHARGER.jpg',
+      rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH-CHARGERBOT.jpg',
+      label: 'QI WIRELESS CHARGER BOARD'
+    },
     description: 'A compact dual-board smart watch platform: a main application board built around the Nordic nRF5340 dual-core SoC, and a separate wireless-charging board with Qi inductive charging and PPG/SpO2/ECG sensing. The main board drives a 1.54" IPS color LCD and a 1.54" e-Paper display, and integrates a 6-axis IMU, environmental sensor, CO2/TVOC sensor, and a digital MEMS microphone.',
     mcu: 'Nordic nRF5340 (dual-core Cortex-M33: App @ 128 MHz + Net @ 64 MHz)',
     pcbLayers: 4,
@@ -196,6 +201,11 @@ export const PROJECTS: Project[] = [
     status: 'IN DEV',
     leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io/main/assets/AIBud-Main-TOP.png',
     rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io/main/assets/AIBud-Main-BOT.png',
+    secondaryBanner: {
+      leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io/main/assets/AIBud-Flex-TOP.png',
+      rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io/main/assets/AIBud-Flex-BOT.png',
+      label: 'FLEX FPC INTERCONNECT'
+    },
     description: 'A true-wireless-earbud (TWS) design built around the Jieli JL701N Bluetooth audio SoC. The assembly is a main bud PCB paired with a flex FPC interconnect (E001-FPC-L-V) that carries speaker and battery contacts to the connector end, tied together as an Altium Multi-Board project.',
     mcu: 'Jieli JL701N',
     pcbLayers: 4,

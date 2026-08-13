@@ -5,6 +5,12 @@ export interface Project {
   status: 'LIVE' | 'IN DEV' | 'ARCHIVED';
   leftImage: string;
   rightImage: string;
+  /** Optional second banner for the same project (e.g. a flex/secondary board) — rendered as its own card right below the main one, opening the same detail modal. */
+  secondaryBanner?: {
+    leftImage: string;
+    rightImage: string;
+    label: string;
+  };
   description: string;
   mcu: string;
   pcbLayers: number;
