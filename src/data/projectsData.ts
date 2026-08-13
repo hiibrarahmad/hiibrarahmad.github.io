@@ -190,6 +190,34 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'ai-bud',
+    title: 'AI BUD — TWS EARBUD',
+    category: 'PCB Design',
+    status: 'IN DEV',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io/main/assets/AIBud-Main-TOP.png',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io/main/assets/AIBud-Main-BOT.png',
+    description: 'A true-wireless-earbud (TWS) design built around the Jieli JL701N Bluetooth audio SoC. The assembly is a main bud PCB paired with a flex FPC interconnect (E001-FPC-L-V) that carries speaker and battery contacts to the connector end, tied together as an Altium Multi-Board project.',
+    mcu: 'Jieli JL701N',
+    pcbLayers: 4,
+    dimensions: '28.7mm (main PCB outline)',
+    clockSpeed: 'N/A — Bluetooth audio SoC, no exposed system clock spec',
+    interfaces: ['B+ (battery)', 'DP/DM (USB D+/D-)', 'S-/S+ (flex speaker contacts)', 'B-/B+ (flex battery contacts)'],
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1007-2026-AIBud.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1007-2026-AIBud.github.io',
+    projectId: 'PRJ-PCB-1007',
+    features: [
+      'Jieli JL701N Bluetooth audio SoC as the main earbud controller',
+      'STMicro LIS2DW12 3-axis accelerometer for motion/gesture sensing',
+      'Flex FPC interconnect (E001-FPC-L-V), 16.57mm wide, 0.15mm thick with a reinforcement steel plate at the connector end',
+      'Altium Multi-Board project tying the main bud PCB and flex FPC together',
+      'Interactive PCB/BOM viewer and 3D model pending a fresh export'
+    ],
+    components: [
+      { name: 'JL701N_SOC', type: 'Bluetooth Audio SoC', pkg: 'QFN', purpose: 'Main Earbud Controller (Jieli JL701N)', pos: [-0.6, 0.2, 0.12], color: '#1a1a1a' },
+      { name: 'LIS2DW12_ACC', type: '3-Axis Accelerometer', pkg: 'LGA12', purpose: 'Motion & Gesture Sensing', pos: [0.7, -0.3, 0.1], color: '#2a2a2a' }
+    ]
+  },
+  {
     id: 'neural-signal-acquisition',
     title: 'NEURAL SIGNAL ACQUISITION',
     category: 'Bio-Potential Sensing',
