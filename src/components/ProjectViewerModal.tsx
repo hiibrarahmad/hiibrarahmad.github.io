@@ -92,14 +92,20 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
     if (objUrl) {
       // Real STEP-exported 3D model — load it instead of the procedural PCB
       const onModelLoaded = (obj: THREE.Group) => {
-        const box = new THREE.Box3().setFromObject(obj);
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const center = new THREE.Vector3();
-        box.getCenter(center);
-        obj.position.sub(center);
-        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        // Scale first, then center — Three.js applies scale to local
+        // geometry before translation, so centering with a pre-scale
+        // offset puts the model outside the camera's view once scaled.
+        const rawBox = new THREE.Box3().setFromObject(obj);
+        const rawSize = new THREE.Vector3();
+        rawBox.getSize(rawSize);
+        const maxDim = Math.max(rawSize.x, rawSize.y, rawSize.z) || 1;
         obj.scale.setScalar(4 / maxDim);
+
+        const scaledBox = new THREE.Box3().setFromObject(obj);
+        const center = new THREE.Vector3();
+        scaledBox.getCenter(center);
+        obj.position.sub(center);
+
         obj.traverse((child) => {
           const mesh = child as THREE.Mesh;
           if (mesh.isMesh) {
