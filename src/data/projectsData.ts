@@ -228,6 +228,38 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'level-converter',
+    title: 'BI-DIRECTIONAL LEVEL CONVERTER',
+    category: 'PCB Design',
+    status: 'LIVE',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1008-2024-LevelConverter.github.io/main/assets/LevelConverter-TOP.png',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1008-2024-LevelConverter.github.io/main/assets/LevelConverter-BOT.png',
+    description: 'A compact bi-directional logic level converter that bridges 3.3V and 5V systems (also accommodating 2.8V and 1.8V devices), stepping signals up and down simultaneously on the same channel. Three independent channels, each built from a single N-channel MOSFET plus a pull-up resistor pair.',
+    mcu: 'N/A — passive MOSFET-based level shifting, no MCU',
+    pcbLayers: 2,
+    dimensions: 'Round, 0.41mm total thickness (0.04mm Cu / 0.32mm FR-4 / 0.04mm Cu)',
+    clockSpeed: 'N/A',
+    interfaces: ['J1: LV1/LV2/LV3/LV/GND (low-voltage side)', 'J2: HV1/HV2/HV3/HV/GND (high-voltage side)'],
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1008-2024-LevelConverter.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1008-2024-LevelConverter.github.io',
+    projectId: 'PRJ-PCB-1008',
+    stepModelUrl: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1008-2024-LevelConverter.github.io/main/assets/LevelConverter.step',
+    features: [
+      'Three independent bi-directional level-shifting channels (Q1/Q2/Q3)',
+      'Each channel: one N-channel MOSFET + pull-up resistor pair, replicated three times',
+      'Supports 5V, 3.3V, 2.8V, and 1.8V logic domains on either side',
+      '2-layer, 0.41mm-thick round PCB — originally designed in Altium, April 2024',
+      'Designer\'s early PCB, alongside the ATX PSU Tester'
+    ],
+    components: [
+      { name: 'Q1_MOSFET', type: 'N-Channel MOSFET', pkg: 'SOT-23', purpose: 'Channel 1 Bi-Directional Level Shift', pos: [0, -0.7, 0.1], color: '#1a1a1a' },
+      { name: 'Q2_MOSFET', type: 'N-Channel MOSFET', pkg: 'SOT-23', purpose: 'Channel 2 Bi-Directional Level Shift', pos: [0, 0, 0.1], color: '#1a1a1a' },
+      { name: 'Q3_MOSFET', type: 'N-Channel MOSFET', pkg: 'SOT-23', purpose: 'Channel 3 Bi-Directional Level Shift', pos: [0, 0.7, 0.1], color: '#1a1a1a' },
+      { name: 'J1_CONN', type: 'Header', pkg: '5-pin', purpose: 'Low-Voltage Side (LV1/LV2/LV3/LV/GND)', pos: [-1.0, 0, 0.15], color: '#2a2a2a' },
+      { name: 'J2_CONN', type: 'Header', pkg: '5-pin', purpose: 'High-Voltage Side (HV1/HV2/HV3/HV/GND)', pos: [1.0, 0, 0.15], color: '#2a2a2a' }
+    ]
+  },
+  {
     id: 'neural-signal-acquisition',
     title: 'NEURAL SIGNAL ACQUISITION',
     category: 'Bio-Potential Sensing',
