@@ -14,6 +14,10 @@ export interface Project {
   schematicsUrl?: string;
   githubUrl?: string;
   projectId?: string;
+  /** Real STEP-exported 3D model (OBJ), rendered instead of the procedural PCB view when present. */
+  objModelUrl?: string;
+  /** Material file paired with objModelUrl. */
+  mtlModelUrl?: string;
   features: string[];
   components: {
     name: string;

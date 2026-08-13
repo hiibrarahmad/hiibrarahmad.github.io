@@ -93,6 +93,39 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'h-bridge-driver',
+    title: 'SMALL H-BRIDGE MOTOR DRIVER',
+    category: 'PCB Design',
+    status: 'LIVE',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1004-2024-HBridge.github.io/main/assets/HBridge-TOP.png',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1004-2024-HBridge.github.io/main/assets/HBridge-BOT.png',
+    description: 'A compact dual full-bridge motor driver board built around the Allegro A4954 PWM motor driver IC. Onboard linear regulation, current-sense trim, and protection circuitry make it a self-contained driver stage for small DC motors, meant to be dropped into a larger system via JST connectors rather than used standalone.',
+    mcu: 'Allegro A4954 (Dual Full-Bridge PWM Motor Driver)',
+    pcbLayers: 2,
+    dimensions: 'N/A',
+    clockSpeed: 'N/A — no onboard clock, PWM driven externally via Ctrl connector',
+    interfaces: ['JST 2-pin (Ctrl)', 'JST 5-pin (Ctrl)', 'JST 2-pin (Pwr, 30V)', 'JST Motor A/B outputs'],
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1004-2024-HBridge.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1004-2024-HBridge.github.io',
+    projectId: 'PRJ-PCB-1004',
+    objModelUrl: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1004-2024-HBridge.github.io/main/assets/Hbridge.step.obj',
+    mtlModelUrl: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1004-2024-HBridge.github.io/main/assets/Hbridge.step.mtl',
+    features: [
+      'Allegro A4954 dual full-bridge PWM motor driver (TSSOP-16EP)',
+      'Diodes Inc AP7381 150mA low-IQ fast-transient LDO for onboard logic supply',
+      'Bourns TC33 trimpot for current-sense reference trim (channels A/B)',
+      'Bidirectional Zener + Bourns DO214AC SMA diode protection network',
+      'JST-connectorized I/O: control, power (30V), and dual motor outputs'
+    ],
+    components: [
+      { name: 'A4954_DRIVER', type: 'Motor Driver', pkg: 'TSSOP-16EP', purpose: 'Dual Full-Bridge PWM Motor Driver', pos: [0, 0.3, 0.12], color: '#111111' },
+      { name: 'AP7381_LDO', type: 'Voltage Regulator', pkg: 'SOT-89', purpose: 'Onboard Logic Supply', pos: [-0.8, -0.5, 0.1], color: '#333333' },
+      { name: 'TC33_TRIM_A', type: 'Potentiometer', pkg: 'Trimpot', purpose: 'Channel A Current-Sense Trim', pos: [-0.6, 0.6, 0.1], color: '#cccccc' },
+      { name: 'TC33_TRIM_B', type: 'Potentiometer', pkg: 'Trimpot', purpose: 'Channel B Current-Sense Trim', pos: [0.6, 0.6, 0.1], color: '#cccccc' },
+      { name: 'PROTECTION_DIODE', type: 'Zener/SMA Diode', pkg: 'DO214AC', purpose: 'Bidirectional/Flyback Protection', pos: [1.2, -0.3, 0.1], color: '#1a1a1a' }
+    ]
+  },
+  {
     id: 'smart-watch-pcb',
     title: 'DUAL-BOARD SMART WATCH PLATFORM',
     category: 'PCB Design',

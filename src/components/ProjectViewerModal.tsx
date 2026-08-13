@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { Project } from '../types';
 
 interface ProjectViewerModalProps {
@@ -80,100 +82,136 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
     const pcbGroup = new THREE.Group();
     scene.add(pcbGroup);
 
-    // PCB Board Substrate
-    const boardGeo = new THREE.BoxGeometry(4.2, 3.0, 0.12);
-    const boardMat = new THREE.MeshStandardMaterial({
-      color: 0x122214, // Dark Green PCB Solder Mask
-      roughness: 0.3,
-      metalness: 0.2,
-    });
-    const board = new THREE.Mesh(boardGeo, boardMat);
-    board.castShadow = true;
-    board.receiveShadow = true;
-    pcbGroup.add(board);
-
-    // PCB Silk screen border lines
-    const silkLineMat = new THREE.LineBasicMaterial({ color: 0xffffff });
-    const silkGeo = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(-2.0, -1.4, 0.07),
-      new THREE.Vector3(2.0, -1.4, 0.07),
-      new THREE.Vector3(2.0, 1.4, 0.07),
-      new THREE.Vector3(-2.0, 1.4, 0.07),
-      new THREE.Vector3(-2.0, -1.4, 0.07),
-    ]);
-    const silkBox = new THREE.Line(silkGeo, silkLineMat);
-    pcbGroup.add(silkBox);
-
-    // Gold Plated Copper Traces
-    const traceMat = new THREE.LineBasicMaterial({
-      color: 0x00F0FF,
-      transparent: true,
-      opacity: 0.7,
-    });
-    const tracePointsCount = 35;
-    for (let i = 0; i < tracePointsCount; i++) {
-      const points = [];
-      const startX = (Math.random() - 0.5) * 3.8;
-      const startY = (Math.random() - 0.5) * 2.6;
-      points.push(new THREE.Vector3(startX, startY, 0.07));
-      const midX = startX + (Math.random() - 0.5) * 0.8;
-      const midY = startY + (Math.random() - 0.5) * 0.8;
-      points.push(new THREE.Vector3(midX, midY, 0.07));
-      points.push(new THREE.Vector3(midX + (Math.random() - 0.5) * 0.5, midY, 0.07));
-      const geo = new THREE.BufferGeometry().setFromPoints(points);
-      const line = new THREE.Line(geo, traceMat);
-      pcbGroup.add(line);
-    }
-
-    // Add Component Meshes
+    // Component Meshes (populated below only for the procedural path — real
+    // loaded models don't have per-part meshes to click/inspect)
     const componentMeshes: { mesh: THREE.Mesh; data: typeof project.components[0] }[] = [];
 
-    project.components.forEach((comp) => {
-      let width = 0.5, depth = 0.5, height = 0.15;
-      if (comp.pkg.includes('LQFP') || comp.pkg.includes('TQFP') || comp.pkg.includes('BGA')) {
-        width = 0.9; depth = 0.9; height = 0.12;
-      } else if (comp.pkg.includes('Type-C') || comp.pkg.includes('Connector') || comp.pkg.includes('Cage')) {
-        width = 0.5; depth = 0.8; height = 0.3;
-      } else if (comp.pkg.includes('QFN')) {
-        width = 0.6; depth = 0.6; height = 0.1;
+    const objUrl = project.objModelUrl;
+    const mtlUrl = project.mtlModelUrl;
+
+    if (objUrl) {
+      // Real STEP-exported 3D model — load it instead of the procedural PCB
+      const onModelLoaded = (obj: THREE.Group) => {
+        const box = new THREE.Box3().setFromObject(obj);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+        obj.position.sub(center);
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        obj.scale.setScalar(4 / maxDim);
+        obj.traverse((child) => {
+          const mesh = child as THREE.Mesh;
+          if (mesh.isMesh) {
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+          }
+        });
+        pcbGroup.add(obj);
+      };
+
+      if (mtlUrl) {
+        new MTLLoader().load(mtlUrl, (materials) => {
+          materials.preload();
+          new OBJLoader().setMaterials(materials).load(objUrl, onModelLoaded);
+        });
+      } else {
+        new OBJLoader().load(objUrl, onModelLoaded);
+      }
+    } else {
+      // PCB Board Substrate
+      const boardGeo = new THREE.BoxGeometry(4.2, 3.0, 0.12);
+      const boardMat = new THREE.MeshStandardMaterial({
+        color: 0x122214, // Dark Green PCB Solder Mask
+        roughness: 0.3,
+        metalness: 0.2,
+      });
+      const board = new THREE.Mesh(boardGeo, boardMat);
+      board.castShadow = true;
+      board.receiveShadow = true;
+      pcbGroup.add(board);
+
+      // PCB Silk screen border lines
+      const silkLineMat = new THREE.LineBasicMaterial({ color: 0xffffff });
+      const silkGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2.0, -1.4, 0.07),
+        new THREE.Vector3(2.0, -1.4, 0.07),
+        new THREE.Vector3(2.0, 1.4, 0.07),
+        new THREE.Vector3(-2.0, 1.4, 0.07),
+        new THREE.Vector3(-2.0, -1.4, 0.07),
+      ]);
+      const silkBox = new THREE.Line(silkGeo, silkLineMat);
+      pcbGroup.add(silkBox);
+
+      // Gold Plated Copper Traces
+      const traceMat = new THREE.LineBasicMaterial({
+        color: 0x00F0FF,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const tracePointsCount = 35;
+      for (let i = 0; i < tracePointsCount; i++) {
+        const points = [];
+        const startX = (Math.random() - 0.5) * 3.8;
+        const startY = (Math.random() - 0.5) * 2.6;
+        points.push(new THREE.Vector3(startX, startY, 0.07));
+        const midX = startX + (Math.random() - 0.5) * 0.8;
+        const midY = startY + (Math.random() - 0.5) * 0.8;
+        points.push(new THREE.Vector3(midX, midY, 0.07));
+        points.push(new THREE.Vector3(midX + (Math.random() - 0.5) * 0.5, midY, 0.07));
+        const geo = new THREE.BufferGeometry().setFromPoints(points);
+        const line = new THREE.Line(geo, traceMat);
+        pcbGroup.add(line);
       }
 
-      const compGeo = new THREE.BoxGeometry(width, depth, height);
-      const compMat = new THREE.MeshStandardMaterial({
-        color: comp.color || 0x222222,
-        roughness: 0.4,
-        metalness: 0.5,
+      // Add Component Meshes
+      project.components.forEach((comp) => {
+        let width = 0.5, depth = 0.5, height = 0.15;
+        if (comp.pkg.includes('LQFP') || comp.pkg.includes('TQFP') || comp.pkg.includes('BGA')) {
+          width = 0.9; depth = 0.9; height = 0.12;
+        } else if (comp.pkg.includes('Type-C') || comp.pkg.includes('Connector') || comp.pkg.includes('Cage')) {
+          width = 0.5; depth = 0.8; height = 0.3;
+        } else if (comp.pkg.includes('QFN')) {
+          width = 0.6; depth = 0.6; height = 0.1;
+        }
+
+        const compGeo = new THREE.BoxGeometry(width, depth, height);
+        const compMat = new THREE.MeshStandardMaterial({
+          color: comp.color || 0x222222,
+          roughness: 0.4,
+          metalness: 0.5,
+        });
+
+        const mesh = new THREE.Mesh(compGeo, compMat);
+        mesh.position.set(comp.pos[0], comp.pos[1], 0.06 + height / 2);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+
+        pcbGroup.add(mesh);
+        componentMeshes.push({ mesh, data: comp });
+
+        // Add pins or leads around the IC
+        const pinMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9, roughness: 0.2 });
+        for (let p = -width / 2 + 0.1; p <= width / 2 - 0.1; p += 0.15) {
+          const pinGeo = new THREE.BoxGeometry(0.04, 0.08, 0.05);
+          const pinLeft = new THREE.Mesh(pinGeo, pinMat);
+          pinLeft.position.set(comp.pos[0] + p, comp.pos[1] - depth / 2 - 0.04, 0.08);
+          pcbGroup.add(pinLeft);
+
+          const pinRight = new THREE.Mesh(pinGeo, pinMat);
+          pinRight.position.set(comp.pos[0] + p, comp.pos[1] + depth / 2 + 0.04, 0.08);
+          pcbGroup.add(pinRight);
+        }
       });
 
-      const mesh = new THREE.Mesh(compGeo, compMat);
-      mesh.position.set(comp.pos[0], comp.pos[1], 0.06 + height / 2);
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-
-      pcbGroup.add(mesh);
-      componentMeshes.push({ mesh, data: comp });
-
-      // Add pins or leads around the IC
-      const pinMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9, roughness: 0.2 });
-      for (let p = -width / 2 + 0.1; p <= width / 2 - 0.1; p += 0.15) {
-        const pinGeo = new THREE.BoxGeometry(0.04, 0.08, 0.05);
-        const pinLeft = new THREE.Mesh(pinGeo, pinMat);
-        pinLeft.position.set(comp.pos[0] + p, comp.pos[1] - depth / 2 - 0.04, 0.08);
-        pcbGroup.add(pinLeft);
-
-        const pinRight = new THREE.Mesh(pinGeo, pinMat);
-        pinRight.position.set(comp.pos[0] + p, comp.pos[1] + depth / 2 + 0.04, 0.08);
-        pcbGroup.add(pinRight);
+      // Add SMD Capacitors / Resistors array
+      const smdMat = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 });
+      for (let c = 0; c < 20; c++) {
+        const smdGeo = new THREE.BoxGeometry(0.1, 0.18, 0.08);
+        const smdMesh = new THREE.Mesh(smdGeo, smdMat);
+        smdMesh.position.set((Math.random() - 0.5) * 3.6, (Math.random() - 0.5) * 2.4, 0.09);
+        pcbGroup.add(smdMesh);
       }
-    });
-
-    // Add SMD Capacitors / Resistors array
-    const smdMat = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 });
-    for (let c = 0; c < 20; c++) {
-      const smdGeo = new THREE.BoxGeometry(0.1, 0.18, 0.08);
-      const smdMesh = new THREE.Mesh(smdGeo, smdMat);
-      smdMesh.position.set((Math.random() - 0.5) * 3.6, (Math.random() - 0.5) * 2.4, 0.09);
-      pcbGroup.add(smdMesh);
     }
 
     // Lighting
@@ -408,7 +446,8 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
                       <span className="text-white font-semibold">{project.dimensions}</span>
                     </div>
 
-                    {/* Selected component inspector */}
+                    {/* Selected component inspector — only meaningful for the procedural view */}
+                    {!project.objModelUrl && (
                     <div className="mt-4 border-t border-white/15 pt-3">
                       <span className="text-[#00F0FF] text-[11px] font-bold block mb-2">
                         INSPECT COMPONENT (CLICK 3D BOARD)
@@ -430,6 +469,7 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
                         </div>
                       )}
                     </div>
+                    )}
                   </div>
                 </div>
 
