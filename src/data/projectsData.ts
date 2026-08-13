@@ -33,37 +33,6 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
-    id: 'smart-watch-pcb',
-    title: 'DUAL-BOARD SMART WATCH PLATFORM',
-    category: 'PCB Design',
-    status: 'LIVE',
-    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg',
-    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg',
-    description: 'A compact dual-board smart watch platform: a main application board built around the Nordic nRF5340 dual-core SoC, and a separate wireless-charging board with Qi inductive charging and PPG/SpO2/ECG sensing. The main board drives a 1.54" IPS color LCD and a 1.54" e-Paper display, and integrates a 6-axis IMU, environmental sensor, CO2/TVOC sensor, and a digital MEMS microphone.',
-    mcu: 'Nordic nRF5340 (dual-core Cortex-M33: App @ 128 MHz + Net @ 64 MHz)',
-    pcbLayers: 4,
-    dimensions: 'N/A',
-    clockSpeed: '128 MHz (App core) / 64 MHz (Net core)',
-    interfaces: ['Bluetooth 5.3 LE', 'SPI (displays/IMU/EEPROM)', 'I2C (BME680/CCS811/MAX86150)', 'PDM Microphone', 'USB-C', 'SWD/JTAG'],
-    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-2026-PCB-0002-SMART_WATCH.github.io/',
-    githubUrl: 'https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io',
-    projectId: 'PRJ-2026-PCB-0002-SMART_WATCH',
-    features: [
-      'Dual-board design: nRF5340 main board + dedicated Qi wireless-charging board',
-      'Dual display: always-on 1.54" IPS color LCD plus 1.54" e-Paper for low-power ambient mode',
-      'Health sensing via MAX86150 (PPG/SpO2/ECG analog front-end) on the charger board',
-      'Environmental sensing (BME680: temp/humidity/pressure/gas) and air quality (CCS811: CO2/TVOC)',
-      '6-axis IMU (ICM-20689) plus digital MEMS microphone; 4-layer impedance-controlled stackup'
-    ],
-    components: [
-      { name: 'NRF5340_SOC', type: 'Dual-Core RF SoC', pkg: 'AQFN73', purpose: 'BLE 5.3 App + Net Core Processor', pos: [-0.6, 0.3, 0.15], color: '#111111' },
-      { name: 'MAX86150_AFE', type: 'Bio-Sensor AFE', pkg: 'OLGA', purpose: 'PPG/SpO2/ECG Analog Front End', pos: [1.2, -0.3, 0.12], color: '#222222' },
-      { name: 'ICM20689_IMU', type: '6-Axis IMU', pkg: 'LGA14', purpose: 'Motion & Gesture Sensing', pos: [-1.1, -0.6, 0.1], color: '#333333' },
-      { name: 'BME680_ENV', type: 'Environmental Sensor', pkg: 'LGA8', purpose: 'Temp/Humidity/Pressure/Gas', pos: [0.6, 0.7, 0.1], color: '#1a1a1a' },
-      { name: 'BQ51003_QI', type: 'Wireless Charge Receiver', pkg: 'QFN20', purpose: 'Qi Inductive Charging Front End', pos: [1.6, 0.4, 0.15], color: '#2a2a2a' }
-    ]
-  },
-  {
     id: 'ultrasound-doppler',
     title: 'ULTRASONIC DOPPLER FRONT-END (USD3.0)',
     category: 'PCB Design',
@@ -98,17 +67,17 @@ export const PROJECTS: Project[] = [
     title: 'CUSTOM ARDUINO UNO COMPATIBLE BOARD',
     category: 'PCB Design',
     status: 'LIVE',
-    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1.jpg',
-    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1bot.jpg',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1003-2026-ArduinoUno-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1.jpg',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1003-2026-ArduinoUno-V1.github.io/main/Assets/PRJ-2026-PCB-0001-UNO-variant1bot.jpg',
     description: 'A custom-designed Arduino UNO-compatible development board built around the ATmega328P microcontroller. Replaces the classic USB-B connector with a modern USB Type-C interface using the CH340G USB-to-serial bridge, while keeping full pinout compatibility with the standard Arduino UNO shield ecosystem. Includes onboard 3.3V and 5V regulation, dual crystal oscillators, and an ICSP header for direct flashing.',
     mcu: 'ATmega328P / 8-bit AVR',
     pcbLayers: 2,
     dimensions: 'N/A',
     clockSpeed: '16 MHz',
     interfaces: ['USB Type-C (CH340G)', 'UART', 'SPI', 'I2C', 'ICSP (2x3)', 'Arduino UNO Shield Header'],
-    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-2026-PCB-0001-UNO-V1.github.io/',
-    githubUrl: 'https://github.com/hiibrarahmad/PRJ-2026-PCB-0001-UNO-V1.github.io',
-    projectId: 'PRJ-2026-PCB-0001-UNO-V1',
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1003-2026-ArduinoUno-V1.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1003-2026-ArduinoUno-V1.github.io',
+    projectId: 'PRJ-PCB-1003',
     features: [
       'USB Type-C connector via CH340G bridge (replaces legacy USB-B)',
       'Onboard 3.3V and 5V SOT-223 LDO regulation',
@@ -121,6 +90,37 @@ export const PROJECTS: Project[] = [
       { name: 'CH340G_BRIDGE', type: 'USB-Serial Bridge', pkg: 'SOP16', purpose: 'USB Type-C to UART Conversion', pos: [1.2, 0.4, 0.1], color: '#222222' },
       { name: 'LDO_5V', type: 'Voltage Regulator', pkg: 'SOT-223', purpose: '5V Rail Regulation', pos: [-1.3, -0.5, 0.1], color: '#333333' },
       { name: 'LDO_3V3', type: 'Voltage Regulator', pkg: 'SOT-223', purpose: '3.3V Rail Regulation', pos: [1.3, -0.6, 0.1], color: '#1a1a1a' }
+    ]
+  },
+  {
+    id: 'smart-watch-pcb',
+    title: 'DUAL-BOARD SMART WATCH PLATFORM',
+    category: 'PCB Design',
+    status: 'LIVE',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io/main/src/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg',
+    description: 'A compact dual-board smart watch platform: a main application board built around the Nordic nRF5340 dual-core SoC, and a separate wireless-charging board with Qi inductive charging and PPG/SpO2/ECG sensing. The main board drives a 1.54" IPS color LCD and a 1.54" e-Paper display, and integrates a 6-axis IMU, environmental sensor, CO2/TVOC sensor, and a digital MEMS microphone.',
+    mcu: 'Nordic nRF5340 (dual-core Cortex-M33: App @ 128 MHz + Net @ 64 MHz)',
+    pcbLayers: 4,
+    dimensions: 'N/A',
+    clockSpeed: '128 MHz (App core) / 64 MHz (Net core)',
+    interfaces: ['Bluetooth 5.3 LE', 'SPI (displays/IMU/EEPROM)', 'I2C (BME680/CCS811/MAX86150)', 'PDM Microphone', 'USB-C', 'SWD/JTAG'],
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-2026-PCB-0002-SMART_WATCH.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-2026-PCB-0002-SMART_WATCH.github.io',
+    projectId: 'PRJ-2026-PCB-0002-SMART_WATCH',
+    features: [
+      'Dual-board design: nRF5340 main board + dedicated Qi wireless-charging board',
+      'Dual display: always-on 1.54" IPS color LCD plus 1.54" e-Paper for low-power ambient mode',
+      'Health sensing via MAX86150 (PPG/SpO2/ECG analog front-end) on the charger board',
+      'Environmental sensing (BME680: temp/humidity/pressure/gas) and air quality (CCS811: CO2/TVOC)',
+      '6-axis IMU (ICM-20689) plus digital MEMS microphone; 4-layer impedance-controlled stackup'
+    ],
+    components: [
+      { name: 'NRF5340_SOC', type: 'Dual-Core RF SoC', pkg: 'AQFN73', purpose: 'BLE 5.3 App + Net Core Processor', pos: [-0.6, 0.3, 0.15], color: '#111111' },
+      { name: 'MAX86150_AFE', type: 'Bio-Sensor AFE', pkg: 'OLGA', purpose: 'PPG/SpO2/ECG Analog Front End', pos: [1.2, -0.3, 0.12], color: '#222222' },
+      { name: 'ICM20689_IMU', type: '6-Axis IMU', pkg: 'LGA14', purpose: 'Motion & Gesture Sensing', pos: [-1.1, -0.6, 0.1], color: '#333333' },
+      { name: 'BME680_ENV', type: 'Environmental Sensor', pkg: 'LGA8', purpose: 'Temp/Humidity/Pressure/Gas', pos: [0.6, 0.7, 0.1], color: '#1a1a1a' },
+      { name: 'BQ51003_QI', type: 'Wireless Charge Receiver', pkg: 'QFN20', purpose: 'Qi Inductive Charging Front End', pos: [1.6, 0.4, 0.15], color: '#2a2a2a' }
     ]
   },
   {
