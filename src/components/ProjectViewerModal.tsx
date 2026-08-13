@@ -9,6 +9,50 @@ interface ProjectViewerModalProps {
   onClose: () => void;
 }
 
+// occt-import-js is loaded as a plain script (public/occt-import-js.js +
+// public/occt-import-js.wasm) rather than bundled — it's a large (~7MB)
+// Emscripten/WASM build only needed by the handful of projects with a real
+// STEP model, so it's fetched lazily and cached at module scope so opening
+// the modal more than once doesn't re-fetch/re-init it.
+let occtInstancePromise: Promise<any> | null = null;
+function loadOcct(): Promise<any> {
+  if (occtInstancePromise) return occtInstancePromise;
+  occtInstancePromise = new Promise((resolve, reject) => {
+    const existing = (window as any).occtimportjs;
+    const init = () => {
+      (window as any).occtimportjs({ locateFile: () => '/occt-import-js.wasm' })
+        .then(resolve)
+        .catch(reject);
+    };
+    if (existing) {
+      init();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = '/occt-import-js.js';
+    script.onload = init;
+    script.onerror = () => reject(new Error('Failed to load occt-import-js.js'));
+    document.head.appendChild(script);
+  });
+  return occtInstancePromise;
+}
+
+// Shared by both the pre-converted-OBJ path and the raw-STEP path: Three.js
+// applies scale to local geometry before translation, so the centering
+// offset must be computed from the *scaled* bounding box, not the raw one.
+function centerAndScaleObject(obj: THREE.Object3D, targetSize = 4) {
+  const rawBox = new THREE.Box3().setFromObject(obj);
+  const rawSize = new THREE.Vector3();
+  rawBox.getSize(rawSize);
+  const maxDim = Math.max(rawSize.x, rawSize.y, rawSize.z) || 1;
+  obj.scale.setScalar(targetSize / maxDim);
+
+  const scaledBox = new THREE.Box3().setFromObject(obj);
+  const center = new THREE.Vector3();
+  scaledBox.getCenter(center);
+  obj.position.sub(center);
+}
+
 export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project, onClose }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeTab, setActiveTab] = useState<'3d' | 'stackup' | 'signal' | 'logs'>('3d');
@@ -86,26 +130,54 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
     // loaded models don't have per-part meshes to click/inspect)
     const componentMeshes: { mesh: THREE.Mesh; data: typeof project.components[0] }[] = [];
 
+    const stepUrl = project.stepModelUrl;
     const objUrl = project.objModelUrl;
     const mtlUrl = project.mtlModelUrl;
+    let cancelled = false;
 
-    if (objUrl) {
-      // Real STEP-exported 3D model — load it instead of the procedural PCB
+    if (stepUrl) {
+      // Real raw STEP (.step/.stp) model — parsed client-side via
+      // occt-import-js (WASM build of OpenCascade) since Three.js has no
+      // built-in STEP support. Mesh data comes back already in a
+      // three.js-compatible position/normal/index layout.
+      (async () => {
+        try {
+          const [occt, response] = await Promise.all([loadOcct(), fetch(stepUrl)]);
+          const buffer = await response.arrayBuffer();
+          const result = occt.ReadStepFile(new Uint8Array(buffer), null);
+          if (cancelled || !result.success) return;
+
+          const group = new THREE.Group();
+          for (const meshData of result.meshes) {
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(meshData.attributes.position.array, 3));
+            if (meshData.attributes.normal) {
+              geometry.setAttribute('normal', new THREE.Float32BufferAttribute(meshData.attributes.normal.array, 3));
+            } else {
+              geometry.computeVertexNormals();
+            }
+            geometry.setIndex(new THREE.Uint32BufferAttribute(meshData.index.array, 1));
+
+            const color = meshData.color
+              ? new THREE.Color(meshData.color[0], meshData.color[1], meshData.color[2])
+              : new THREE.Color(0x888888);
+            const material = new THREE.MeshStandardMaterial({ color, roughness: 0.4, metalness: 0.4 });
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            group.add(mesh);
+          }
+
+          centerAndScaleObject(group);
+          if (!cancelled) pcbGroup.add(group);
+        } catch (err) {
+          console.error('Failed to load STEP model:', err);
+        }
+      })();
+    } else if (objUrl) {
+      // Real 3D model pre-converted to OBJ+MTL — load it instead of the procedural PCB
       const onModelLoaded = (obj: THREE.Group) => {
-        // Scale first, then center — Three.js applies scale to local
-        // geometry before translation, so centering with a pre-scale
-        // offset puts the model outside the camera's view once scaled.
-        const rawBox = new THREE.Box3().setFromObject(obj);
-        const rawSize = new THREE.Vector3();
-        rawBox.getSize(rawSize);
-        const maxDim = Math.max(rawSize.x, rawSize.y, rawSize.z) || 1;
-        obj.scale.setScalar(4 / maxDim);
-
-        const scaledBox = new THREE.Box3().setFromObject(obj);
-        const center = new THREE.Vector3();
-        scaledBox.getCenter(center);
-        obj.position.sub(center);
-
+        centerAndScaleObject(obj);
         obj.traverse((child) => {
           const mesh = child as THREE.Mesh;
           if (mesh.isMesh) {
@@ -310,6 +382,7 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
     window.addEventListener('resize', handleResize);
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', handleResize);
       dom.removeEventListener('mousedown', onMouseDown);
@@ -453,7 +526,7 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
                     </div>
 
                     {/* Selected component inspector — only meaningful for the procedural view */}
-                    {!project.objModelUrl && (
+                    {!project.objModelUrl && !project.stepModelUrl && (
                     <div className="mt-4 border-t border-white/15 pt-3">
                       <span className="text-[#00F0FF] text-[11px] font-bold block mb-2">
                         INSPECT COMPONENT (CLICK 3D BOARD)

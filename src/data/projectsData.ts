@@ -130,17 +130,18 @@ export const PROJECTS: Project[] = [
     title: 'DUAL-BOARD SMART WATCH PLATFORM',
     category: 'PCB Design',
     status: 'LIVE',
-    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2026-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg',
-    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2026-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCH.jpg',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/IMAGES/PRJ-2026-PCB-0002-SMART_WATCHBOT.jpg',
     description: 'A compact dual-board smart watch platform: a main application board built around the Nordic nRF5340 dual-core SoC, and a separate wireless-charging board with Qi inductive charging and PPG/SpO2/ECG sensing. The main board drives a 1.54" IPS color LCD and a 1.54" e-Paper display, and integrates a 6-axis IMU, environmental sensor, CO2/TVOC sensor, and a digital MEMS microphone.',
     mcu: 'Nordic nRF5340 (dual-core Cortex-M33: App @ 128 MHz + Net @ 64 MHz)',
     pcbLayers: 4,
     dimensions: 'N/A',
     clockSpeed: '128 MHz (App core) / 64 MHz (Net core)',
     interfaces: ['Bluetooth 5.3 LE', 'SPI (displays/IMU/EEPROM)', 'I2C (BME680/CCS811/MAX86150)', 'PDM Microphone', 'USB-C', 'SWD/JTAG'],
-    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1005-2026-SmartWatch.github.io/',
-    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1005-2026-SmartWatch.github.io',
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1005-2024-SmartWatch.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io',
     projectId: 'PRJ-PCB-1005',
+    stepModelUrl: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1005-2024-SmartWatch.github.io/main/assets/SensCharger.step',
     features: [
       'Dual-board design: nRF5340 main board + dedicated Qi wireless-charging board',
       'Dual display: always-on 1.54" IPS color LCD plus 1.54" e-Paper for low-power ambient mode',
@@ -154,6 +155,38 @@ export const PROJECTS: Project[] = [
       { name: 'ICM20689_IMU', type: '6-Axis IMU', pkg: 'LGA14', purpose: 'Motion & Gesture Sensing', pos: [-1.1, -0.6, 0.1], color: '#333333' },
       { name: 'BME680_ENV', type: 'Environmental Sensor', pkg: 'LGA8', purpose: 'Temp/Humidity/Pressure/Gas', pos: [0.6, 0.7, 0.1], color: '#1a1a1a' },
       { name: 'BQ51003_QI', type: 'Wireless Charge Receiver', pkg: 'QFN20', purpose: 'Qi Inductive Charging Front End', pos: [1.6, 0.4, 0.15], color: '#2a2a2a' }
+    ]
+  },
+  {
+    id: 'atx-psu-tester',
+    title: 'ATX POWER SUPPLY TESTER',
+    category: 'PCB Design',
+    status: 'LIVE',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1006-2023-ATXPSUTester.github.io/main/assets/ATXPSUTester-TOP.png',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1006-2023-ATXPSUTester.github.io/main/assets/ATXPSUTester-BOT.png',
+    description: 'The designer\'s first PCB — an ATX power supply tester and load monitor, controlled by an STM32 Nucleo-32 (STM32L432KC). Switches and loads ATX rails (PSON, +12V, +5V) via two independent MOSFET channels, and measures the resulting load current via dual op-amp current-sense stages on each channel, through a standard 24-pin ATX power connector.',
+    mcu: 'STM32L432KC (Nucleo-32)',
+    pcbLayers: 2,
+    dimensions: 'N/A',
+    clockSpeed: 'N/A — MCU-driven control, no dedicated high-speed clock domain',
+    interfaces: ['24-pin ATX power connector', 'PSON / +12VO / +5VO / COM', '2x MOSFET load channels', '2x op-amp current-sense channels'],
+    schematicsUrl: 'https://hiibrarahmad.github.io/PRJ-PCB-1006-2023-ATXPSUTester.github.io/',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-PCB-1006-2023-ATXPSUTester.github.io',
+    projectId: 'PRJ-PCB-1006',
+    stepModelUrl: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-PCB-1006-2023-ATXPSUTester.github.io/main/assets/ATXPSUTester.step',
+    features: [
+      'Two independent MOSFET (AUIRFZ44N) load-switching channels for ATX rail testing',
+      'Dual op-amp (LM358P) current-sense amplifier per channel for load current measurement',
+      '24-position, 4.2mm-pitch ATX-standard power connector (PSON/+12V/+5V/COM)',
+      'STM32 Nucleo-32 (STM32L432KC) control and readout',
+      'Designer\'s first PCB — originally designed in Altium, early 2024'
+    ],
+    components: [
+      { name: 'MOSFET_CH1', type: 'Power MOSFET', pkg: 'TO-220', purpose: 'AUIRFZ44N — Rail Load Switch, Channel 1', pos: [-0.9, 0.4, 0.2], color: '#111111' },
+      { name: 'MOSFET_CH2', type: 'Power MOSFET', pkg: 'TO-220', purpose: 'AUIRFZ44N — Rail Load Switch, Channel 2', pos: [0.9, 0.4, 0.2], color: '#111111' },
+      { name: 'SENSE_AMP1', type: 'Current Sense Amp', pkg: 'DIP8', purpose: 'LM358P — Channel 1 Current Sense', pos: [-1.2, -0.5, 0.1], color: '#222222' },
+      { name: 'SENSE_AMP2', type: 'Current Sense Amp', pkg: 'DIP8', purpose: 'LM358P — Channel 2 Current Sense', pos: [1.2, -0.5, 0.1], color: '#222222' },
+      { name: 'ATX_CONN', type: 'Power Connector', pkg: '24-pos 4.2mm', purpose: 'Standard ATX Main Power Input', pos: [0, 0.8, 0.15], color: '#333333' }
     ]
   },
   {
