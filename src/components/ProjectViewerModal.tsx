@@ -158,10 +158,17 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
             }
             geometry.setIndex(new THREE.Uint32BufferAttribute(meshData.index.array, 1));
 
+            // Most STEP exports (KiCad included) only carry color data on a
+            // handful of parts (connectors, ICs) — the bare board substrate
+            // usually has none. Falling back to flat gray reads as an
+            // untextured CAD blob; a PCB-green, low-metalness fallback reads
+            // as an actual circuit board instead.
             const color = meshData.color
               ? new THREE.Color(meshData.color[0], meshData.color[1], meshData.color[2])
-              : new THREE.Color(0x888888);
-            const material = new THREE.MeshStandardMaterial({ color, roughness: 0.4, metalness: 0.4 });
+              : new THREE.Color(0x1c5c3a);
+            const material = meshData.color
+              ? new THREE.MeshStandardMaterial({ color, roughness: 0.4, metalness: 0.4 })
+              : new THREE.MeshStandardMaterial({ color, roughness: 0.55, metalness: 0.1 });
             const mesh = new THREE.Mesh(geometry, material);
             mesh.castShadow = true;
             mesh.receiveShadow = true;

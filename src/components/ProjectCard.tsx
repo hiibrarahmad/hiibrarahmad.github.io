@@ -53,7 +53,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
       )}
 
       {/* Text Overlay (Absolute Center) */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center z-20 pointer-events-none bg-black/40 group-hover:bg-black/20 transition-colors duration-500 px-4">
+      <div className="absolute inset-0 flex flex-col justify-center items-center z-20 pointer-events-none bg-black/25 group-hover:bg-black/15 transition-colors duration-500 px-4">
         <h3 className="font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl md:text-5xl font-bold text-[#F0F0F0] tracking-widest text-center group-hover:scale-105 transition-transform duration-500 drop-shadow-md">
           {title}
         </h3>
@@ -71,10 +71,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
         <img
           src={leftImage}
           alt={`${title} Render Left`}
-          className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          className="w-full h-full object-contain brightness-100 group-hover:brightness-110 transition-[filter] duration-500"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/5 to-transparent" />
       </div>
 
       {/* Right Image Split */}
@@ -82,10 +82,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
         <img
           src={rightImage}
           alt={`${title} Render Right`}
-          className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          className="w-full h-full object-contain brightness-100 group-hover:brightness-110 transition-[filter] duration-500"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-black/5 to-transparent" />
       </div>
 
       {/* Bottom specs preview bar */}
