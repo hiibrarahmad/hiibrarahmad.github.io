@@ -68,9 +68,9 @@ export default function App() {
     if (!matchesSearch) return false;
 
     if (!selectedTag) return true;
-    if (selectedTag === 'high-speed') return project.pcbLayers >= 6 || project.title.includes('TRANSCEIVER') || project.title.includes('DERMSCOPE');
-    if (selectedTag === 'firmware') return project.mcu.length > 0;
-    if (selectedTag === 'pcb') return project.pcbLayers >= 4;
+    if (selectedTag === 'high-speed') return project.pcbLayers >= 4;
+    if (selectedTag === 'firmware') return project.category === 'Firmware';
+    if (selectedTag === 'pcb') return project.category === 'PCB Design';
 
     return true;
   });
@@ -105,6 +105,11 @@ export default function App() {
             <FeaturesBadges
               selectedTag={selectedTag}
               onSelectTag={setSelectedTag}
+              counts={{
+                'high-speed': PROJECTS.filter((p) => p.pcbLayers >= 4).length,
+                firmware: PROJECTS.filter((p) => p.category === 'Firmware').length,
+                pcb: PROJECTS.filter((p) => p.category === 'PCB Design').length,
+              }}
             />
 
             {/* Hardware Repositories Section */}
