@@ -289,6 +289,36 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'arduino-avr-alarm-clock',
+    title: 'ARDUINO AVR ALARM CLOCK',
+    category: 'Firmware',
+    status: 'ARCHIVED',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4001-2020-ArduinoAVRAlarmClock/main/assets/AlarmClock-Left-MCU.png',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4001-2020-ArduinoAVRAlarmClock/main/assets/AlarmClock-Right-LCD.png',
+    description: 'A university semester project: a digital alarm clock built around the ATmega328P. Keeps time entirely in software via a Timer1 1Hz interrupt (no RTC module), shows HH:MM:SS and alarm status on a 16x2 character LCD, reads five push buttons for setting the clock/alarm and toggling the alarm on/off, and drives a buzzer when the clock time matches the alarm time. Designed and simulated in Proteus 8 Professional; also built on breadboard.',
+    mcu: 'ATmega328P',
+    pcbLayers: 0,
+    dimensions: 'N/A — breadboard build, Proteus 8 Professional simulation',
+    clockSpeed: '16 MHz (external crystal)',
+    interfaces: ['16x2 character LCD (4-bit, bit-banged)', '5x push button (PORTC1-4, PORTB4)', 'IR sensor input (backlight trigger)', 'Active buzzer (PORTC0)'],
+    schematicsUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4001-2020-ArduinoAVRAlarmClock',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4001-2020-ArduinoAVRAlarmClock',
+    projectId: 'PRJ-FW-4001',
+    features: [
+      'Software-clocked timekeeping via a Timer1 CTC interrupt (16MHz / 1024 prescaler, 1 tick/second) — no RTC chip',
+      '16x2 character LCD shows live HH:MM:SS plus alarm time/status',
+      'Five push buttons: set minutes, set hours, set alarm minutes, set alarm hours, alarm on/off',
+      'IR sensor input lights the LCD backlight for a few seconds when triggered',
+      'Designed and verified in Proteus 8 Professional, 2020 — also built on breadboard'
+    ],
+    components: [
+      { name: 'ATMEGA328P_MCU', type: 'AVR Microcontroller', pkg: 'DIP-28', purpose: 'Main clock/alarm logic, Timer1-based timekeeping', pos: [-0.8, 0.2, 0.1], color: '#00F0FF' },
+      { name: 'LCD1', type: '16x2 Character LCD', pkg: 'HD44780-compatible', purpose: 'Displays time and alarm status', pos: [1.0, 0.3, 0.12], color: '#1a3a1a' },
+      { name: 'X1_CRYSTAL', type: 'Crystal Oscillator', pkg: 'HC-49', purpose: '16MHz system clock', pos: [-1.1, -0.5, 0.08], color: '#2a2a2a' },
+      { name: 'BUZZER', type: 'Active Buzzer', pkg: 'THT', purpose: 'Alarm sound output', pos: [0.3, -0.6, 0.1], color: '#FF4D00' }
+    ]
+  },
+  {
     id: 'neural-signal-acquisition',
     title: 'NEURAL SIGNAL ACQUISITION',
     category: 'Bio-Potential Sensing',
