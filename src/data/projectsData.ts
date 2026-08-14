@@ -260,6 +260,35 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'esp32-bt-audio-stream-test',
+    title: 'ESP32 BT AUDIO STREAM TEST',
+    category: 'Firmware',
+    status: 'LIVE',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4000-2019-ESP32-BTAudioStreamTest/main/assets/a2dp-sink-flow.svg',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4000-2019-ESP32-BTAudioStreamTest/main/assets/i2s-audio-out.svg',
+    description: 'A firmware test of the ESP-IDF Bluedroid A2DP sink stack against a real I2S audio path — no custom PCB, runs on a generic ESP32 DevKit. The ESP32 advertises itself over classic Bluetooth as "ESP32-SPEAKER", accepts a streamed audio connection from any paired phone/PC, and writes the decoded PCM straight out over I2S to an external DAC/amplifier. AVRCP rides alongside it for play/pause/volume feedback and track metadata. Originally built in 2019 to prove the streaming + I2S path end-to-end, not as a finished product.',
+    mcu: 'ESP32 (generic DevKit — dual-core Xtensa LX6, no custom PCB)',
+    pcbLayers: 2,
+    dimensions: 'N/A — off-the-shelf ESP32 DevKit, firmware-only project',
+    clockSpeed: '240 MHz (ESP32 dual-core)',
+    interfaces: ['Classic Bluetooth — A2DP Sink + AVRCP Controller', 'I2S (GPIO27 BCLK / GPIO26 LRCK / GPIO25 DOUT)', 'UART 115200 (debug log)'],
+    schematicsUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4000-2019-ESP32-BTAudioStreamTest',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4000-2019-ESP32-BTAudioStreamTest',
+    projectId: 'PRJ-FW-4000',
+    features: [
+      'ESP-IDF Bluedroid A2DP sink — receives a live stereo audio stream over classic Bluetooth',
+      'AVRCP controller — play/pause/track-skip feedback plus title/artist/album metadata',
+      'I2S master/TX output at 44.1kHz 16-bit stereo, decoded PCM written straight to the DAC',
+      'Advertises as "ESP32-SPEAKER", no-PIN Just Works pairing',
+      'Single self-contained main.c — a 2019 test of the streaming + I2S path, not a product'
+    ],
+    components: [
+      { name: 'A2DP_SINK', type: 'BT Profile', pkg: 'Bluedroid', purpose: 'Receives decoded stereo PCM over classic Bluetooth', pos: [-1.0, 0.4, 0.1], color: '#00F0FF' },
+      { name: 'AVRCP_CT', type: 'BT Profile', pkg: 'Bluedroid', purpose: 'Play/pause/volume feedback + track metadata', pos: [1.0, 0.4, 0.1], color: '#FF4D00' },
+      { name: 'I2S_DRIVER', type: 'Peripheral Driver', pkg: 'I2S0', purpose: 'Master/TX, 44.1kHz 16-bit stereo PCM out', pos: [0, -0.5, 0.1], color: '#1a1a1a' }
+    ]
+  },
+  {
     id: 'neural-signal-acquisition',
     title: 'NEURAL SIGNAL ACQUISITION',
     category: 'Bio-Potential Sensing',
