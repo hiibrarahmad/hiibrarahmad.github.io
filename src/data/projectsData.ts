@@ -319,6 +319,36 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'comsats-avr-microprocessor-labs',
+    title: 'COMSATS AVR MICROPROCESSOR LABS',
+    category: 'Firmware',
+    status: 'ARCHIVED',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/7Segment-0-99-Counter/assets/Counter-ProteusSimulation.png',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/Matrix-Keypad/assets/Keypad-ProteusSimulation.png',
+    description: 'Nine AVR/ATmega328P projects from COMSATS University Islamabad\'s "Microprocessor Systems and Interfacing" course and the same 2021 learning period, consolidated into one repository: intro lab exercises, a debounced push-button toggle, an HC-SR04 ultrasonic sensor with LCD readout, a 3x4 matrix keypad scanner, a 7-segment 0-99 counter, two independent alarm-clock builds, and four EEE446 display-interfacing tasks. All work done in lab under the supervision of Khiyam Iftikhar, who built the real ground floor of my embedded systems knowledge.',
+    mcu: 'ATmega328P',
+    pcbLayers: 0,
+    dimensions: 'N/A — breadboard builds, Proteus 8 Professional simulation',
+    clockSpeed: '16 MHz (external crystal)',
+    interfaces: ['16x2 character LCD', '7-segment displays', '3x4 matrix keypad', 'HC-SR04 ultrasonic sensor', 'Push buttons', 'Active buzzer'],
+    schematicsUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs',
+    projectId: 'PRJ-FW-4002',
+    features: [
+      'Nine standalone AVR/ATmega328P exercises consolidated under one repository',
+      'Direct-register I/O (no framework) across Atmel Studio, plus Arduino IDE for the EEE446 tasks',
+      'Real Proteus 8 Professional schematic captures for the keypad, counter, toggle-button, and alarm clock builds',
+      'Covers digital I/O, debouncing, 7-segment multiplexing, matrix keypad scanning, ultrasonic ranging, and LCD interfacing',
+      'All work done in lab under the supervision of Khiyam Iftikhar, COMSATS University Islamabad'
+    ],
+    components: [
+      { name: 'ATMEGA328P_MCU', type: 'AVR Microcontroller', pkg: 'DIP-28', purpose: 'Common target across all nine lab exercises', pos: [-0.8, 0.2, 0.1], color: '#00F0FF' },
+      { name: 'LCD_16X2', type: 'Character LCD', pkg: 'HD44780-compatible', purpose: 'Text/counter display (ultrasonic, EEE446, alarm clocks)', pos: [1.0, 0.3, 0.12], color: '#1a3a1a' },
+      { name: 'MATRIX_KEYPAD', type: '3x4 Keypad', pkg: 'THT', purpose: 'Row/column scanned digit input', pos: [-1.1, -0.5, 0.08], color: '#2a2a2a' },
+      { name: 'HCSR04', type: 'Ultrasonic Sensor', pkg: 'THT', purpose: 'Trigger/echo distance ranging', pos: [0.3, -0.6, 0.1], color: '#FF4D00' }
+    ]
+  },
+  {
     id: 'neural-signal-acquisition',
     title: 'NEURAL SIGNAL ACQUISITION',
     category: 'Bio-Potential Sensing',
