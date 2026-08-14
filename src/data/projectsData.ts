@@ -346,6 +346,67 @@ export const PROJECTS: Project[] = [
       { name: 'LCD_16X2', type: 'Character LCD', pkg: 'HD44780-compatible', purpose: 'Text/counter display (ultrasonic, EEE446, alarm clocks)', pos: [1.0, 0.3, 0.12], color: '#1a3a1a' },
       { name: 'MATRIX_KEYPAD', type: '3x4 Keypad', pkg: 'THT', purpose: 'Row/column scanned digit input', pos: [-1.1, -0.5, 0.08], color: '#2a2a2a' },
       { name: 'HCSR04', type: 'Ultrasonic Sensor', pkg: 'THT', purpose: 'Trigger/echo distance ranging', pos: [0.3, -0.6, 0.1], color: '#FF4D00' }
+    ],
+    subProjects: [
+      {
+        id: 'lab-01',
+        title: 'Lab 1 — Development Tools',
+        description: 'First exercises across Arduino IDE, AVR Studio, Atmel Studio, and Proteus — direct-register LED blink on PORTB.',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Lab-01-Development-Tools'
+      },
+      {
+        id: 'lab-02',
+        title: 'Lab 2 — Digital I/O Ports',
+        description: 'Task 1 repeats the Lab 1 blink; Task 2 adds a debounced push button that cycles through 3 LEDs.',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Lab-02-Digital-IO-Ports'
+      },
+      {
+        id: 'toggle-led',
+        title: 'Toggle LED / Push Button',
+        description: 'A push button toggles an LED exactly once per press, regardless of how long it\'s held.',
+        image: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/Toggle-LED-Push-Button/assets/ProteusSimulation.png',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Toggle-LED-Push-Button'
+      },
+      {
+        id: 'ultrasonic',
+        title: 'HC-SR04 Ultrasonic Sensor',
+        description: 'Distance measured via Timer1 pulse-width capture, printed in centimeters to a 16x2 LCD.',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Ultrasonic-Sensor-HCSR04'
+      },
+      {
+        id: 'matrix-keypad',
+        title: 'Matrix Keypad',
+        description: '3x4 matrix keypad scanner (row/column debounced read), decoded digit drives indicator LEDs.',
+        image: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/Matrix-Keypad/assets/Keypad-ProteusSimulation.png',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Matrix-Keypad'
+      },
+      {
+        id: '7segment-counter',
+        title: '7-Segment 0–99 Counter',
+        description: 'Two common-anode 7-segment displays driven from lookup tables, counting 0–99.',
+        image: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/7Segment-0-99-Counter/assets/Counter-ProteusSimulation.png',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/7Segment-0-99-Counter'
+      },
+      {
+        id: 'alarm-clock',
+        title: 'Alarm Clock (ATmega328P)',
+        description: 'Full digital alarm clock — Timer1 software RTC, 16x2 LCD, 5 buttons, buzzer, IR-triggered backlight.',
+        image: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/Alarm-Clock-ATmega328P/assets/AlarmClock-ProteusSimulation.png',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Alarm-Clock-ATmega328P'
+      },
+      {
+        id: 'digital-clock-alarm-stopwatch-timer',
+        title: 'Clock / Alarm / Stopwatch / Timer',
+        description: 'A second, menu-driven take on the same idea — clock, alarm, stopwatch, and countdown timer on one LCD.',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/Digital-Clock-Alarm-Stopwatch-Timer'
+      },
+      {
+        id: 'eee446',
+        title: 'EEE446 — Real-Time Embedded Systems',
+        description: 'Four Arduino-IDE tasks: single & multiplexed 7-segment counters, plus two 16x2 LCD text-display exercises.',
+        image: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/main/EEE446-Real-Time-Embedded-Systems/Task1-7Segment-0-to-9/assets/diagram.png',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4002-2021-COMSATS-AVRMicroprocessorLabs/tree/main/EEE446-Real-Time-Embedded-Systems'
+      }
     ]
   },
   {

@@ -55,7 +55,8 @@ function centerAndScaleObject(obj: THREE.Object3D, targetSize = 4) {
 
 export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project, onClose }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [activeTab, setActiveTab] = useState<'3d' | 'stackup' | 'signal' | 'logs'>('3d');
+  const isFirmware = project?.category === 'Firmware';
+  const [activeTab, setActiveTab] = useState<'3d' | 'stackup' | 'signal' | 'logs' | 'overview'>(isFirmware ? 'overview' : '3d');
   const [selectedComponent, setSelectedComponent] = useState<typeof project.components[0] | null>(null);
   const [autorotate, setAutorotate] = useState(true);
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
@@ -64,6 +65,11 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
   const [traceWidth, setTraceWidth] = useState(6.0); // mils
   const [dielectricH, setDielectricH] = useState(4.2); // mils
   const [dielectricEr, setDielectricEr] = useState(4.3); // FR-4
+
+  // Firmware-only projects have no PCB to show — land on the overview tab instead.
+  useEffect(() => {
+    setActiveTab(project?.category === 'Firmware' ? 'overview' : '3d');
+  }, [project]);
 
   useEffect(() => {
     if (!project) return;
@@ -428,7 +434,8 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
                 {project.title}
               </h2>
               <p className="font-['JetBrains_Mono',monospace] text-[11px] text-[#00F0FF]">
-                {project.category} // {project.pcbLayers} LAYERS // {project.mcu}
+                {project.category}
+                {!isFirmware && <> // {project.pcbLayers} LAYERS</>} // {project.mcu}
                 {project.projectId && <span className="text-white/40"> // {project.projectId}</span>}
               </p>
             </div>
@@ -448,12 +455,18 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
 
           {/* Modal Tab Controls */}
           <div className="flex gap-2">
-            {[
-              { id: '3d', label: '3D PCB MODEL', icon: 'view_in_ar' },
-              { id: 'stackup', label: 'LAYER STACKUP', icon: 'layers' },
-              { id: 'signal', label: 'SIGNAL INTEGRITY', icon: 'query_stats' },
-              { id: 'logs', label: 'SWD TERMINAL', icon: 'terminal' },
-            ].map((tab) => (
+            {(isFirmware
+              ? [
+                  { id: 'overview', label: 'OVERVIEW', icon: 'info' },
+                  { id: 'logs', label: 'FIRMWARE TERMINAL', icon: 'terminal' },
+                ]
+              : [
+                  { id: '3d', label: '3D PCB MODEL', icon: 'view_in_ar' },
+                  { id: 'stackup', label: 'LAYER STACKUP', icon: 'layers' },
+                  { id: 'signal', label: 'SIGNAL INTEGRITY', icon: 'query_stats' },
+                  { id: 'logs', label: 'SWD TERMINAL', icon: 'terminal' },
+                ]
+            ).map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
@@ -480,6 +493,61 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
 
         {/* Content Body */}
         <div className="flex-grow w-full h-full relative overflow-hidden bg-[#131313]">
+          {/* FIRMWARE TAB: OVERVIEW (no PCB — no 3D canvas, no layer stackup) */}
+          {activeTab === 'overview' && (
+            <div className="w-full h-full overflow-y-auto p-5 md:p-8">
+              <div className="max-w-4xl mx-auto space-y-6">
+                <p className="font-['Plus_Jakarta_Sans',sans-serif] text-sm text-[#c6c6c7] leading-relaxed">
+                  {project.description}
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-['JetBrains_Mono',monospace] text-xs">
+                  <div className="bg-white/5 p-3 rounded border border-white/10">
+                    <span className="text-[#c6c6c7] block text-[10px]">MICROCONTROLLER</span>
+                    <strong className="text-[#00F0FF] text-sm">{project.mcu}</strong>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded border border-white/10">
+                    <span className="text-[#c6c6c7] block text-[10px]">CLOCK SPEED</span>
+                    <strong className="text-white">{project.clockSpeed}</strong>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded border border-white/10">
+                    <span className="text-[#c6c6c7] block text-[10px]">HARDWARE</span>
+                    <strong className="text-white">{project.dimensions}</strong>
+                  </div>
+                </div>
+
+                {project.interfaces.length > 0 && (
+                  <div>
+                    <span className="font-['JetBrains_Mono',monospace] text-[10px] text-[#FF4D00] font-bold tracking-widest block mb-2">
+                      INTERFACES
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {project.interfaces.map((iface, idx) => (
+                        <span key={idx} className="font-['JetBrains_Mono',monospace] text-[11px] bg-white/5 border border-white/10 text-[#c6c6c7] px-2.5 py-1 rounded">
+                          {iface}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <span className="font-['JetBrains_Mono',monospace] text-[10px] text-[#FF003C] font-bold tracking-widest block mb-2">
+                    FEATURES
+                  </span>
+                  <ul className="space-y-1.5 font-['Plus_Jakarta_Sans',sans-serif] text-xs text-[#c6c6c7]">
+                    {project.features.map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-1.5">
+                        <span className="text-[#00F0FF] font-bold">›</span>
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* TAB 1: 3D MODEL VIEW */}
           {activeTab === '3d' && (
             <div className="w-full h-full flex flex-col md:flex-row relative">

@@ -5,7 +5,9 @@ import { NavBar } from './components/NavBar';
 import { Hero } from './components/Hero';
 import { FeaturesBadges } from './components/FeaturesBadges';
 import { ProjectCard } from './components/ProjectCard';
+import { CategoryRoadmap } from './components/CategoryRoadmap';
 import { ProjectViewerModal } from './components/ProjectViewerModal';
+import { ProjectGridModal } from './components/ProjectGridModal';
 import { ConnectModal } from './components/ConnectModal';
 import { SchematicsSection } from './components/SchematicsSection';
 import { LabSection } from './components/LabSection';
@@ -172,6 +174,9 @@ export default function App() {
                 )}
               </div>
             </section>
+
+            {/* Category Roadmap */}
+            <CategoryRoadmap />
           </>
         )}
 
@@ -188,12 +193,19 @@ export default function App() {
       {/* Footer Mission Control */}
       <Footer telemetry={telemetry} />
 
-      {/* 3D PCB Interactive Viewer Modal */}
+      {/* 3D PCB Interactive Viewer Modal, or a grid picker for multi-project repos */}
       {active3DProject && (
-        <ProjectViewerModal
-          project={active3DProject}
-          onClose={() => setActive3DProject(null)}
-        />
+        active3DProject.subProjects ? (
+          <ProjectGridModal
+            project={active3DProject}
+            onClose={() => setActive3DProject(null)}
+          />
+        ) : (
+          <ProjectViewerModal
+            project={active3DProject}
+            onClose={() => setActive3DProject(null)}
+          />
+        )
       )}
 
       {/* Direct Transmission Connect Modal */}

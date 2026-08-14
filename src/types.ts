@@ -35,6 +35,18 @@ export interface Project {
     pos: [number, number, number];
     color: string;
   }[];
+  /**
+   * When set, this project represents a collection of independent sub-projects
+   * (e.g. a consolidated multi-repo monorepo) rather than one board. Clicking
+   * the card opens a grid picker instead of the standard 3D viewer modal.
+   */
+  subProjects?: {
+    id: string;
+    title: string;
+    description: string;
+    image?: string;
+    githubUrl: string;
+  }[];
 }
 
 export interface SystemTelemetry {
