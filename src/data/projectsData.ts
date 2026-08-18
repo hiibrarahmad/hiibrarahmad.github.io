@@ -410,6 +410,59 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: 'smart-video-doorbell',
+    title: 'SMART VIDEO DOORBELL',
+    category: 'Firmware',
+    status: 'ARCHIVED',
+    leftImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule/main/assets/system-architecture.svg',
+    rightImage: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule/main/assets/HomeModule-Schematic.png',
+    description: 'Final year project (COMSATS University Islamabad): a two-ESP32 smart video doorbell. The door unit is an ESP32-CAM that streams the visitor\'s photo and captures their voice through a MAX9814 mic, then drives a servo latch to release the door. The indoor unit hosts the WiFi AP and WebSockets server, decodes the JPEG onto a TFT display, and plays the visitor audio through a MAX98357A I2S amplifier. A Flutter companion app connects to the same endpoint as a portable second screen.',
+    mcu: 'ESP32-CAM (AI-Thinker) + ESP32',
+    pcbLayers: 0,
+    dimensions: 'N/A — two module boards, no custom PCB',
+    clockSpeed: '240 MHz (ESP32 dual-core)',
+    interfaces: ['WebSockets over WiFi AP (192.168.4.1:8888)', 'OV2640 camera', 'MAX9814 mic (ADC)', 'MAX98357A I2S speaker', 'TFT display (TJpg_Decoder)', 'Servo door latch'],
+    schematicsUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule',
+    githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule',
+    projectId: 'PRJ-FW-4003',
+    features: [
+      'Two-ESP32 system: door unit (camera + mic + servo) and indoor unit (display + speaker)',
+      'Live JPEG video streamed door-to-indoor over WebSockets on a self-hosted WiFi AP',
+      'Two-way path: visitor audio in via MAX9814, playback out via MAX98357A I2S amplifier',
+      'Servo door latch released remotely from the indoor unit',
+      'Flutter companion app as a portable second screen on the same WebSockets endpoint',
+      'Full evolution preserved in each repo\'s history/ folder — 2022-12 through 2023-06'
+    ],
+    components: [
+      { name: 'ESP32_CAM', type: 'Camera MCU', pkg: 'AI-Thinker', purpose: 'Door unit — OV2640 capture + WebSockets client', pos: [-1.0, 0.3, 0.12], color: '#00F0FF' },
+      { name: 'ESP32_HOME', type: 'MCU', pkg: 'DevKit', purpose: 'Indoor unit — WebSockets server + FreeRTOS tasks', pos: [1.0, 0.3, 0.12], color: '#FF4D00' },
+      { name: 'MAX9814', type: 'Mic Amplifier', pkg: 'THT', purpose: 'Visitor voice capture at the door (ADC33)', pos: [-1.1, -0.5, 0.1], color: '#2a2a2a' },
+      { name: 'MAX98357A', type: 'I2S Class-D Amp', pkg: 'THT', purpose: 'Visitor audio playback indoors', pos: [1.1, -0.5, 0.1], color: '#1a3a1a' },
+      { name: 'SERVO', type: 'Door Latch', pkg: 'SG90', purpose: 'Remote door release (GPIO16)', pos: [0, -0.7, 0.1], color: '#FF003C' }
+    ],
+    subProjects: [
+      {
+        id: 'cam-module',
+        title: '🚪 Cam Module — Door Unit',
+        description: 'ESP32-CAM: camera + MAX9814 mic + servo door latch + bell/talk buttons. WebSockets client. Includes 3 earlier stages and 2 prototypes.',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-CamModule'
+      },
+      {
+        id: 'home-module',
+        title: '🏠 Home Module — Indoor Unit',
+        description: 'ESP32 + TFT display + MAX98357A speaker. Hosts the WiFi AP and WebSockets server. Holds the most recent commit of the whole FYP (2023-06-06).',
+        image: 'https://raw.githubusercontent.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule/main/assets/HomeModule-Schematic.png',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule'
+      },
+      {
+        id: 'mobile-app',
+        title: '📱 Flutter Companion App',
+        description: 'Mobile client on the same :8888 WebSockets endpoint — a portable second screen for the door camera.',
+        githubUrl: 'https://github.com/hiibrarahmad/PRJ-FW-4003-2023-SmartDoorbell-HomeModule/tree/main/mobile-app'
+      }
+    ]
+  },
+  {
     id: 'neural-signal-acquisition',
     title: 'NEURAL SIGNAL ACQUISITION',
     category: 'Bio-Potential Sensing',
