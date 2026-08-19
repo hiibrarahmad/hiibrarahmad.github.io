@@ -103,7 +103,7 @@ export const AboutSection: React.FC = () => {
             </div>
             <div className="flex justify-between text-[#c6c6c7]">
               <span>EMAIL:</span>
-              <span className="text-white font-semibold">ibrar.ahmad@mindtuneinnovations.tech</span>
+              <span className="text-white font-semibold">hiibrarahmad@gmail.com</span>
             </div>
           </div>
         </div>

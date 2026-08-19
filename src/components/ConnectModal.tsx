@@ -120,7 +120,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
               <div className="bg-black/50 p-3 rounded border border-white/10 text-[11px] text-[#c6c6c7] flex justify-between items-center">
                 <div>
                   <span className="block text-white font-bold">DIRECT EMAIL</span>
-                  <span>ibrar.ahmad@mindtuneinnovations.tech</span>
+                  <span>hiibrarahmad@gmail.com</span>
                 </div>
                 <div className="text-right">
                   <span className="block text-[#00F0FF] font-bold">PGP FINGERPRINT</span>
