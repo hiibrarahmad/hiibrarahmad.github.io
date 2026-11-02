@@ -19,6 +19,10 @@ export interface Project {
   interfaces: string[];
   schematicsUrl?: string;
   githubUrl?: string;
+  /** Software projects: the live app (GitHub Pages) or the download page, shown as an "open app" button in the detail modal. */
+  liveUrl?: string;
+  /** Label for the liveUrl button, e.g. 'OPEN APP' or 'DOWNLOAD'. Defaults to 'OPEN APP'. */
+  liveLabel?: string;
   projectId?: string;
   /** Real STEP-exported 3D model, pre-converted to OBJ, rendered instead of the procedural PCB view when present. */
   objModelUrl?: string;

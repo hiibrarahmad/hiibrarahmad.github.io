@@ -90,9 +90,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpen3DViewe
 
       {/* Bottom specs preview bar */}
       <div className="absolute bottom-2 left-4 right-4 z-30 hidden group-hover:flex justify-between items-center text-[11px] font-['JetBrains_Mono',monospace] text-[#c6c6c7] bg-black/80 backdrop-blur-md px-3 py-1.5 border border-white/10 rounded">
-        <span>MCU: <strong className="text-[#00F0FF]">{project.mcu}</strong></span>
-        <span>LAYERS: <strong className="text-[#FF4D00]">{project.pcbLayers}L PCB</strong></span>
-        <span>CLOCK: <strong className="text-white">{project.clockSpeed}</strong></span>
+        {project.category === 'Software' ? (
+          <>
+            <span>PLATFORM: <strong className="text-[#00F0FF]">{project.mcu}</strong></span>
+            <span>STACK: <strong className="text-white">{project.clockSpeed}</strong></span>
+          </>
+        ) : (
+          <>
+            <span>MCU: <strong className="text-[#00F0FF]">{project.mcu}</strong></span>
+            <span>LAYERS: <strong className="text-[#FF4D00]">{project.pcbLayers}L PCB</strong></span>
+            <span>CLOCK: <strong className="text-white">{project.clockSpeed}</strong></span>
+          </>
+        )}
       </div>
     </div>
   );

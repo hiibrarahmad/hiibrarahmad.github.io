@@ -71,6 +71,7 @@ export default function App() {
     if (selectedTag === 'high-speed') return project.pcbLayers >= 4;
     if (selectedTag === 'firmware') return project.category === 'Firmware';
     if (selectedTag === 'pcb') return project.category === 'PCB Design';
+    if (selectedTag === 'software') return project.category === 'Software';
 
     return true;
   });
@@ -109,6 +110,7 @@ export default function App() {
                 'high-speed': PROJECTS.filter((p) => p.pcbLayers >= 4).length,
                 firmware: PROJECTS.filter((p) => p.category === 'Firmware').length,
                 pcb: PROJECTS.filter((p) => p.category === 'PCB Design').length,
+                software: PROJECTS.filter((p) => p.category === 'Software').length,
               }}
             />
 

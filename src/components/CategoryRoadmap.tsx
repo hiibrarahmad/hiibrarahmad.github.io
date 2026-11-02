@@ -10,7 +10,7 @@ interface RoadmapCategory {
 const ROADMAP: RoadmapCategory[] = [
   { code: 'PCB', label: 'PCB Hardware', icon: 'developer_board', status: 'IN PROGRESS' },
   { code: 'FW', label: 'Firmware & Embedded', icon: 'memory', status: 'IN PROGRESS' },
-  { code: 'APP', label: 'Apps & Software', icon: 'apps', status: 'QUEUED' },
+  { code: 'APP', label: 'Apps & Software', icon: 'apps', status: 'IN PROGRESS' },
   { code: 'EEG', label: 'EEG & BCI', icon: 'psychology', status: 'QUEUED' },
   { code: 'AUD', label: 'Audio & TWS', icon: 'graphic_eq', status: 'QUEUED' },
   { code: 'REV', label: 'Reverse Engineering', icon: 'search', status: 'QUEUED' },

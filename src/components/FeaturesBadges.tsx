@@ -24,6 +24,13 @@ export const FeaturesBadges: React.FC<FeaturesBadgesProps> = ({ selectedTag, onS
       glow: 'hover:shadow-[0_0_20px_rgba(255,77,0,0.4)]'
     },
     {
+      id: 'software',
+      label: 'Apps & Software',
+      icon: 'apps',
+      color: 'border-b-[#7CFF4D] text-[#7CFF4D]',
+      glow: 'hover:shadow-[0_0_20px_rgba(124,255,77,0.4)]'
+    },
+    {
       id: 'high-speed',
       label: '4+ Layer PCBs',
       icon: 'memory',

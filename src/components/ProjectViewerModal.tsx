@@ -56,7 +56,9 @@ function centerAndScaleObject(obj: THREE.Object3D, targetSize = 4) {
 export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project, onClose }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isFirmware = project?.category === 'Firmware';
-  const [activeTab, setActiveTab] = useState<'3d' | 'stackup' | 'signal' | 'logs' | 'overview'>(isFirmware ? 'overview' : '3d');
+  // Software projects have no board and no MCU — overview tab only, no PCB/SWD tabs.
+  const isSoftware = project?.category === 'Software';
+  const [activeTab, setActiveTab] = useState<'3d' | 'stackup' | 'signal' | 'logs' | 'overview'>(isFirmware || isSoftware ? 'overview' : '3d');
   const [selectedComponent, setSelectedComponent] = useState<typeof project.components[0] | null>(null);
   const [autorotate, setAutorotate] = useState(true);
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
@@ -66,9 +68,9 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
   const [dielectricH, setDielectricH] = useState(4.2); // mils
   const [dielectricEr, setDielectricEr] = useState(4.3); // FR-4
 
-  // Firmware-only projects have no PCB to show — land on the overview tab instead.
+  // Firmware-only and software projects have no PCB to show — land on the overview tab instead.
   useEffect(() => {
-    setActiveTab(project?.category === 'Firmware' ? 'overview' : '3d');
+    setActiveTab(project?.category === 'Firmware' || project?.category === 'Software' ? 'overview' : '3d');
   }, [project]);
 
   useEffect(() => {
@@ -435,7 +437,7 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
               </h2>
               <p className="font-['JetBrains_Mono',monospace] text-[11px] text-[#00F0FF]">
                 {project.category}
-                {!isFirmware && <> // {project.pcbLayers} LAYERS</>} // {project.mcu}
+                {!isFirmware && !isSoftware && <> // {project.pcbLayers} LAYERS</>} // {project.mcu}
                 {project.projectId && <span className="text-white/40"> // {project.projectId}</span>}
               </p>
             </div>
@@ -451,11 +453,25 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
                 <span className="hidden sm:inline">GITHUB REPO</span>
               </a>
             )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="font-['JetBrains_Mono',monospace] text-xs font-bold px-3 py-1.5 rounded transition-all flex items-center gap-1.5 border bg-[#00F0FF]/15 border-[#00F0FF]/60 text-[#00F0FF] hover:bg-[#00F0FF]/25"
+              >
+                <span className="material-symbols-outlined text-sm">open_in_new</span>
+                <span className="hidden sm:inline">{project.liveLabel ?? 'OPEN APP'}</span>
+              </a>
+            )}
           </div>
 
           {/* Modal Tab Controls */}
           <div className="flex gap-2">
-            {(isFirmware
+            {(isSoftware
+              ? [{ id: 'overview', label: 'OVERVIEW', icon: 'info' }]
+              : isFirmware
               ? [
                   { id: 'overview', label: 'OVERVIEW', icon: 'info' },
                   { id: 'logs', label: 'FIRMWARE TERMINAL', icon: 'terminal' },
@@ -503,15 +519,15 @@ export const ProjectViewerModal: React.FC<ProjectViewerModalProps> = ({ project,
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-['JetBrains_Mono',monospace] text-xs">
                   <div className="bg-white/5 p-3 rounded border border-white/10">
-                    <span className="text-[#c6c6c7] block text-[10px]">MICROCONTROLLER</span>
+                    <span className="text-[#c6c6c7] block text-[10px]">{isSoftware ? 'PLATFORM' : 'MICROCONTROLLER'}</span>
                     <strong className="text-[#00F0FF] text-sm">{project.mcu}</strong>
                   </div>
                   <div className="bg-white/5 p-3 rounded border border-white/10">
-                    <span className="text-[#c6c6c7] block text-[10px]">CLOCK SPEED</span>
+                    <span className="text-[#c6c6c7] block text-[10px]">{isSoftware ? 'TECH STACK' : 'CLOCK SPEED'}</span>
                     <strong className="text-white">{project.clockSpeed}</strong>
                   </div>
                   <div className="bg-white/5 p-3 rounded border border-white/10">
-                    <span className="text-[#c6c6c7] block text-[10px]">HARDWARE</span>
+                    <span className="text-[#c6c6c7] block text-[10px]">{isSoftware ? 'RUNS ON' : 'HARDWARE'}</span>
                     <strong className="text-white">{project.dimensions}</strong>
                   </div>
                 </div>
